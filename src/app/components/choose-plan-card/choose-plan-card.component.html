@@ -1,0 +1,17 @@
+<div
+  class="flex flex-col sm:flex-row justify-start items-start gap-5 cursor-pointer"
+  (click)="selectPlan()"
+>
+  <div class="mb-4 p-5 bg-[#F2F2F7] rounded-3xl w-full sm:w-[400px]">
+    <h4 class="font-semibold sm:text-xl text-base mb-4">{{ plan }}</h4>
+    <div class="flex gap-3 justify-start items-center">
+      <img src="img.svg" class="w-8 h-8 sm:w-10 sm:h-10" />
+      <div>
+        <p class="text-[#0067FF] text-sm sm:text-xl font-normal">
+          {{ companyName }}
+        </p>
+        <p class="text-sm sm:text-base font-normal">{{ price }}</p>
+      </div>
+    </div>
+  </div>
+</div>

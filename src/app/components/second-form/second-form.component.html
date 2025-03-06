@@ -1,0 +1,106 @@
+<form [formGroup]="form" class="p-4 sm:w-[834px] w-full mx-auto">
+  <div class="mb-4">
+    <app-input-selector
+      class="w-[100%]"
+      label="Quantity"
+      [options]="quantity"
+      formControlName="quantity"
+    ></app-input-selector>
+  </div>
+
+  <div formArrayName="items" class="space-y-4 mb-6">
+    <div
+      *ngFor="let item of items.controls; let i = index"
+      [formGroupName]="i"
+      class="bg-white p-4 rounded-2xl shadow-md"
+    >
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-[#0067FF] text-xl font-semibold">
+          {{ i + 1 }}<span *ngIf="i === 0">st</span
+          ><span *ngIf="i === 1">nd</span><span *ngIf="i === 2">rd</span
+          ><span *ngIf="i > 2">th</span>
+        </h3>
+        <img src="more.png" alt="More Image" width="25px" />
+      </div>
+
+      <div
+        *ngIf="!item.value.expanded"
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-2"
+      >
+        <app-input-field
+          label="Length"
+          placeholder="Example"
+          text="c.m"
+          formControlName="length"
+        ></app-input-field>
+        <app-input-field
+          *ngIf="selectedType === 'Pallet'"
+          label="width"
+          placeholder="Example"
+          text="c.m"
+          formControlName="width"
+        ></app-input-field>
+        <app-input-field
+          label="height"
+          placeholder="Example"
+          text="c.m"
+          formControlName="height"
+        ></app-input-field>
+        <app-input-field
+          *ngIf="selectedType === 'Pallet'"
+          label="weight"
+          placeholder="Example"
+          text="c.m"
+          formControlName="weight"
+        ></app-input-field>
+
+        <app-input-field
+          label="description"
+          placeholder="Example"
+          formControlName="description"
+          class="col-span-2"
+        ></app-input-field>
+      </div>
+
+      <div
+        *ngIf="item.value.expanded"
+        class="mt-2 p-2 rounded-lg"
+        (click)="toggleExpand(i)"
+      >
+        <p class="text-sm text-[#8E8E93] cursor-pointer">
+          L: {{ item.value.length }} cm | W: {{ item.value.width }} cm | H:
+          {{ item.value.height }} cm | Weight: {{ item.value.weight }} kg
+        </p>
+      </div>
+
+      <button
+        type="button"
+        (click)="toggleExpand(i)"
+        class="mt-2 text-gray-600 flex justify-center items-center w-full"
+      >
+        <img
+          *ngIf="item.value.expanded; else collapsedIcon"
+          src="icon/arrow-down.svg"
+          alt="Expanded"
+          class="w-4 h-4"
+        />
+        <ng-template #collapsedIcon>
+          <img src="icon/arrow-top.svg" alt="Collapsed" class="w-4 h-4" />
+        </ng-template>
+      </button>
+
+      <!-- <button
+        type="button"
+        (click)="removeItem(i)"
+        *ngIf="items.length > 1"
+        class="mt-2 text-red-500"
+      >
+        Remove
+      </button> -->
+    </div>
+  </div>
+
+  <button type="button" (click)="addItem()" class="custom-dashed">
+    + Add more
+  </button>
+</form>

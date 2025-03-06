@@ -1,0 +1,78 @@
+<div class="mb-4 flex space-x-4">
+  <section class="w-[444px] p-[20px_15px]">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-[#0067FF] font-semibold text-xl">{{ title }}</h2>
+      <img src="more.png" alt="More Image" width="25px" />
+    </div>
+
+    <form [formGroup]="form">
+      <div class="flex justify-around items-center gap-3 mb-3">
+        <app-input-selector
+          class="w-[100%]"
+          label="Country"
+          [options]="cities"
+          formControlName="country"
+        ></app-input-selector>
+        <app-input-selector
+          class="w-[100%]"
+          label="City"
+          [options]="cities"
+          formControlName="city"
+        ></app-input-selector>
+      </div>
+      <div class="flex justify-around items-center gap-3 mb-3">
+        <app-input-selector
+          class="w-[100%]"
+          label="Area"
+          [options]="cities"
+          formControlName="area"
+        ></app-input-selector>
+        <app-input-selector
+          class="w-[100%]"
+          label="Floor"
+          [options]="cities"
+          formControlName="floor"
+        ></app-input-selector>
+      </div>
+      <app-input-field
+        class="w-full"
+        label="Address"
+        placeholder="Choose"
+        icon="icon/blue-location.svg"
+        formControlName="address"
+      ></app-input-field>
+      <app-input-field
+        label="Contact Name"
+        placeholder="Choose"
+        formControlName="contactName"
+      ></app-input-field>
+      <app-input-field
+        *ngIf="selectedType === 'Pallet'"
+        label="Phone Number"
+        placeholder="Choose"
+        formControlName="phoneNumber"
+      ></app-input-field>
+
+      <div class="mb-4 text-[#001533]">
+        <p class="text-[#001533] text-base font-normal">Address Type</p>
+        <div class="flex justify-between items-center gap-3 mt-2 w-[90%]">
+          <app-radio-group
+            class="w-[100%]"
+            label="Home"
+            name="addressType"
+            value="home"
+            formControlName="addressType"
+          ></app-radio-group>
+
+          <app-radio-group
+            class="w-[100%]"
+            label="Office"
+            name="addressType"
+            value="office"
+            formControlName="addressType"
+          ></app-radio-group>
+        </div>
+      </div>
+    </form>
+  </section>
+</div>

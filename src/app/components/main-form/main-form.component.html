@@ -1,0 +1,164 @@
+<div *ngIf="currentStep === 1 || currentStep === 2" class="col-span-3 h-16">
+  <app-choose-package
+    [types]="types"
+    [selectedType]="selectedType"
+    (typeSelected)="selectType($event)"
+  >
+  </app-choose-package>
+</div>
+<p-stepper [(value)]="currentStep" class="flex flex-row-reverse">
+  <div
+    class="hidden justify-end items-start top-16 relative lg:flex col-span-1 h-32"
+  >
+    <p-step-list class="flex flex-col !items-start">
+      <p-step [value]="1">Addresses</p-step>
+      <p-step [value]="2">Dimension & Weight</p-step>
+      <p-step [value]="3">Shipping Rates</p-step>
+      <p-step [value]="4">Shipment Info</p-step>
+    </p-step-list>
+  </div>
+
+  <div
+    class="w-full flex flex-row-reverse justify-between items-start col-span-2 row-span-2 h-64"
+  >
+    <p-step-panels>
+      <!-- Step 1: Addresses -->
+      <p-step-panel [value]="1">
+        <ng-template #content let-activateCallback="activateCallback">
+          <div class="flex flex-col">
+            <!-- <h1 class="lg:text-[36px] text-xl ml-6">Addresses</h1> -->
+            <div class="w-full flex flex-col items-center p-6">
+              <div
+                class="bg-white p-6 rounded-2xl flex flex-col lg:flex-row gap-6 w-fit"
+              >
+                <app-shipping-form
+                  [selectedType]="selectedType"
+                  title="Shipping From"
+                  [form]="shippingFromForm"
+                ></app-shipping-form>
+
+                <div class="flex flex-col items-center relative">
+                  <div class="custom-dashed hidden lg:block"></div>
+                  <button
+                    class="font-light p-3 rounded-full text-3xl cursor-pointer my-2 md:my-0 transform rotate-90 lg:rotate-0"
+                    (click)="swapForms()"
+                  >
+                    ⇄
+                  </button>
+                  <div class="custom-dashed hidden lg:block"></div>
+                </div>
+
+                <app-shipping-form
+                  [selectedType]="selectedType"
+                  title="Shipping To"
+                  [form]="shippingToForm"
+                ></app-shipping-form>
+              </div>
+            </div>
+            <div class="flex justify-end gap-4 mr-12">
+              <p-button
+                class="back-button button"
+                label="Back"
+                severity="secondary"
+                icon="pi pi-arrow-left"
+                (onClick)="activateCallback(1)"
+              ></p-button>
+              <p-button
+                class="next-button button"
+                label="Next"
+                icon="pi pi-arrow-right"
+                iconPos="right"
+                (onClick)="activateCallback(2)"
+              ></p-button>
+            </div>
+          </div>
+        </ng-template>
+      </p-step-panel>
+
+      <!-- Step 2: Dimension & Weight -->
+      <p-step-panel [value]="2">
+        <ng-template #content let-activateCallback="activateCallback">
+          <div class="flex flex-col p-6">
+            <h1 class="text-[36px] ml-8">Dimension & Weight</h1>
+            <div
+              class="rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium p-6 w-full"
+            >
+              <app-second-form
+                [form]="secondForm"
+                class="w-full"
+                [selectedType]="selectedType"
+              ></app-second-form>
+            </div>
+          </div>
+          <div class="flex justify-end gap-4 mr-12">
+            <p-button
+              class="back-button button"
+              label="Back"
+              severity="secondary"
+              icon="pi pi-arrow-left"
+              (onClick)="activateCallback(1)"
+            ></p-button>
+            <p-button
+              class="next-button button"
+              label="Next"
+              icon="pi pi-arrow-right"
+              iconPos="right"
+              (onClick)="activateCallback(3)"
+            ></p-button>
+          </div>
+        </ng-template>
+      </p-step-panel>
+
+      <!-- Step 3: Shipping Rates -->
+      <p-step-panel [value]="3">
+        <ng-template #content let-activateCallback="activateCallback">
+          <div class="flex flex-col p-6">
+            <h1 class="text-[36px] ml-8">Shipping Rates</h1>
+            <div
+              class="flex-auto flex justify-center items-center font-medium p-6 w-full"
+            >
+              <app-rates-form
+                (cardSelected)="activateCallback(4)"
+                (planSelected)="handlePlanSelection($event)"
+              ></app-rates-form>
+            </div>
+          </div>
+        </ng-template>
+      </p-step-panel>
+
+      <!-- Step 4: Shipment Info -->
+      <p-step-panel [value]="4">
+        <ng-template #content let-activateCallback="activateCallback">
+          <div class="flex flex-col p-6">
+            <h1 class="text-[36px] ml-8">Shipment Info</h1>
+            <div class="rounded bg-surface-50 flex-auto font-medium p-6">
+              <app-info-form
+                [shippingFrom]="shippingFromForm.value"
+                [shippingTo]="shippingToForm.value"
+                [secondForm]="secondForm"
+                [selectedCard]="selectedCard"
+                [selectedPlan]="selectedPlan"
+              ></app-info-form>
+            </div>
+          </div>
+          <div class="flex justify-end items-start gap-4 mr-12">
+            <p-button
+              class="back-button button"
+              label="Back"
+              severity="secondary"
+              icon="pi pi-arrow-left"
+              (onClick)="activateCallback(3)"
+            ></p-button>
+            <p-button
+              class="next-button button"
+              label="Next"
+              icon="pi pi-arrow-right"
+              iconPos="right"
+              (onClick)="activateCallback(1)"
+            ></p-button>
+          </div>
+        </ng-template>
+      </p-step-panel>
+    </p-step-panels>
+  </div>
+</p-stepper>
