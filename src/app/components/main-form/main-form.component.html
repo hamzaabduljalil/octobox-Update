@@ -38,7 +38,7 @@
     <!-- Package  Tabs -->
     <div
       *ngIf="currentStep === 1 || currentStep === 2"
-      class="w-full overflow-x-auto whitespace-nowrap scrollbar-hide flex justify-center ml-6"
+      class="w-full overflow-x-auto whitespace-nowrap scrollbar-hide flex justify-center ml-12"
       style="max-width: 100%; overflow-x: auto; scroll-behavior: smooth"
     >
       <app-choose-package
@@ -51,7 +51,7 @@
 
     <!-- Stepper -->
     <p-stepper [(value)]="currentStep">
-      <div class="grid grid-cols-[2fr_0fr] gap-6 items-start">
+      <div class="grid grid-cols-[2fr_0fr] gap-2 items-start">
         <!-- Main Content Section -->
         <div class="grid grid-cols-1 gap-4">
           <p-step-panels>
