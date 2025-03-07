@@ -1,0 +1,12 @@
+<div>
+  <label>
+    <input
+      type="radio"
+      [name]="name"
+      [value]="value"
+      [checked]="value === selectedValue"
+      (change)="onSelectionChange()"
+    />
+    <span class="ml-2 text-[#001533] text-base font-normal">{{ label }}</span>
+  </label>
+</div>

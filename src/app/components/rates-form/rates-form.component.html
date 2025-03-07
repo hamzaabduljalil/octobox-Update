@@ -1,0 +1,26 @@
+<div class="w-full top-0 relative">
+  <div class="flex justify-center items-center gap-4">
+    <app-choose-plan-card
+      *ngFor="let planItem of plan"
+      [plan]="planItem.plan"
+      [companyName]="planItem.companyName"
+      [price]="planItem.price"
+      (planSelected)="handlePlanSelection(planItem)"
+      class="mb-6"
+      [ngClass]="{ 'selected-plan': selectedPlan === planItem }"
+    >
+    </app-choose-plan-card>
+  </div>
+
+  <div class="flex gap-3 flex-col">
+    <app-card
+      *ngFor="let cardItem of cards"
+      [Company]="cardItem.company"
+      [Service]="cardItem.service"
+      [price]="cardItem.price"
+      button="select"
+      (cardSelected)="handleCardSelection(cardItem)"
+      [ngClass]="{ 'selected-card': selectedCard === cardItem }"
+    ></app-card>
+  </div>
+</div>

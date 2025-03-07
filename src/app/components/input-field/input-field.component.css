@@ -1,0 +1,34 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+input {
+  flex: 1;
+  border: none;
+  outline: none;
+}
+label {
+  font-size: 16px;
+  color: #001533;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+.icon {
+  color: blue;
+  cursor: pointer;
+}
+.text {
+  color: black;
+  font-weight: 400;
+  font-size: 16px;
+}

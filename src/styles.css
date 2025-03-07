@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+body {
+  background-color: #f9f9fb;
+}
+
+/* .tab {
+  @apply flex flex-col items-center px-4 py-2 border rounded-lg text-gray-600 hover:bg-gray-200;
+}
+
+.tab.active {
+  @apply border-blue-500 text-blue-500;
+}
+
+.select-box {
+  @apply w-full px-4 py-2 border rounded-md bg-gray-50;
+}
+
+.step {
+  @apply flex items-center space-x-2 text-gray-500;
+}
+
+.step.active {
+  @apply text-blue-500 font-semibold;
+} */
