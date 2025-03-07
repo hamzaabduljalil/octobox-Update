@@ -105,6 +105,9 @@
 ::ng-deep .p-step-number {
   display: none !important;
 }
+::ng-deep .p-step {
+  padding: 0 8px !important;
+}
 ::ng-deep .p-step-active .p-step-title {
   color: #007bff !important;
 }
