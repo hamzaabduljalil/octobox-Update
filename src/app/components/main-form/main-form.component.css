@@ -43,6 +43,7 @@
   cursor: pointer;
   width: 100px;
 }
+
 @media (max-width: 991px) {
   ::ng-deep .first .p-button {
     width: 300px !important;
@@ -65,7 +66,7 @@
   }
 }
 ::ng-deep .next-button .p-button {
-  background-color: #0067ff;
+  background-color: #0067ff !important;
   color: white !important;
 }
 ::ng-deep .next-button .p-button:hover {
