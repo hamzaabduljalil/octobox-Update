@@ -14,11 +14,7 @@ body {
   font-family: "Cairo", sans-serif !important;
   line-height: 120% !important;
   margin: 0;
-  /* background-color: var(--surface-50);
-  color: var(--text-color); */
-
   overflow-x: hidden;
-
   height: 100% !important;
 }
 

@@ -7,7 +7,7 @@
         "theme": {
           "extend": {
             "fontFamily": {
-              "cairo": ["Cairo", "sans-serif"]
+              "Cairo": ["Cairo", "sans-serif"]
             }
           }
         },
