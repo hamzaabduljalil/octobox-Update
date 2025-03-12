@@ -1,7 +1,25 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Cairo";
+  src: url(./assets/Cairo/Cairo-Regular.woff2) format("woff2"),
+    url(./assets/Cairo/Cairo-Regular.woff) format("woff"),
+    url(./assets/Cairo/Cairo-Regular.ttf) format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
 body {
-  background-color: #f9f9fb;
+  font-family: "Cairo", sans-serif !important;
+  line-height: 120% !important;
+  margin: 0;
+  /* background-color: var(--surface-50);
+  color: var(--text-color); */
+
+  overflow-x: hidden;
+
+  height: 100% !important;
 }
 
 /* .tab {
