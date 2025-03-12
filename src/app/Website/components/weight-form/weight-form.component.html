@@ -29,7 +29,7 @@
         </button>
 
         <ul
-          *ngIf="items.at(i).value.isDropdownOpen"
+          *ngIf="item.value.isDropdownOpen"
           class="absolute text-base text-start right-0 top-6 w-48 !bg-[var(--p--surface-e)] rounded-[15px] border p-[0_16px] z-10"
           (click)="$event.stopPropagation()"
         >
