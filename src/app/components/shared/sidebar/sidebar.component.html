@@ -1,0 +1,79 @@
+<div class="flex flex-row gap-3">
+  <div class="relative">
+    @if(stateService.sidebarVisible) {
+    <div
+      class="shadow-md px-3 py-2 sticky w-80 top-20 sidebar"
+      style="background-color: var(--surface-50)"
+    >
+      <div class="sidebar-content">
+        @for (menuItem of menuItems; track $index) {
+        <ul class="list-none m-0 p-0 capitalize">
+          <li>
+            @if (menuItem?.subMenu?.length! <= 0) {
+            <div
+              pRipple
+              class="m-0 mb-1 p-3 menuItem flex justify-start items-center"
+              [routerLink]="menuItem?.routerLink"
+              routerLinkActive="menuItem_active"
+            >
+              <i class="{{ menuItem?.icon }} mx-2 text-2xl"></i>
+              <span class="capitalize">{{ menuItem.title | translate }}</span>
+            </div>
+            }@else {
+
+            <div
+              pRipple
+              class="m-0 mb-1 p-3 menuItem flex items-center justify-between"
+              (click)="toggleArrowDirection(menuItem.id!)"
+            >
+              <span>
+                <i class="{{ menuItem?.icon }} mx-2 text-2xl"></i>
+                <span class="capitalize">
+                  {{ menuItem.title | translate }}</span
+                >
+              </span>
+
+              <i
+                class="pi"
+                [ngClass]="{
+                  'pi-chevron-down': isSubMenuOpen[menuItem.id!],
+                  'pi-chevron-up': !isSubMenuOpen[menuItem.id!]
+                }"
+              ></i>
+            </div>
+
+            @for (smi of menuItem.subMenu; track $index) { @if
+            (isSubMenuOpen[menuItem.id!]) {
+            <ul class="list-none m-0 p-0 capitalize px-2">
+              <div
+                pRipple
+                class="m-0 mb-1 p-3 menuItem flex justify-between"
+                routerLinkActive="menuItem_active"
+                [routerLink]="smi?.routerLink"
+              >
+                <span class="capitalize">{{ smi.title | translate }}</span>
+              </div>
+            </ul>
+            } } }
+          </li>
+        </ul>
+        }
+      </div>
+      <div class="logout-button">
+        <div
+          pRipple
+          class="m-0 my-1 p-3 menuItem logoutText"
+          (click)="logout()"
+        >
+          <i class="pi pi-sign-out mx-2"></i>
+          <span class="capitalize">{{ "logout" | translate }}</span>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="w-full">
+    <router-outlet></router-outlet>
+  </div>
+</div>

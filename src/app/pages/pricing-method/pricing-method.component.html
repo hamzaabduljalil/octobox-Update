@@ -1,0 +1,58 @@
+<div class="card my-3 px-3">
+  <!-- <div class="flex flex-row w-full gap-3 mb-3">
+        <p-button (click)="openDialog()" pRipple ButtonIconPosition="right">
+            <ng-template pTemplate="content">
+                <div class="flex items-center gap-2">
+                    <span class="pi pi-plus"></span>
+                    <span class="md:block hidden font-semibold capitalize">
+                        {{ "Add" | translate }}
+                    </span>
+                </div>
+            </ng-template>
+        </p-button>
+    </div> -->
+
+  <p-table
+    [columns]="cols"
+    [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
+    [value]="objs()"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th
+         class="{{currentLang() === 'en' ? 'text-left' : 'text-right'}}"
+          *ngFor="let col of columns"
+        >
+          {{ col.header | translate }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td
+        class="{{currentLang() === 'en' ? 'text-left' : 'text-right'}}"
+          *ngFor="let col of columns"
+        >
+          <ng-container *ngIf="col.field !== 'actions'">
+            @switch (col.field) { @case ('code') {
+            {{ rowData[col.field] }}
+            } @default {
+            {{
+              currentLang() === "en"
+                ? rowData[col.field].en
+                : rowData[col.field].ar
+            }}
+            } }
+          </ng-container>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [rows]="paginationState.getValue().rows!"
+    [totalRecords]="count()"
+    [rowsPerPageOptions]="[15, 50, 100]"
+  ></p-paginator>
+</div>

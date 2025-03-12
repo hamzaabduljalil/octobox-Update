@@ -1,0 +1,98 @@
+<form #form="ngForm">
+  <div class="flex flex-col gap-3 my-2 w-full h-full">
+    <div class="w-full flex flex-col gap-2">
+      <label for="City" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">{{
+        "SCity" | translate
+      }}</label>
+      <p-dropdown
+        [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+        class="w-full"
+        [optionLabel]="currentLang == 'en' ? 'name.en' : 'name.ar'"
+        name="City"
+        [options]="cities"
+        [(ngModel)]="dynamicDialogConfig.data?.obj.city"
+        [filter]="true"
+        filterBy="name"
+        [placeholder]="'SCity' | translate"
+        styleClass="w-full min-h-10 z-50"
+      >
+      </p-dropdown>
+    </div>
+    <div class="flex flex-row gap-3 w-full">
+      <div class="w-full flex flex-col gap-2">
+        <label [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'" for="NameAr">{{
+          "Name In Arabic" | translate
+        }}</label>
+        <input
+          [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+          type="text"
+          [placeholder]="'Area Name' | translate"
+          pInputText
+          name="NameAr"
+          [(ngModel)]="dynamicDialogConfig.data?.obj.name.ar"
+        />
+      </div>
+      <div class="w-full flex flex-col gap-2">
+        <label [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'" for="NameEn">{{
+          "Name In English" | translate
+        }}</label>
+        <input
+          [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+          type="text"
+          [placeholder]="'Area Name' | translate"
+          pInputText
+          name="NameEn"
+          [(ngModel)]="dynamicDialogConfig.data?.obj.name.en"
+        />
+      </div>
+    </div>
+    <div class="flex flex-row gap-3 w-full">
+      <div class="w-full flex flex-col gap-2">
+        <label for="lng" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">{{
+          "Enter longitude :" | translate
+        }}</label>
+        <input
+          type="number"
+          [placeholder]="'longitude' | translate"
+          pInputText
+          [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+          name="lng"
+          [(ngModel)]="dynamicDialogConfig.data?.obj.coordinates.lon"
+        />
+      </div>
+      <div class="w-full flex flex-col gap-2">
+        <label for="lat" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">{{
+          "Enter latitude :" | translate
+        }}</label>
+        <input
+          type="number"
+          [placeholder]="'latitude' | translate"
+          pInputText
+          [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+          name="lat"
+          [(ngModel)]="dynamicDialogConfig.data?.obj.coordinates.lat"
+        />
+      </div>
+    </div>
+  </div>
+</form>
+<div class="p-dialog-footer custom-footer py-4">
+  <div class="flex justify-end">
+    <p-button
+      pRipple
+      [outlined]="true"
+      [label]="'Close' | translate"
+      (onClick)="dynamicDialogRef.close()"
+      [disabled]="saving"
+      [loading]="saving"
+    ></p-button>
+    <p-button
+      pRipple
+      [label]="'Save' | translate"
+      (onClick)="save()"
+      [loading]="saving"
+      [disabled]="form.form.invalid"
+      [loading]="saving"
+    ></p-button>
+  </div>
+</div>

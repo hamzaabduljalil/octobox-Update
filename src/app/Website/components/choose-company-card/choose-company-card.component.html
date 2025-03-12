@@ -1,0 +1,37 @@
+<div
+  class="flex flex-col justify-start md:flex-row items-center md:justify-between gap-1 md:gap-4 bg-white rounded-2xl p-[16px]"
+>
+  <!-- Left Section -->
+  <div class="flex items-start justify-between flex-wrap w-full">
+    <div class="flex items-start gap-2 w-full">
+      <img src="../../../../assets/icon/checker.svg" class="w-[56px]" />
+      <div class="flex justify-between flex-row w-full">
+        <div>
+          <p
+            class="text-primary text-center mb-1 text-[#0067FF] text-base sm:text-xl font-normal"
+          >
+            {{ Company }}
+          </p>
+          <p class="text-sm m-0 text-start text-[#8E8E93] font-normal">
+            {{ Service }}
+          </p>
+        </div>
+        <button class="block md:hidden w-[20px] h-[20px]">
+          <i class="pi pi-ellipsis-v"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-between flex-row w-full items-start">
+    <div class="text-base text-center font-semibold ml-6 md:ml-0">
+      {{ price }}
+    </div>
+    <button
+      class="bg-[#0067FF] border-none text-sm font-normal text-white rounded-[10px] cursor-pointer p-[7px_27px]"
+      (click)="selectCard()"
+    >
+      {{ button }}
+    </button>
+  </div>
+</div>

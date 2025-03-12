@@ -1,0 +1,128 @@
+<p-button (onClick)="showDialog()" label="Show" />
+
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [closable]="false"
+  [style]="{
+    width: '502px',
+    minHeight: '264px',
+    padding: '2px',
+  }"
+  class="custom-dialog"
+>
+  <div class="p-[15px_5px]">
+    <!-- Custom Header (Without Space) -->
+    <div class="text-2xl font-semibold">Shipping Method</div>
+
+    <!-- Form Content -->
+    <div class="flex flex-col gap-3 my-4">
+      <div class="flex gap-2 items-center">
+        <input
+          type="radio"
+          name="addressType"
+          value="residential"
+          formControlName="addressType"
+          class="w-[15px] h-[15px] accent-[#0067FF]"
+          id="1"
+        />
+        <label class="text-[14px]" for="1"> Resedintial Address </label>
+      </div>
+      <div class="flex gap-2 items-center">
+        <input
+          type="radio"
+          name="addressType"
+          value="residential"
+          formControlName="addressType"
+          class="w-[15px] h-[15px] accent-[#0067FF]"
+          id="2"
+        />
+        <label class="text-[14px]" for="2"> Resedintial Address </label>
+      </div>
+      <div class="flex gap-2 items-center">
+        <input
+          type="radio"
+          name="addressType"
+          value="residential"
+          formControlName="addressType"
+          class="w-[15px] h-[15px] accent-[#0067FF]"
+          id="3"
+        />
+        <label class="text-[14px]" for="3"> Resedintial Address </label>
+      </div>
+    </div>
+    <!--  -->
+
+    <div class="flex gap-3 flex-col">
+      <div class="flex flex-col w-full gap-2">
+        <label class="text-sm text-[#8E8E93]" for="address">
+          Shipping Date
+        </label>
+        <div class="flex items-center relative w-full">
+          <input
+            formControlName="address"
+            class="rounded-[10px] w-full p-[12px_16px] pr-10 bg-[var(--surface-e)] border-1 border-[#E5E5EA] focus:outline-none"
+            pInputText
+            type="text"
+            id="address"
+            placeholder="Example"
+          />
+          <img
+            src="../../../../assets/icon/cleander.svg"
+            class="absolute right-4 text-blue-500 cursor-pointer text-[24px]"
+          />
+        </div>
+      </div>
+
+      <div class="flex flex-row justify-center items-center gap-2">
+        <div>
+          <label class="text-sm text-[#8E8E93] mb-2 block" for="address">
+            Shipping Date
+          </label>
+          <div class="flex items-center relative">
+            <input
+              formControlName="address"
+              class="rounded-[10px] w-full p-[12px_16px] pr-10 bg-[var(--surface-e)] border-1 border-[#E5E5EA] focus:outline-none"
+              pInputText
+              type="text"
+              id="address"
+              placeholder="Example"
+            />
+            <i
+              class="pi pi-clock absolute right-4 text-blue-500 cursor-pointer text-[24px]"
+            ></i>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm text-[#8E8E93] mb-2 block" for="address">
+            Shipping Date
+          </label>
+          <div class="flex items-center relative">
+            <input
+              formControlName="address"
+              class="rounded-[10px] w-full p-[12px_16px] pr-10 bg-[var(--surface-e)] border-1 border-[#E5E5EA] focus:outline-none"
+              pInputText
+              type="text"
+              id="address"
+              placeholder="Example"
+            />
+            <i
+              class="pi pi-clock absolute right-4 text-blue-500 cursor-pointer text-[24px]"
+            ></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--  -->
+    <div class="flex justify-end gap-4 mt-5">
+      <p-button class="next-button button first w-full" label="Book"></p-button>
+      <p-button
+        class="edit-button button first w-full !border-none"
+        label="Save to draft"
+        (onClick)="closeDialog()"
+      ></p-button>
+    </div>
+  </div>
+</p-dialog>

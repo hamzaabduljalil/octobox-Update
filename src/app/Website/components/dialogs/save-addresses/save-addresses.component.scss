@@ -1,0 +1,36 @@
+::ng-deep .custom-dialog .p-dialog-content {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+::ng-deep .button .p-button {
+  pointer-events: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 15px !important;
+  padding: 9px 24px;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  width: 100%;
+  max-width: 100% !important;
+}
+
+::ng-deep .next-button .p-button {
+  background-color: #0067ff !important;
+  color: white !important;
+  border: 2px solid #0067ff;
+}
+
+::ng-deep .next-button .p-button:hover {
+  border: 2px solid #0067ff;
+
+  background-color: #0067ff;
+}
+
+::ng-deep .edit-button .p-button {
+  color: #0067ff !important;
+}
+::ng-deep .p-dialog-content {
+  border-radius: 15px !important;
+}

@@ -1,0 +1,87 @@
+<div class="w-full">
+  <h1 class="">Add Service</h1>
+  <p-stepper>
+    <p-stepperPanel header="Step I">
+      <ng-template
+        pTemplate="content"
+        let-nextCallback="nextCallback"
+        let-index="index"
+      >
+        <div class="flex flex-column h-[50vh] w-3/4 mx-auto">
+          <div class="w-full">
+            <app-first-step/>
+          </div>
+        </div>
+        <!-- Next Button -->
+        <div class="flex pt-4 me-2 justify-content-end">
+          <p-button
+            label="Next"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            (onClick)="nextCallback.emit()"
+            [disabled]="!isStepValid(1)"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+
+    <p-stepperPanel header="Step II">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+        let-nextCallback="nextCallback"
+        let-index="index"
+      >
+        <div class="flex flex-column h-[70vh] w-3/4 mx-auto">
+          <div class="w-full">
+            <app-second-step />
+          </div>
+        </div>
+        <div class="flex pt-4 justify-content-between">
+          <p-button
+            label="Back"
+            icon="pi pi-arrow-left"
+            (onClick)="prevCallback.emit()"
+          />
+          <p-button
+            label="Next"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            (onClick)="nextCallback.emit()"
+            [disabled]="!isStepValid(2)"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel header="Step III">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+        let-index="index"
+      >
+      <div class="flex flex-column h-[70vh] w-3/4 mx-auto">
+        <div class="w-full">
+          <app-third-step (priceData)="onPriceDataReady($event)" />
+        </div>
+      </div>
+      <div class="flex">
+
+      </div>
+        <div class=" pt-4 justify-content-start">
+          <p-button
+            label="Back"
+            icon="pi pi-arrow-left"
+            (onClick)="prevCallback.emit()"
+          />
+        </div>
+        <div class="flex pt-4 justify-content-end me-6">
+          <p-button
+            label="Save"
+            (onClick)="save()"
+            
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+  </p-stepper>
+</div>

@@ -1,0 +1,114 @@
+<form>
+  <div class="flex flex-col gap-4 w-1/2 mx-auto">
+    <div class="flex w-full flex-col gap-2">
+      <label for="type" [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'">
+        {{ "Pricing Method" | translate }}
+      </label>
+      <p-multiSelect
+        [options]="pricingTypes()"
+        [(ngModel)]="selectedPricing"
+        (onChange)="changePricingMethod($event)"
+        [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
+        name="selectedPricingMethod"
+        [optionLabel]="currentLang() === 'ar' ? 'name.ar' : 'name.en'"
+        [filter]="true"
+        filterBy="name"
+        [placeholder]="'Select Pricing Method' | translate"
+        styleClass="w-full min-h-10 border"
+      >
+      </p-multiSelect>
+    </div>
+    <div class="flex flex-col gap-4">
+      @if(isZones()){
+      <div [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'">
+        <p-button
+          pRipple
+          [label]="'Add New Range' | translate"
+          (onClick)="openRangeDialog()"
+        />
+      </div>
+      }
+      <div
+        class="grid grid-cols-3 gap-4"
+        [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
+      >
+        @for(price of selectedPricing; track price.id) { @if(price.code !== 2){
+        <div class="flex flex-col gap-1 p-2 flex-1">
+          <label [for]="'price' + price.code">
+            {{
+              (price.code === 1
+                ? "price per 1km"
+                : price.code === 3
+                ? "price per 1kg"
+                : price.code === 4
+                ? "price per 1m"
+                : ""
+              ) | translate
+            }}
+          </label>
+          <input
+            class="p-2 border w-full"
+            [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
+            [(ngModel)]="pricesArray[price.code.toString()]"
+            type="number"
+            pInputText
+            [name]="'price' + price.id"
+            [id]="'price' + price.id"
+          />
+        </div>
+        } }
+      </div>
+    </div>
+  </div>
+
+  @if(rangesArray().length > 0){ @for(range of rangesArray(); let i = $index
+  ;track range?.id){
+  <div class="flex flex-col gap-3">
+    <div
+      class="bg-white/10 rounded-lg p-4 shadow-sm hover:bg-white/15 transition-all duration-200"
+    >
+      <div class="flex flex-wrap items-center gap-6">
+        <!-- Range Number -->
+        <div class="flex items-center gap-2">
+          <span class="text-blue-400 font-semibold">Range:</span>
+          <span
+            class="bg-blue-500/20 px-3 py-1 rounded-full text-blue-300 font-medium"
+          >
+            {{ i + 1 }}
+          </span>
+        </div>
+
+        <!-- Range Details -->
+        <div class="flex flex-wrap gap-6">
+          <div class="flex items-center gap-2">
+            <span class="text-gray-300">Min:</span>
+            <span
+              class="bg-gray-700/50 px-3 py-1 rounded-md text-white font-medium"
+            >
+              {{ range.minRange }}
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-gray-300">Max:</span>
+            <span
+              class="bg-gray-700/50 px-3 py-1 rounded-md text-white font-medium"
+            >
+              {{ range.maxRange }}
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-gray-300">Price:</span>
+            <span
+              class="bg-green-500/20 px-3 py-1 rounded-md text-green-300 font-medium"
+            >
+              {{ range.price }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  } }
+</form>

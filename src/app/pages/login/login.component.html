@@ -1,0 +1,64 @@
+<div class="flex justify-center items-center w-full min-h-[100vh]">
+  <div class="text-center py-5 w-1/2 rounded">
+    <h1
+      class="text-4xl mb-5 font-bold"
+      [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+    >
+      {{ "Welcome ,Please Login" | translate }}
+    </h1>
+    <form
+      (ngSubmit)="login()"
+      class="w-1/2 flex flex-col gap-6 mx-auto"
+      action=""
+    >
+      <div class="flex flex-col text-start gap-2">
+        <label
+          [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+          class="text-xl font-meduim"
+          for="name"
+          >{{ "User Name" | translate }}:</label
+        >
+        <input
+          [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+          [(ngModel)]="username"
+          pInputText
+          class="font-bold py-3"
+          type="text"
+          name="name"
+          id="name"
+        />
+      </div>
+      <!--  -->
+      <div class="flex flex-col text-start gap-2">
+        <label
+          [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+          class="text-xl font-meduim"
+          for="password"
+          >{{ "Password" | translate }} :</label
+        >
+        <input
+          [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+          [(ngModel)]="password"
+          pInputText
+          class="font-bold py-3"
+          type="password"
+          name="password"
+          id="password"
+        />
+      </div>
+      <div class="w-[100%]">
+        <p-button
+          type="submit"
+          [disabled]="!isDisabled()"
+          styleClass="w-[100%] flex justify-center font-bold text-2xl"
+          >{{ "login" | translate }}</p-button
+        >
+      </div>
+    </form>
+    <div class="mt-5">
+      <p-button styleClass="border-0 font-bold text-2xl" (click)="toggleLang()">
+        {{ currentLang === "en" ? "Arabic" : ("English" | translate) }}
+      </p-button>
+    </div>
+  </div>
+</div>

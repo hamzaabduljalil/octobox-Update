@@ -1,0 +1,68 @@
+<form #form="ngForm" class="flex flex-col gap-5 my-4">
+  <div class="flex flex-col gap-2">
+    <div class="flex gap-3">
+     <div class="flex flex-col gap-2">
+        <label for="min" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">{{
+            "min range" | translate
+          }}</label>
+         <input
+           class="flex-1"
+           [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+           [(ngModel)]="minRange"
+           type="number"
+           pInputText
+           name="min"
+           id="min"
+         />
+     </div>
+     <div class="flex flex-col gap-2">
+        <label for="max" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">{{
+            "max range" | translate
+          }}</label>
+          <input
+            class="flex-1"
+            [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+            [(ngModel)]="maxRange"
+            type="number"
+            pInputText
+            name="max"
+            id="max"
+          />
+     </div>
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <label for="price" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">{{
+      "Enter The Price" | translate
+    }}</label>
+    <div class="flex gap-3">
+      <input
+        class="flex-1"
+        [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+        [(ngModel)]="price"
+        type="number"
+        pInputText
+        name="price"
+        id="price"
+      />
+    </div>
+  </div>
+</form>
+<div class="p-dialog-footer custom-footer py-4">
+  <div class="flex justify-end">
+    <p-button
+      pRipple
+      [outlined]="true"
+      [label]="'Close' | translate"
+      (onClick)="dynamicDialogRef.close()"
+    >
+    </p-button>
+    <p-button
+      pRipple
+      [label]="'Save' | translate"
+      (onClick)="save()"
+      [disabled]="form.form.invalid"
+    >
+    </p-button>
+  </div>
+</div>

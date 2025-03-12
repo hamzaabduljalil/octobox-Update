@@ -1,0 +1,43 @@
+<form #form="ngForm">
+  <div
+    class="flex flex-wrap justify-between gap-5 my-2 w-full"
+    [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
+  >
+    @for(area of areas; track area.city.id;let index = $index){
+    <div
+      class="flex flex-col w-[45%] gap-2"
+      [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
+    >
+      <label for="Area" [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
+        >{{ "Areas In" | translate }}
+        {{
+          currentLang() === "ar" ? area.city.name.ar : area.city.name.en
+        }}</label
+      >
+      <p-multiSelect
+        [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
+        [options]="area.areas"
+        [(ngModel)]="selectedArea[index]"
+        [name]="'area_' + area.city.id"
+        [optionLabel]="currentLang() === 'ar' ? 'name.ar' : 'name.en'"
+        [placeholder]="'Select Areas' | translate"
+        styleClass="w-full min-h-10"
+      >
+      </p-multiSelect>
+    </div>
+    }
+  </div>
+</form>
+<div class="p-dialog-footer custom-footer py-4">
+  <div class="flex justify-end">
+    <p-button
+      pRipple
+      [outlined]="true"
+      [label]="'Close' | translate"
+      (onClick)="dynamicDialogRef.close()"
+    >
+    </p-button>
+    <p-button pRipple [label]="'Next' | translate" (onClick)="save()">
+    </p-button>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div [dir]="langService.currentDirection()">
+  <div class="main-container">
+    <div
+      class="editor-container editor-container_document-editor"
+      #editorContainerElement
+    >
+      <div class="editor-container__toolbar" #editorToolbarElement></div>
+      <div class="editor-container__editor-wrapper">
+        <div class="editor-container__editor">
+          <div #editorElement>
+            @if (isLayoutReady) {
+            <ckeditor
+              [editor]="Editor"
+              [config]="config"
+              (ready)="onReady($event)"
+              id="wording"
+              name="wording"
+              [(ngModel)]="dynamicDialogConfig.data!.text"
+              [ngModelOptions]="{ standalone: true }"
+            />}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-dialog-footer custom-footer py-4">
+    <div class="flex justify-end">
+      <p-button
+        pRipple
+        [outlined]="true"
+        [label]="'Close' | translate"
+        (onClick)="dynamicDialogRef.close()"
+      ></p-button>
+      <p-button
+        pRipple
+        [label]="'Update' | translate"
+        [disabled]="
+          !dynamicDialogConfig.data?.text ||
+          (dynamicDialogConfig.data?.text)!.length <= 0
+        "
+        (onClick)="dynamicDialogRef.close(dynamicDialogConfig.data?.text)"
+      ></p-button>
+    </div>
+  </div>
+</div>

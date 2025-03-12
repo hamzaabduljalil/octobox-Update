@@ -1,0 +1,301 @@
+<div
+  class="flex items-center w-full md:grid md:place-items-center justify-center p-[25px_20px] md:container mx-auto"
+>
+  <div class="grid w-full max-w-[1120px] mx-auto place-items-center">
+    <!-- Title Section -->
+    <div class="md:text-[32px] text-xl text-start w-full">
+      <div
+        class="flex justify-between"
+        *ngFor="let step of steps; let i = index"
+      >
+        <div
+          *ngIf="currentStep === i + 1"
+          class="flex justify-between items-center w-full"
+        >
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <button (click)="prevStep()">
+                <i
+                  class="pi pi-arrow-left w-[22px] h-[24px] blocck md:hidden"
+                ></i>
+              </button>
+
+              <h1 class="text-xl md:text-4xl font-semibold md:font-normal">
+                {{ step }}
+              </h1>
+            </div>
+          </div>
+          <div>
+            <button>
+              <i class="pi pi-bars w-[24px] block md:hidden"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Package  Tabs -->
+    <div
+      *ngIf="currentStep === 1 || currentStep === 2"
+      class="w-full min-w-full scroll-smooth mt-4 whitespace-nowrap flex justify-center overflow-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+    >
+      <app-choose-package
+        class="w-full"
+        [types]="types"
+        [selectedType]="selectedType"
+        (typeSelected)="selectType($event)"
+      ></app-choose-package>
+    </div>
+
+    <div class="w-full flex justify-between items-start mt-5">
+      <!-- Step Content -->
+      <div class="text-center w-[100%] md:w-[74.5%]">
+        <div *ngIf="currentStep === 1">
+          <div
+            class="bg-white p-4 rounded-2xl flex flex-col md:flex-row justify-between gap-[8px]"
+          >
+            <div class="w-full md:w-[45%]">
+              <app-shipping-form
+                [fieldsToShow]="{
+                  country: true,
+                  city: true,
+                  address: true,
+                  addressType: true,
+                  drop:true,
+
+                }"
+                [selectedType]="selectedType"
+                title="Shipping From"
+                [form]="shippingFrom"
+                [form]="shippingFrom"
+                [items]="dropdownFrom"
+                [isDialogVisible]="isDialogVisibleFrom"
+                [isDialogRadioVisible]="isDialogRadioVisibleFrom"
+              ></app-shipping-form>
+            </div>
+            <div
+              class="flex items-center justify-center gap-2 relative md:flex-col"
+            >
+              <div class="custom-dashed-line"></div>
+              <p-button
+                icon="pi pi-arrow-right-arrow-left"
+                [text]="true"
+                severity="secondary"
+                (click)="swapForms()"
+                size="large"
+                [className]="
+                  'my-button p-[2px] lg:p-[8px] rotate-[90deg] md:rotate-[0deg] '
+                "
+              />
+              <div class="custom-dashed-line"></div>
+            </div>
+            <div class="w-full md:w-[45%]">
+              <app-shipping-form
+                [fieldsToShow]="{
+                  country: true,
+                  city: true,
+                  address: true,
+                  addressType: true,
+                  drop:true,
+
+                }"
+                [selectedType]="selectedType"
+                title="Shipping To"
+                [form]="shippingTo"
+                [form]="shippingTo"
+                [items]="dropdownTo"
+                [isDialogVisible]="isDialogVisibleTo"
+                [isDialogRadioVisible]="isDialogRadioVisibleTo"
+              ></app-shipping-form>
+            </div>
+          </div>
+          <div class="flex gap-4 mt-4 justify-self-auto justify-end">
+            <p-button
+              class="next-button button first w-full md:!w-[27%]"
+              label="Next"
+              (click)="nextStep()"
+              [disabled]="currentStep === steps.length"
+            ></p-button>
+          </div>
+        </div>
+
+        <div *ngIf="currentStep === 2" class="flex flex-col">
+          <div
+            class="w-[100%] rounded flex-auto flex justify-center items-center font-medium"
+          >
+            <app-weight-form
+              class="w-[100%]"
+              [form]="weightForm"
+              [selectedType]="selectedType"
+            ></app-weight-form>
+          </div>
+
+          <div class="flex justify-end gap-4 mt-6">
+            <p-button
+              class="back-button button first hidden md:block w-full md:!w-[27%]"
+              label="Back"
+              (click)="prevStep()"
+            ></p-button>
+            <p-button
+              class="next-button button first w-full md:!w-[27%]"
+              label=" Get Rates"
+              (click)="nextStep()"
+              [disabled]="currentStep === steps.length"
+            ></p-button>
+          </div>
+        </div>
+
+        <div *ngIf="currentStep === 3">
+          <app-rates-form
+            class="w-[100%]"
+            (cardSelected)="onCardSelected($event)"
+            (cardSelected)="nextStep()"
+          ></app-rates-form>
+        </div>
+
+        <div *ngIf="currentStep === 4">
+          <div
+            class="bg-white p-4 rounded-2xl flex flex-col md:flex-row justify-between gap-[8px]"
+          >
+            <div class="w-full md:w-[45%]">
+              <app-shipping-form
+                [fieldsToShow]="{
+                  country: true,
+                  city: true,
+                  address: true,
+                  area: true,
+                  floor: true,
+                  name: true,
+                  number: true,
+                  addressType: true,
+                  drop:true,
+                }"
+                [selectedType]="selectedType"
+                title="Shipping From"
+                [form]="shippingFrom"
+                [items]="dropdownFrom"
+                [isDialogVisible]="isDialogVisibleFrom"
+                [isDialogRadioVisible]="isDialogRadioVisibleFrom"
+              ></app-shipping-form>
+            </div>
+            <div
+              class="flex items-center justify-center gap-2 relative md:flex-col"
+            >
+              <div class="custom-dashed-line"></div>
+              <p-button
+                icon="pi pi-arrow-right-arrow-left"
+                [text]="true"
+                severity="secondary"
+                (click)="swapForms()"
+                size="large"
+                [className]="
+                  'my-button p-[2px] lg:p-[8px] rotate-[90deg] md:rotate-[0deg] '
+                "
+              />
+              <div class="custom-dashed-line"></div>
+            </div>
+            <div class="w-full md:w-[45%]">
+              <app-shipping-form
+                [fieldsToShow]="{
+                  country: true,
+                  city: true,
+                  address: true,
+                  area: true,
+                  floor: true,
+                  name: true,
+                  number: true,
+                  addressType: true,
+                  drop:true,
+
+                }"
+                [selectedType]="selectedType"
+                title="Shipping To"
+                [form]="shippingTo"
+                [items]="dropdownTo"
+                [isDialogVisible]="isDialogVisibleTo"
+                [isDialogRadioVisible]="isDialogRadioVisibleTo"
+              ></app-shipping-form>
+            </div>
+          </div>
+
+          <div class="flex gap-4 mt-4 justify-self-auto justify-end">
+            <p-button
+              class="back-button button first w-full md:!w-[27%]"
+              label="Save to draft"
+              (click)="nextStep()"
+              [disabled]="currentStep === steps.length"
+            ></p-button>
+            <p-button
+              class="next-button button first w-full md:!w-[27%]"
+              label="Back"
+              (click)="prevStep()"
+              [disabled]="currentStep === steps.length"
+            ></p-button>
+          </div>
+        </div>
+      </div>
+      <!-- Stepper Progress -->
+      <div
+        class="bg-white rounded-2xl shadow-md p-[16px_15px] w-[23.5%] hidden md:block"
+      >
+        <div class="flex flex-col">
+          <ng-container *ngFor="let step of steps; let i = index">
+            <ng-container *ngIf="i !== steps.length - 1">
+              <div
+                class="relative flex items-start w-full cursor-pointer gap-3"
+                (click)="setStep(i + 1)"
+              >
+                <!-- Step Icon and Line Container -->
+                <div class="flex flex-col items-center">
+                  <!-- Step Icon -->
+                  <div
+                    class="w-[32px] h-[32px] flex items-center justify-center rounded-full border-3 transition-all"
+                    [ngClass]="{
+                      'border-blue-600 bg-white': currentStep === i + 1,
+                      'border-blue-500 bg-blue-500 text-white':
+                        currentStep !== i + 1 && i < currentStep,
+                      'border-gray-300 bg-white': i >= currentStep
+                    }"
+                  >
+                    <ng-container
+                      *ngIf="i < currentStep - 1; else currentStepDot"
+                    >
+                      <img
+                        src="../../../../assets/icon/check.png"
+                        class="w-[17px]"
+                      />
+                    </ng-container>
+                    <ng-template #currentStepDot>
+                      <div
+                        class="w-[10px] h-[10px] rounded-full"
+                        [ngClass]="{
+                          'bg-blue-500': currentStep === i + 1,
+                          'bg-gray-300': i >= currentStep
+                        }"
+                      ></div>
+                    </ng-template>
+                  </div>
+
+                  <!-- Step Line (Hidden for Last Step) -->
+                  <div
+                    *ngIf="i !== steps.length - 2"
+                    class="w-[2px] h-[60px]"
+                    [ngClass]="{
+                      'bg-blue-500': i < currentStep,
+                      'bg-gray-300': i >= currentStep - 1
+                    }"
+                  ></div>
+                </div>
+
+                <!-- Step Label -->
+                <p class="text-xl font-light mt-2 text-[#001533]">
+                  {{ step }}
+                </p>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+@if (data.length<=0) {
+<div
+  class="drop-area flex items-center justify-center flex-col gap-3"
+  (drop)="onFileDropped($event)"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  [@dragging]="!isNotDragging.toString()"
+>
+  <div class="text-center mx-1">
+    {{ "Drag and Drop a file here or click upload icon" | translate }}
+  </div>
+  <i
+    class="pi pi-upload upload-icon"
+    style="font-size: 2rem"
+    (click)="uploadFile()"
+  ></i>
+</div>
+}@else {
+<div class="relative">
+  <video
+    [src]="data"
+    class="w-full mb-3 rounded-lg relative"
+    controls
+    autoplay
+    loop
+  ></video>
+
+  <p-button
+    class="absolute top-2 right-2"
+    icon="pi pi-times"
+    severity="danger"
+    (onClick)="removeVideo()"
+  ></p-button>
+</div>
+
+}

@@ -1,0 +1,167 @@
+<div
+  class="flex items-center w-full md:grid md:place-items-center justify-center p-[25px_20px] md:container mx-auto"
+>
+  <div
+    class="grid w-full max-w-[1120px] mx-auto place-items-start justify-between"
+  >
+    <!-- title  -->
+    <div
+      class="md:text-[32px] text-xl text-start w-full mb-4 flex justify-between items-center"
+    >
+      <h1 class="text-[20px] md:text-[32px] font-semibold md:font-normal">
+        My Saved Packages
+      </h1>
+      <button>
+        <i class="pi pi-bars w-[24px] block md:hidden"></i>
+      </button>
+    </div>
+    <!--  -->
+    <div class="text-start w-[100%] md:w-[49%] gap-3">
+      <!-- *ngFor="let item of weightForm.get('items')?.value" -->
+      <section>
+        <div class="mb-4 bg-[var(--surface-e)] p-[16px] rounded-2xl">
+          <div>
+            <div class="flex justify-between items-start">
+              <div class="flex items-start justify-start flex-col">
+                <div class="flex justify-center items-center">
+                  <img src="../../../../assets/icon/Package1.svg" />
+                  <div class="ml-2">
+                    <p
+                      class="text-primary text-[#0067FF] text-xl text-start pb-2"
+                    >
+                      Package Name
+                    </p>
+                    <div class="flex flex-wrap gap-5 text-base text-[#001533]">
+                      <span>L: 999 cm | W: 999 cm | H: 999 cm</span>
+                      <span>Weight: 999 kg</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-[#8E8E93] text-base text-start py-2">
+                  Description Description Description Description scription
+                  Descrip
+                </p>
+              </div>
+              <button>
+                <i class="pi pi-ellipsis-v w-[20px]"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div
+      class="bg-[var(--surface-e)] rounded-[25px] hidden md:block w-[49%] p-[24px]"
+    >
+      <h2 class="text-[#0067FF] text-xl font-semibold">Add a new package</h2>
+      <!--  -->
+      <div
+        class="w-full min-w-full scroll-smooth mt-4 whitespace-nowrap flex justify-center overflow-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+      >
+        <app-choose-package
+          class="w-full"
+          [types]="types"
+          [selectedType]="selectedType"
+          (typeSelected)="selectType($event)"
+        ></app-choose-package>
+      </div>
+
+      <!--  -->
+      <div class="flex flex-wrap gap-1 my-4 transition-all">
+        <div style="width: calc(97% / 2)" class="mb-3">
+          <div class="flex flex-col gap-2 w-full">
+            <label class="text-[16px] text-start" for="Length"> Length </label>
+            <div class="relative">
+              <input
+                formControlName="length"
+                pInputText
+                type="text"
+                id="Length"
+                placeholder="Example"
+                class="rounded-[10px] p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
+              />
+              <span class="absolute right-7 top-3">c.m</span>
+            </div>
+          </div>
+        </div>
+        <div style="width: calc(97% / 2)" class="mb-3">
+          <div class="flex flex-col gap-2 w-full">
+            <label class="text-[16px] text-start" for="Width"> Width </label>
+            <div class="relative">
+              <input
+                formControlName="width"
+                pInputText
+                type="text"
+                id="Width"
+                placeholder="Example"
+                class="rounded-[10px] p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
+              />
+              <span class="absolute right-3 top-3">c.m</span>
+            </div>
+          </div>
+        </div>
+        <div style="width: calc(97% / 2)" class="mb-3">
+          <div class="flex flex-col gap-2 w-full">
+            <label class="text-[16px] text-start" for="Height"> Height </label>
+            <div class="relative">
+              <input
+                formControlName="height"
+                pInputText
+                type="text"
+                id="Height"
+                placeholder="Example"
+                class="rounded-[10px] p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
+              />
+              <span class="absolute right-3 top-3">c.m</span>
+            </div>
+          </div>
+        </div>
+        <div style="width: calc(97% / 2)" class="mb-3">
+          <div class="flex flex-col gap-2 w-full">
+            <label class="text-[16px] text-start" for="Weight"> Weight </label>
+            <div class="relative">
+              <input
+                formControlName="weight"
+                pInputText
+                type="text"
+                id="Weight"
+                placeholder="Example"
+                class="rounded-[10px] p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
+              />
+              <span class="absolute right-3 top-3">k.g</span>
+            </div>
+          </div>
+        </div>
+        <div style="width: 97%">
+          <div class="flex flex-col gap-2 w-full">
+            <label class="text-[16px] text-start" for="Description">
+              Description
+            </label>
+            <div class="relative">
+              <input
+                formControlName="description"
+                pInputText
+                type="text"
+                id="Description"
+                placeholder="Example"
+                class="rounded-[10px] w-full p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA]"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <p-button
+          class="back-button button first w-full"
+          label="Cancel"
+        ></p-button>
+
+        <p-button
+          class="next-button button first w-full"
+          label="Save"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+</div>

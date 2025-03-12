@@ -1,0 +1,67 @@
+::ng-deep .edit-button .p-button {
+  color: #0067ff !important;
+}
+
+.custom-dashed {
+  flex-grow: 1;
+  border-left: 3px dashed transparent;
+  height: 200px;
+  width: 1px;
+  border-image: repeating-linear-gradient(
+      0deg,
+      #d1d1d6,
+      #d1d1d6 10px,
+      transparent 10px,
+      transparent 20px
+    )
+    1;
+}
+::ng-deep .p-step-number {
+  display: none !important;
+}
+::ng-deep .p-step {
+  padding: 0 8px !important;
+}
+::ng-deep .p-step-active .p-step-title {
+  color: #007bff !important;
+}
+
+::ng-deep .my-button .p-button-secondary {
+  width: 24px;
+  height: 24px;
+  box-shadow: none;
+}
+::ng-deep .my-button .p-button-icon {
+  font-size: 20px;
+}
+
+.custom-dashed-line {
+  width: 40%;
+  height: 0;
+  border-top: 2px dashed #d1d1d6;
+  border-image: repeating-linear-gradient(
+      to right,
+      #d1d1d6,
+      #d1d1d6 4px,
+      transparent 4px,
+      transparent 10px
+    )
+    1;
+}
+
+@media (min-width: 768px) {
+  .custom-dashed-line {
+    width: 2px;
+    height: 40%;
+    border-top: none;
+    border-left: 2px dashed #d1d1d6;
+    border-image: repeating-linear-gradient(
+        to bottom,
+        #d1d1d6,
+        #d1d1d6 4px,
+        transparent 4px,
+        transparent 10px
+      )
+      1;
+  }
+}

@@ -1,0 +1,53 @@
+<div class="w-full top-0 relative mt-0">
+  <div class="flex justify-start items-start gap-5 mb-4">
+    <!--  -->
+    <div
+      class="p-[16px] md:p-[20px_24px] bg-[#F2F2F7] text-start rounded-[15px] cursor-pointer w-full"
+    >
+      <h4 class="font-semibold sm:text-2xl text-base mb-4">Best Price</h4>
+      <div class="flex gap-3 items-center justify-start">
+        <img
+          src="../../../../assets/icon/Ellipse.svg"
+          class="w-[32px] md:w-[48px]"
+        />
+        <div>
+          <p class="text-[#0067FF] m-0 text-sm sm:text-xl font-normal mb-1">
+            Company Name
+          </p>
+          <p class="text-sm sm:text-base font-normal mt-2">1 Day - $15.00</p>
+        </div>
+      </div>
+    </div>
+
+    <!--  -->
+    <div
+      class="p-[16px] md:p-[20px_24px] bg-[#F2F2F7] text-start rounded-[15px] cursor-pointer w-full"
+    >
+      <h4 class="font-semibold sm:text-2xl text-base mb-4">Best Price</h4>
+      <div class="flex gap-3 items-center justify-start">
+        <img
+          src="../../../../assets/icon/Ellipse.svg"
+          class="w-[32px] md:w-[48px]"
+        />
+        <div>
+          <p class="text-[#0067FF] m-0 text-sm sm:text-xl font-normal mb-1">
+            Company Name
+          </p>
+          <p class="text-sm sm:text-base font-normal mt-2">1 Day - $15.00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <app-choose-company-card
+      *ngFor="let cardItem of cards"
+      [Company]="cardItem.company"
+      [Service]="cardItem.service"
+      [price]="cardItem.price"
+      button="select"
+      (cardSelected)="handleCardSelection(cardItem)"
+      [ngClass]="{ 'selected-card': selectedCard === cardItem }"
+    ></app-choose-company-card>
+  </div>
+</div>
