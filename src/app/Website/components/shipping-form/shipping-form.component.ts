@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SaveRadioComponent } from '../dialogs/save-radio/save-radio.component';
 import { SaveAddressesComponent } from '../dialogs/save-addresses/save-addresses.component';
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-shipping-form',
   standalone: true,
@@ -20,6 +21,7 @@ import { SaveAddressesComponent } from '../dialogs/save-addresses/save-addresses
     CommonModule,
     MultiSelectModule,
     SaveRadioComponent,
+    ButtonModule,
     SaveAddressesComponent,
   ],
   templateUrl: './shipping-form.component.html',
