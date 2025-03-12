@@ -10,7 +10,8 @@
           [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
           pInputText
           name="NameAr"
-          [(ngModel)]="dynamicDialogConfig.data?.obj.name.ar"
+          [(ngModel)]="dynamicDialogConfig.data.obj.name.ar"
+          required
         />
       </div>
       <div class="w-full flex flex-col gap-2">
@@ -22,7 +23,7 @@
           [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
           pInputText
           name="NameEn"
-          [(ngModel)]="dynamicDialogConfig.data?.obj.name.en"
+          [(ngModel)]="dynamicDialogConfig.data.obj.name.en"
         />
       </div>
     </div>

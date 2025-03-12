@@ -4,34 +4,34 @@ import {
   Component,
   inject,
   signal,
-} from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { ButtonModule } from "primeng/button";
-import { DialogModule } from "primeng/dialog";
-import { DropdownModule } from "primeng/dropdown";
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 import {
   DialogService,
   DynamicDialogConfig,
   DynamicDialogRef,
-} from "primeng/dynamicdialog";
-import { InputTextModule } from "primeng/inputtext";
-import { MultiSelectModule } from "primeng/multiselect";
-import { ToastService } from "../../../../services/other/toast.service";
-import { PackageTypeService } from "../../../../services/dataServices/package-type.service";
-import { PricingMethodService } from "../../../../services/dataServices/pricing-method.service";
-import { VehicleTypeService } from "../../../../services/dataServices/vehicle-type.service";
-import { ServiceService } from "../../../../services/dataServices/service.service";
-import { Service } from "../../../../models/Interfaces/Service";
-import { AddRangeDialogComponent } from "../add-range-dialog/add-range-dialog.component";
-import { ChoosePricingComponent } from "../choose-pricing/choose-pricing.component";
-import { PackageType } from "../../../../models/Interfaces/PackageType";
-import { PricingMethod } from "../../../../models/Interfaces/PricingMethod";
-import { Vehicle } from "../../../../models/Interfaces/Vehicle";
-import { ChangeLangService } from "../../../../services/other/change-lang.service";
+} from 'primeng/dynamicdialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ToastService } from '../../../../services/other/toast.service';
+import { PackageTypeService } from '../../../../services/dataServices/package-type.service';
+import { PricingMethodService } from '../../../../services/dataServices/pricing-method.service';
+import { VehicleTypeService } from '../../../../services/dataServices/vehicle-type.service';
+import { ServiceService } from '../../../../services/dataServices/service.service';
+import { Service } from '../../../../models/Interfaces/Service';
+import { AddRangeDialogComponent } from '../add-range-dialog/add-range-dialog.component';
+import { ChoosePricingComponent } from '../choose-pricing/choose-pricing.component';
+import { PackageType } from '../../../../models/Interfaces/PackageType';
+import { PricingMethod } from '../../../../models/Interfaces/PricingMethod';
+import { Vehicle } from '../../../../models/Interfaces/Vehicle';
+import { ChangeLangService } from '../../../../services/other/change-lang.service';
 
 @Component({
-  selector: "app-service-part-two",
+  selector: 'app-service-part-two',
   standalone: true,
   imports: [
     ButtonModule,
@@ -42,8 +42,8 @@ import { ChangeLangService } from "../../../../services/other/change-lang.servic
     DropdownModule,
     MultiSelectModule,
   ],
-  templateUrl: "./service-part-two.component.html",
-  styleUrl: "./service-part-two.component.scss",
+  templateUrl: './service-part-two.component.html',
+  styleUrl: './service-part-two.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServicePartTwoComponent {
@@ -56,26 +56,26 @@ export class ServicePartTwoComponent {
   currentLang = inject(ChangeLangService).currentLang;
   packageTypes = signal<PackageType[]>([]);
   selectedPackages = signal<PackageType[]>([]);
-  selectedPricingMethod: PricingMethod;
+  selectedPricingMethod: PricingMethod | undefined;
   vehicleTypesArray = signal<Vehicle[]>([]);
   selectedVehicleTypes = signal<Vehicle[]>([]);
-  priceFees: number;
-  from: number;
-  to: number;
+  priceFees?: number;
+  from?: number;
+  to?: number;
   maxLength: number = 0;
   maxWidth: number = 0;
   maxHeight: number = 0;
   maxWeight: number = 0;
-  minWeight: number;
+  minWeight?: number;
   toastService = inject(ToastService);
   companyData: any;
   dynamicDialogConfig = inject(DynamicDialogConfig) as {
-    data?: {
-      obj?: Service;
+    data: {
+      obj: Service;
     };
   };
   ngOnInit(): void {
-    console.log(this.dynamicDialogConfig.data.obj, "ddddd");
+    console.log(this.dynamicDialogConfig.data.obj, 'ddddd');
 
     this.getData();
   }
@@ -121,11 +121,11 @@ export class ServicePartTwoComponent {
   saving = false;
 
   openPricingDialog() {
-    const headerText = this.translate.instant("Choose Pricing");
+    const headerText = this.translate.instant('Choose Pricing');
     const dialog = this.dialogService.open(ChoosePricingComponent, {
       header: headerText,
-      footer: ".",
-      width: "600px",
+      footer: '.',
+      width: '600px',
       data: { obj: this.dynamicDialogConfig.data?.obj.price },
       rtl: true,
     });
@@ -144,7 +144,7 @@ export class ServicePartTwoComponent {
     this.dynamicDialogConfig.data.obj.maxHeight = this.maxHeight;
     this.dynamicDialogConfig.data.obj.maxLength = this.maxLength;
 
-    console.log(this.dynamicDialogConfig.data?.obj, "data");
+    console.log(this.dynamicDialogConfig.data?.obj, 'data');
     const modifiedService = {
       ...this.dynamicDialogConfig.data?.obj,
       shippingCompany: this.dynamicDialogConfig.data.obj.shippingCompany.id,
@@ -172,14 +172,14 @@ export class ServicePartTwoComponent {
         price,
       })),
     };
-    console.log(modifiedService, "modifiedService");
+    console.log(modifiedService, 'modifiedService');
     if (this.dynamicDialogConfig.data?.obj.id) {
       const id = this.dynamicDialogConfig.data?.obj.id;
       this.serviceService
         .save(this.dynamicDialogConfig.data?.obj, id)
         .subscribe({
           next: (value) => {
-            console.log(value, "value");
+            console.log(value, 'value');
             this.toastService.showToast_success();
             this.dynamicDialogRef.close(value);
           },
@@ -190,7 +190,7 @@ export class ServicePartTwoComponent {
     } else {
       this.serviceService.save(this.dynamicDialogConfig.data?.obj).subscribe({
         next: (value) => {
-          console.log(value, "value");
+          console.log(value, 'value');
           this.toastService.showToast_success();
           this.dynamicDialogRef.close(value);
         },

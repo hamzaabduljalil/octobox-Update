@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
@@ -30,34 +35,34 @@ import { ThisReceiver } from '@angular/compiler';
     FormsModule,
     InputTextModule,
     DropdownModule,
-    MultiSelectModule
+    MultiSelectModule,
   ],
   templateUrl: './first-step.component.html',
   styleUrl: './first-step.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FirstStepComponent {
-  data = inject(ServiceService).data
-  companyService = inject(ShippingCompanyService)
-  cityService = inject(CityService)
-  typeService = inject(ShippingTypeService)
-  areaService = inject(AreaService)
-  currentLang = inject(ChangeLangService).currentLang
-  companies = signal<Company[]>([])
-  cities = signal<City[]>([])
-  selectedCities :City[] = []
-  types = signal<ShippingType[]>([])
-  areasByCities = signal<CityArea[]>([])
+  data = inject(ServiceService).data;
+  companyService = inject(ShippingCompanyService);
+  cityService = inject(CityService);
+  typeService = inject(ShippingTypeService);
+  areaService = inject(AreaService);
+  currentLang = inject(ChangeLangService).currentLang;
+  companies = signal<Company[]>([]);
+  cities = signal<City[]>([]);
+  selectedCities: City[] = [];
+  types = signal<ShippingType[]>([]);
+  areasByCities = signal<CityArea[]>([]);
 
-  citiesIds:string[] = []
-  saving = false
-  
-  ngOnInit(){
+  citiesIds: string[] = [];
+  saving = false;
+
+  ngOnInit() {
     console.log(this.data, 'data Initialized');
     this.getData();
-    
+
     // Restore previously selected cities and areas if available
-    if(this.data.cityArea && this.data.cityArea.length > 0){
+    if (this.data.cityArea && this.data.cityArea.length > 0) {
       this.areasByCities.set(this.data.cityArea);
     } else if (this.data.city && this.data.city.length > 0) {
       // If we have cities selected but no cityArea data, fetch the areas
@@ -65,80 +70,83 @@ export class FirstStepComponent {
     }
   }
 
-  getData(){
+  getData() {
     const data = {
-      sortKey:'createdAt',
-      sortOrder:-1
-    }
+      sortKey: 'createdAt',
+      sortOrder: -1,
+    };
 
-    this.typeService.getShippingTypes()
-    .subscribe({
-      next:(res) => {
-        this.types.set(res)
-      }
-    })
+    this.typeService.getShippingTypes().subscribe({
+      next: (res) => {
+        this.types.set(res);
+      },
+    });
 
-    this.companyService.get(data)
-    .subscribe({
-      next:(res => {
-        this.companies.set(res)
-      })
-    })
+    this.companyService.get(data).subscribe({
+      next: (res) => {
+        this.companies.set(res);
+      },
+    });
 
-    this.cityService.get(data)
-    .subscribe({
-      next:(res => {
-        this.cities.set(res)
-      })
-    })
+    this.cityService.get(data).subscribe({
+      next: (res) => {
+        this.cities.set(res);
+      },
+    });
   }
 
   onCitiesChange() {
     if (this.data.city && this.data.city.length > 0) {
       const selectedCities = this.data.city;
-      this.citiesIds = selectedCities.map(city => city.id);
-      
-      this.areaService.getAreasByCities(this.citiesIds)
-        .subscribe({  
-          next: (res) => {
-            // If we have existing cityArea data with selections
-            if (this.data.cityArea && this.data.cityArea.length > 0) {
-              // Map existing selections to the new cityArea data
-              const areasWithSelection = res.map(cityArea => {
-                const existingCityArea = this.data.cityArea.find(ca => ca.city.id === cityArea.city.id);
-                return {
-                  ...cityArea,
-                  selectedAreas: existingCityArea ? existingCityArea.selectedAreas : []
-                };
-              });
-              this.areasByCities.set(areasWithSelection);
-            } else {
-              // No existing selections, initialize with empty selections
-              const areasWithSelection = res.map(cityArea => ({
+      this.citiesIds = selectedCities
+        .map((city) => city.id)
+        .filter((id): id is string => id !== undefined);
+
+      this.areaService.getAreasByCities(this.citiesIds).subscribe({
+        next: (res) => {
+          // If we have existing cityArea data with selections
+          if (this.data.cityArea && this.data.cityArea.length > 0) {
+            // Map existing selections to the new cityArea data
+            const areasWithSelection = res.map((cityArea) => {
+              const existingCityArea = this.data.cityArea?.find(
+                (ca) => ca.city.id === cityArea.city.id
+              );
+              return {
                 ...cityArea,
-                selectedAreas: []
-              }));
-              this.areasByCities.set(areasWithSelection);
-            }
-            
-            console.log(this.areasByCities(), 'areas');
+                selectedAreas: existingCityArea
+                  ? existingCityArea.selectedAreas
+                  : [],
+              };
+            });
+            this.areasByCities.set(areasWithSelection);
+          } else {
+            // No existing selections, initialize with empty selections
+            const areasWithSelection = res.map((cityArea) => ({
+              ...cityArea,
+              selectedAreas: [],
+            }));
+            this.areasByCities.set(areasWithSelection);
           }
-        });
+
+          console.log(this.areasByCities(), 'areas');
+        },
+      });
     } else {
       this.areasByCities.set([]);
     }
   }
-  
-  ngOnDestroy(){
+
+  ngOnDestroy() {
     // Save the selected cities and areas when component is destroyed
     this.data.cityArea = this.areasByCities();
-    
+
     // Update the data.area with all selected areas from all cities
-    const allSelectedAreas = this.areasByCities()
-      .flatMap(cityArea => cityArea.selectedAreas || []);
-    
+    const allSelectedAreas = this.areasByCities().flatMap(
+      (cityArea) => cityArea.selectedAreas || []
+    );
+
     this.data.area = allSelectedAreas;
-    
+
     console.log(this.data, 'Service After Destroy');
   }
 }

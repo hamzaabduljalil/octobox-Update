@@ -4,7 +4,7 @@ import {
   style,
   transition,
   trigger,
-} from "@angular/animations";
+} from '@angular/animations';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -13,43 +13,45 @@ import {
   HostBinding,
   Input,
   Output,
-} from "@angular/core";
-import { TranslateModule } from "@ngx-translate/core";
-import { ButtonModule } from "primeng/button";
-import { DynamicDialogRef } from "primeng/dynamicdialog";
-import { FileNamePipe } from "../../../pipes/file-name.pipe";
-import { ChangeLangService } from "../../../services/other/change-lang.service";
-import File from "../../../models/Interfaces/File";
+} from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { FileNamePipe } from '../../../pipes/file-name.pipe';
+import { ChangeLangService } from '../../../services/other/change-lang.service';
+import File from '../../../models/Interfaces/File';
 
 @Component({
-  selector: "app-file-uploader-list",
+  selector: 'app-file-uploader-list',
   standalone: true,
   imports: [ButtonModule, TranslateModule, FileNamePipe],
-  templateUrl: "./file-uploader-list.component.html",
-  styleUrl: "./file-uploader-list.component.scss",
+  templateUrl: './file-uploader.component.html',
+  styleUrls: ['./file-uploader.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger("dragging", [
+    trigger('dragging', [
       state(
-        "true",
+        'true',
         style({
           opacity: 1,
         })
       ),
       state(
-        "false",
+        'false',
         style({
-          boxShadow: "none",
+          boxShadow: 'none',
           opacity: 0.8,
         })
       ),
-      transition("false => true", [animate("200ms")]),
-      transition("true => false", [animate("200ms")]),
+      transition('false => true', [animate('200ms')]),
+      transition('true => false', [animate('200ms')]),
     ]),
   ],
 })
 export class FileUploaderListComponent {
-  @HostBinding("@dragging") isNotDragging: boolean = true;
+  onlyViewIcon: boolean = false;
+  canDelete: boolean = true;
+  @HostBinding('@dragging') isNotDragging: boolean = true;
 
   @Input({ required: true }) files!: File[];
   @Output() filesChange = new EventEmitter<File[]>();
@@ -78,9 +80,9 @@ export class FileUploaderListComponent {
     this.cd.detectChanges();
   }
   uploadFile() {
-    const fileInput = document.createElement("input");
-    fileInput.type = "file";
-    fileInput.addEventListener("change", (event: any) =>
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.addEventListener('change', (event: any) =>
       this.uploadVideo(event?.target?.files)
     );
     fileInput.click();
@@ -119,6 +121,6 @@ export class FileUploaderListComponent {
 
   viewFile(index: number) {
     const data = this.files[index].url;
-    window.open(data, "_blank");
+    window.open(data, '_blank');
   }
 }

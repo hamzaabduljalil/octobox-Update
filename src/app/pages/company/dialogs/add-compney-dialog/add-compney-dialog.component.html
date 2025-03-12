@@ -12,7 +12,7 @@
           [placeholder]="'Enter Name' | translate"
           pInputText
           name="NameAr"
-          [(ngModel)]="dynamicDialogConfig.data?.obj?.name.ar"
+          [(ngModel)]="dynamicDialogConfig.data.obj!.name!.ar"
         />
       </div>
       <div class="w-full flex flex-col gap-2">
@@ -23,7 +23,7 @@
           [placeholder]="'Enter Name' | translate"
           pInputText
           name="NameEn"
-          [(ngModel)]="dynamicDialogConfig.data?.obj?.name.en"
+          [(ngModel)]="dynamicDialogConfig.data.obj!.name!.en"
         />
       </div>
     </div>

@@ -1,7 +1,7 @@
 <div class="w-full">
   <h1 class="">Add Service</h1>
   <p-stepper>
-    <p-stepperPanel header="Step I">
+    <p-step-panel header="Step I">
       <ng-template
         pTemplate="content"
         let-nextCallback="nextCallback"
@@ -9,7 +9,7 @@
       >
         <div class="flex flex-column h-[50vh] w-3/4 mx-auto">
           <div class="w-full">
-            <app-first-step/>
+            <app-first-step />
           </div>
         </div>
         <!-- Next Button -->
@@ -23,9 +23,9 @@
           />
         </div>
       </ng-template>
-    </p-stepperPanel>
+    </p-step-panel>
 
-    <p-stepperPanel header="Step II">
+    <p-step-panel header="Step II">
       <ng-template
         pTemplate="content"
         let-prevCallback="prevCallback"
@@ -52,22 +52,20 @@
           />
         </div>
       </ng-template>
-    </p-stepperPanel>
-    <p-stepperPanel header="Step III">
+    </p-step-panel>
+    <p-step-panel header="Step III">
       <ng-template
         pTemplate="content"
         let-prevCallback="prevCallback"
         let-index="index"
       >
-      <div class="flex flex-column h-[70vh] w-3/4 mx-auto">
-        <div class="w-full">
-          <app-third-step (priceData)="onPriceDataReady($event)" />
+        <div class="flex flex-column h-[70vh] w-3/4 mx-auto">
+          <div class="w-full">
+            <app-third-step (priceData)="onPriceDataReady($event)" />
+          </div>
         </div>
-      </div>
-      <div class="flex">
-
-      </div>
-        <div class=" pt-4 justify-content-start">
+        <div class="flex"></div>
+        <div class="pt-4 justify-content-start">
           <p-button
             label="Back"
             icon="pi pi-arrow-left"
@@ -75,13 +73,9 @@
           />
         </div>
         <div class="flex pt-4 justify-content-end me-6">
-          <p-button
-            label="Save"
-            (onClick)="save()"
-            
-          />
+          <p-button label="Save" (onClick)="save()" />
         </div>
       </ng-template>
-    </p-stepperPanel>
+    </p-step-panel>
   </p-stepper>
 </div>

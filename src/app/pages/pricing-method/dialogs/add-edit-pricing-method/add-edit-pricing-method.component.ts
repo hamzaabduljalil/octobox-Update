@@ -1,14 +1,26 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import {
+  DialogService,
+  DynamicDialogConfig,
+  DynamicDialogRef,
+} from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastService } from '../../../../services/other/toast.service';
 import { CityService } from '../../../../services/dataServices/city.service';
 import { PricingMethodService } from '../../../../services/dataServices/pricing-method.service';
-import { PricingMethod, PricingMethodDefault } from '../../../../models/Interfaces/PricingMethod';
+import {
+  PricingMethod,
+  PricingMethodDefault,
+} from '../../../../models/Interfaces/PricingMethod';
 
 @Component({
   selector: 'app-add-edit-pricing-method',
@@ -22,7 +34,7 @@ import { PricingMethod, PricingMethodDefault } from '../../../../models/Interfac
   ],
   templateUrl: './add-edit-pricing-method.component.html',
   styleUrl: './add-edit-pricing-method.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddEditPricingMethodComponent {
   dynamicDialogRef = inject(DynamicDialogRef);
@@ -32,41 +44,43 @@ export class AddEditPricingMethodComponent {
   toastService = inject(ToastService);
   translate = inject(TranslateService);
   PricingMethodService = inject(PricingMethodService);
-  cd = inject(ChangeDetectorRef)
+  cd = inject(ChangeDetectorRef);
   companyData: any;
   dynamicDialogConfig = inject(DynamicDialogConfig) as {
-    data?: {
-      obj?: PricingMethod;
-    }
+    data: {
+      obj: PricingMethod;
+    };
   };
-  currentLang: string = "en";
+  currentLang: string = 'en';
   newPricingMethod: PricingMethod = PricingMethodDefault;
   ngOnInit(): void {
-    this.translate.onLangChange.subscribe(event => {
+    this.translate.onLangChange.subscribe((event) => {
       this.currentLang = event.lang;
-    })
-    this.currentLang = this.translate.currentLang || "en";
-    console.log(this.dynamicDialogConfig.data?.obj)
+    });
+    this.currentLang = this.translate.currentLang || 'en';
+    console.log(this.dynamicDialogConfig.data?.obj);
     if (!this.dynamicDialogConfig.data?.obj) {
       this.dynamicDialogConfig.data = {
         obj: this.newPricingMethod,
       };
-      console.log(this.dynamicDialogConfig.data?.obj , 'dynamicDialogConfig.data?.obj');
+      console.log(
+        this.dynamicDialogConfig.data?.obj,
+        'dynamicDialogConfig.data?.obj'
+      );
     }
-  };
+  }
   saving = false;
 
-
- 
   save() {
-    const pricingMethodToSave = this.dynamicDialogConfig.data?.obj 
-    if(pricingMethodToSave.id){
-      const id = pricingMethodToSave.id
-      this.PricingMethodService
-      .save( pricingMethodToSave || this.newPricingMethod , id)
-      .subscribe({
+    const pricingMethodToSave = this.dynamicDialogConfig.data?.obj;
+    if (pricingMethodToSave && pricingMethodToSave.id) {
+      const id = pricingMethodToSave.id;
+      this.PricingMethodService.save(
+        pricingMethodToSave || this.newPricingMethod,
+        id
+      ).subscribe({
         next: (value) => {
-          console.log(value ,'updated');
+          console.log(value, 'updated');
           this.toastService.showToast_success();
           this.dynamicDialogRef.close(value);
         },
@@ -74,11 +88,8 @@ export class AddEditPricingMethodComponent {
           this.toastService.showToast_error(err);
         },
       });
-    }
-    else{
-      this.PricingMethodService
-      .save( this.newPricingMethod )
-      .subscribe({
+    } else {
+      this.PricingMethodService.save(this.newPricingMethod).subscribe({
         next: (value) => {
           this.toastService.showToast_success();
           this.dynamicDialogRef.close(value);

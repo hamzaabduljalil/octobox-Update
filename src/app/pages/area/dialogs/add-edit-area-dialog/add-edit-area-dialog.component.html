@@ -10,7 +10,7 @@
         [optionLabel]="currentLang == 'en' ? 'name.en' : 'name.ar'"
         name="City"
         [options]="cities"
-        [(ngModel)]="dynamicDialogConfig.data?.obj.city"
+        [(ngModel)]="(dynamicDialogConfig.data?.obj)!.city"
         [filter]="true"
         filterBy="name"
         [placeholder]="'SCity' | translate"
@@ -29,7 +29,7 @@
           [placeholder]="'Area Name' | translate"
           pInputText
           name="NameAr"
-          [(ngModel)]="dynamicDialogConfig.data?.obj.name.ar"
+          [(ngModel)]="(dynamicDialogConfig.data?.obj)!.name!.ar"
         />
       </div>
       <div class="w-full flex flex-col gap-2">
@@ -42,7 +42,7 @@
           [placeholder]="'Area Name' | translate"
           pInputText
           name="NameEn"
-          [(ngModel)]="dynamicDialogConfig.data?.obj.name.en"
+          [(ngModel)]="(dynamicDialogConfig.data?.obj)!.name!.en"
         />
       </div>
     </div>
@@ -57,7 +57,7 @@
           pInputText
           [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
           name="lng"
-          [(ngModel)]="dynamicDialogConfig.data?.obj.coordinates.lon"
+          [(ngModel)]="(dynamicDialogConfig.data?.obj)!.coordinates!.lon"
         />
       </div>
       <div class="w-full flex flex-col gap-2">
@@ -70,7 +70,7 @@
           pInputText
           [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
           name="lat"
-          [(ngModel)]="dynamicDialogConfig.data?.obj.coordinates.lat"
+          [(ngModel)]="(dynamicDialogConfig.data?.obj)!.coordinates!.lat"
         />
       </div>
     </div>

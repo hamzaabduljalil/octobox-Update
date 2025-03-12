@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, signal, inject, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  signal,
+  inject,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
@@ -20,31 +27,29 @@ import { Range } from '../../../../models/Interfaces/Range';
     ButtonModule,
     TranslateModule,
     FormsModule,
-    InputTextModule
+    InputTextModule,
   ],
   templateUrl: './third-step.component.html',
   styleUrl: './third-step.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThirdStepComponent {
   @Output() priceData = new EventEmitter<any>();
 
-  data = inject(ServiceService).data
+  data = inject(ServiceService).data;
   pricingService = inject(PricingMethodService);
   translate = inject(TranslateService);
   currentLang = inject(ChangeLangService).currentLang;
-  dialogService = inject(DialogService)
+  dialogService = inject(DialogService);
   isZones = signal(false);
   selectedPricing: PricingMethod[] = [];
   rangesArray = signal<Range[]>([]);
   pricingTypes = signal<PricingMethod[]>([]);
   pricesArray: { [key: string]: number } = {};
 
-
-  ngOnInit(){
-    this.getData()
+  ngOnInit() {
+    this.getData();
   }
-
 
   getData() {
     this.pricingService
@@ -59,18 +64,14 @@ export class ThirdStepComponent {
             this.pricingTypes.set(value.results);
           }
           if (this.data.pricingMethod.length > 0) {
-            this.selectedPricing = 
-              this.pricingTypes().filter((price) => {
-                return this.data.pricingMethod.some(
-                  (p) => price.code === p.code
-                );
-              }
-            );
+            this.selectedPricing = this.pricingTypes().filter((price) => {
+              return this.data.pricingMethod.some((p) => price.code === p.code);
+            });
             this.isZones.set(this.selectedPricing.some((p) => p.code === 2));
           }
           // if(this.dynamicDialogConfig.data.obj){
           //   this.pricesArray = this.dynamicDialogConfig.data.obj
-          //   console.log(this.pricesArray , 'pricesArray');  
+          //   console.log(this.pricesArray , 'pricesArray');
           // }
           // if (this.dynamicDialogConfig?.data?.obj && Array.isArray(this.dynamicDialogConfig.data.obj)) {
           //   this.dynamicDialogConfig.data.obj.forEach((price) => {
@@ -81,7 +82,6 @@ export class ThirdStepComponent {
           // } else {
           //   console.error("data.obj is undefined or not an array:", this.dynamicDialogConfig?.data?.obj);
           // }
-          
         },
         error: (e) => {
           console.log(e);
@@ -89,57 +89,57 @@ export class ThirdStepComponent {
       });
   }
 
-  changePricingMethod(event) {
+  changePricingMethod(event: { value: PricingMethod[] }): void {
     this.pricesArray = {};
     console.log(event.value);
-    this.selectedPricing = ([...event.value]);
-    console.log(this.selectedPricing , 'selectedPricing');
-    this.isZones.set(this.selectedPricing.some((val) => val.code === 2));
+    this.selectedPricing = [...event.value];
+    console.log(this.selectedPricing, 'selectedPricing');
+    this.isZones.set(
+      this.selectedPricing.some((val: PricingMethod) => val.code === 2)
+    );
     if (!this.isZones) {
-      this.rangesArray.set([]); 
+      this.rangesArray.set([]);
     }
   }
 
   openRangeDialog() {
-    const headerText = this.translate.instant("Add Range");
+    const headerText = this.translate.instant('Add Range');
     const dialog = this.dialogService.open(AddRangeDialogComponent, {
       header: headerText,
-      footer: ".",
-      width: "600px",
+      footer: '.',
+      width: '600px',
       rtl: true,
     });
     dialog.onClose.subscribe((result) => {
-      console.log("Dialog closed", result);
+      console.log('Dialog closed', result);
       const range = result;
-      this.rangesArray.set([...this.rangesArray(),range]);
-      console.log(this.rangesArray() , 'Array Of Ranges');
+      this.rangesArray.set([...this.rangesArray(), range]);
+      console.log(this.rangesArray(), 'Array Of Ranges');
     });
   }
 
   preparePriceData() {
     console.log('functios is called');
-    
+
     const result = [];
     const name = this.selectedPricing.map((p) => p);
     for (const n of name) {
       if (this.rangesArray().length > 0 && n.code === 2) {
         result.push({
           type: n.name,
-          code: n.code,
+          code: n.code as number,
           range: this.rangesArray(),
-        }); 
+        });
       } else {
         result.push({
           type: n.name,
-          code: n.code,
+          code: n.code as number,
           price: this.pricesArray[n.code.toString()],
         });
       }
     }
     this.data.price = result;
-    console.log(result ,'result');
+    console.log(result, 'result');
     this.priceData.emit(result);
   }
 }
-  
-

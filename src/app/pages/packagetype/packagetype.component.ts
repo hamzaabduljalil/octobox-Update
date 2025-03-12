@@ -4,35 +4,35 @@ import {
   Component,
   inject,
   signal,
-} from "@angular/core";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { ButtonModule } from "primeng/button";
-import { CheckboxModule } from "primeng/checkbox";
-import { DialogModule } from "primeng/dialog";
-import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
-import { InputTextModule } from "primeng/inputtext";
-import { OverlayPanelModule } from "primeng/overlaypanel";
-import { PaginatorModule, PaginatorState } from "primeng/paginator";
-import { SkeletonModule } from "primeng/skeleton";
-import { TableModule } from "primeng/table";
-import { ButtonGroupModule } from "primeng/buttongroup";
-import { CommonModule } from "@angular/common";
-import { BehaviorSubject, finalize, switchMap } from "rxjs";
-import { AddEditPackagetypeComponent } from "./dialogs/add-edit-packagetype/add-edit-packagetype.component";
-import { PackageTypeService } from "../../services/dataServices/package-type.service";
+} from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DialogModule } from 'primeng/dialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { SkeletonModule } from 'primeng/skeleton';
+import { TableModule } from 'primeng/table';
+import { ButtonGroupModule } from 'primeng/buttongroup';
+import { CommonModule } from '@angular/common';
+import { BehaviorSubject, finalize, switchMap } from 'rxjs';
+import { AddEditPackagetypeComponent } from './dialogs/add-edit-packagetype/add-edit-packagetype.component';
+import { PackageTypeService } from '../../services/dataServices/package-type.service';
 import {
   PackageType,
   PackageTypeDefault,
-} from "../../models/Interfaces/PackageType";
-import { deepMergeAndOverwrite } from "../../services/other/staticFunctions";
-import { ConfirmationService, MessageService } from "primeng/api";
-import { HttpClient } from "@angular/common/http";
-import { ToastService } from "../../services/other/toast.service";
-import { ChangeLangService } from "../../services/other/change-lang.service";
-import { ShippingType } from "../../models/Interfaces/ShippingType";
+} from '../../models/Interfaces/PackageType';
+import { deepMergeAndOverwrite } from '../../services/other/staticFunctions';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { HttpClient } from '@angular/common/http';
+import { ToastService } from '../../services/other/toast.service';
+import { ChangeLangService } from '../../services/other/change-lang.service';
+import { ShippingType } from '../../models/Interfaces/ShippingType';
 
 @Component({
-  selector: "app-packagetype",
+  selector: 'app-packagetype',
   standalone: true,
   imports: [
     CommonModule,
@@ -47,8 +47,8 @@ import { ShippingType } from "../../models/Interfaces/ShippingType";
     InputTextModule,
     ButtonGroupModule,
   ],
-  templateUrl: "./packagetype.component.html",
-  styleUrl: "./packagetype.component.scss",
+  templateUrl: './packagetype.component.html',
+  styleUrl: './packagetype.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PackagetypeComponent {
@@ -71,10 +71,10 @@ export class PackagetypeComponent {
 
   selectedObj: PackageType | null = null;
   dynamicDialogRef: DynamicDialogRef | undefined;
-  searchValue = "";
+  searchValue = '';
   cols = [
-    { field: "name", header: "Name" },
-    { field: "processes", header: "Processes" },
+    { field: 'name', header: 'Name' },
+    { field: 'processes', header: 'Processes' },
   ];
   paginationState = new BehaviorSubject<PaginatorState>({
     page: 0,
@@ -90,7 +90,7 @@ export class PackagetypeComponent {
       .pipe(
         switchMap((event: PaginatorState) => {
           this.objs.set([]);
-          this.count.set(0)
+          this.count.set(0);
           this.loading.set(true);
 
           const data = {
@@ -128,11 +128,13 @@ export class PackagetypeComponent {
   }
 
   openDialog(obj?: PackageType) {
-    const cloneObject = JSON.parse(JSON.stringify(obj ? obj : PackageTypeDefault));
+    const cloneObject = JSON.parse(
+      JSON.stringify(obj ? obj : PackageTypeDefault)
+    );
     const dialog = this.dialogService.open(AddEditPackagetypeComponent, {
-      header: this.tr.instant(obj ? "Edit" : "Add"),
-      footer: ".",
-      width: "600px",
+      header: this.tr.instant(obj ? 'Edit' : 'Add'),
+      footer: '.',
+      width: '600px',
       data: { obj: cloneObject },
       closeOnEscape: false,
       style: {
@@ -156,14 +158,13 @@ export class PackagetypeComponent {
         }
       }
     });
-   
   }
 
   delete(obj: ShippingType, index: number) {
     this.confirmationService.confirm({
-      header: this.tr.instant("Delete"),
-      message: this.tr.instant("Delete This Row"),
-      icon: "fa-solid fa-trash-can fa-2xl",
+      header: this.tr.instant('Delete'),
+      message: this.tr.instant('Delete This Row'),
+      icon: 'fa-solid fa-trash-can fa-2xl',
       // acceptButtonProps: {
       //   label: this.tr.instant("Delete"),
       //   severity: "danger",
@@ -175,15 +176,15 @@ export class PackagetypeComponent {
       //   outlined: true,
       // },
       accept: () => {
-        this.dataService.delete(obj.id).subscribe({
+        this.dataService.delete(obj.id!).subscribe({
           next: () => {
-            this.count.set(this.count()-1)
+            this.count.set(this.count() - 1);
             this.objs().splice(index, 1);
-            this.getData()
+            this.getData();
             this.toastService.showToast(
-              "success",
-              "",
-              this.tr.instant("Deleted Successfully")
+              'success',
+              '',
+              this.tr.instant('Deleted Successfully')
             );
           },
         });

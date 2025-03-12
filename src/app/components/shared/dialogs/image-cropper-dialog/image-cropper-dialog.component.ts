@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -6,21 +6,20 @@ import {
   inject,
   OnInit,
   ViewChild,
-} from "@angular/core";
-import { TranslateModule } from "@ngx-translate/core";
+} from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   ImageCropperComponent,
   ImageCropperModule,
   OutputFormat,
-} from "ngx-image-cropper";
-import { ButtonModule } from "primeng/button";
-import { DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
-import File from "../../../../models/File";
+} from 'ngx-image-cropper';
+import { ButtonModule } from 'primeng/button';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
-  selector: "app-image-cropper-dialog",
-  templateUrl: "./image-cropper-dialog.component.html",
-  styleUrls: ["./image-cropper-dialog.component.scss"],
+  selector: 'app-image-cropper-dialog',
+  templateUrl: './image-cropper-dialog.component.html',
+  styleUrls: ['./image-cropper-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [ImageCropperModule, CommonModule, TranslateModule, ButtonModule],
@@ -41,8 +40,8 @@ export class ImageCropperDialogComponent implements OnInit {
   dynamicDialogRef = inject(DynamicDialogRef) as any;
   cd = inject(ChangeDetectorRef);
 
-  imageChangedEvent: any = "";
-  croppedImage: string = "";
+  imageChangedEvent: any = '';
+  croppedImage: string = '';
   @ViewChild(ImageCropperComponent, { static: false })
   imageCropper!: ImageCropperComponent;
 

@@ -14,7 +14,7 @@
         <p-multiSelect
           [options]="vehicleTypesArray()"
           [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
-          [(ngModel)]="dynamicDialogConfig.data?.obj.vehicle"
+          [(ngModel)]="dynamicDialogConfig.data.obj.vehicle"
           name="selectedVehicleTypes"
           [optionLabel]="currentLang() === 'ar' ? 'name.ar' : 'name.en'"
           styleClass="w-full min-h-10"
@@ -29,7 +29,7 @@
       <p-multiSelect
         class="w-full"
         [options]="packageTypes()"
-        [(ngModel)]="dynamicDialogConfig.data?.obj.packageType"
+        [(ngModel)]="dynamicDialogConfig.data.obj.packageType"
         [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
         name="selectedPackages"
         [optionLabel]="currentLang() === 'ar' ? 'name.ar' : 'name.en'"
@@ -48,7 +48,7 @@
           <input
             class="flex-1"
             [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
-            [(ngModel)]="dynamicDialogConfig.data?.obj.from"
+            [(ngModel)]="dynamicDialogConfig.data.obj.from"
             type="number"
             pInputText
             [placeholder]="'Enter From the hour' | translate"
@@ -63,7 +63,7 @@
           <input
             class="flex-1"
             [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
-            [(ngModel)]="dynamicDialogConfig.data?.obj.to"
+            [(ngModel)]="dynamicDialogConfig.data.obj.to"
             type="number"
             pInputText
             name="to"
@@ -75,13 +75,15 @@
     <div class="w-full flex flex-col gap-2">
       <div class="flex gap-3">
         <div class="flex flex-col gap-2 w-1/2">
-          <label for="minWeight" [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'">{{
-            "min weight" | translate
-          }}</label>
+          <label
+            for="minWeight"
+            [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
+            >{{ "min weight" | translate }}</label
+          >
           <input
             [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
             class="flex-1"
-            [(ngModel)]="dynamicDialogConfig.data?.obj.minWeight"
+            [(ngModel)]="dynamicDialogConfig.data.obj.minWeight"
             type="number"
             pInputText
             name="minWeight"
@@ -89,13 +91,15 @@
           />
         </div>
         <div class="flex flex-col gap-2 w-1/2">
-          <label for="maxWeight" [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'">{{
-            "max weight" | translate
-          }}</label>
+          <label
+            for="maxWeight"
+            [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
+            >{{ "max weight" | translate }}</label
+          >
           <input
             [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
             class="flex-1"
-            [(ngModel)]="dynamicDialogConfig.data?.obj.maxWeight"
+            [(ngModel)]="dynamicDialogConfig.data.obj.maxWeight"
             type="number"
             pInputText
             name="maxWeight"
@@ -107,13 +111,15 @@
     <div class="w-full flex flex-col gap-2">
       <div class="flex gap-3">
         <div class="flex flex-col gap-2 w-1/2">
-          <label for="riskFees" [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'">{{
-            "risk fees" | translate
-          }}</label>
+          <label
+            for="riskFees"
+            [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
+            >{{ "risk fees" | translate }}</label
+          >
           <input
             [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
             class="flex-1"
-            [(ngModel)]="dynamicDialogConfig.data?.obj.riskFees"
+            [(ngModel)]="dynamicDialogConfig.data.obj.riskFees"
             type="number"
             pInputText
             name="riskFees"
@@ -121,13 +127,15 @@
           />
         </div>
         <div class="flex flex-col gap-2 w-1/2">
-          <label for="fuelFees" [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'">{{
-            "fuel fees" | translate
-          }}</label>
+          <label
+            for="fuelFees"
+            [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
+            >{{ "fuel fees" | translate }}</label
+          >
           <input
             [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
             class="flex-1"
-            [(ngModel)]="dynamicDialogConfig.data?.obj.fuelFees"
+            [(ngModel)]="dynamicDialogConfig.data.obj.fuelFees"
             type="number"
             pInputText
             name="fuelFees"

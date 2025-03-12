@@ -11,7 +11,7 @@
           pInputText
           [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
           name="CityAr"
-          [(ngModel)]="dynamicDialogConfig.data?.obj?.name.ar"
+          [(ngModel)]="(dynamicDialogConfig.data?.obj?.name)!.ar"
         />
       </div>
       <div class="w-full flex flex-col gap-2">
@@ -24,7 +24,7 @@
           pInputText
           [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
           name="CityEn"
-          [(ngModel)]="dynamicDialogConfig.data?.obj?.name.en"
+          [(ngModel)]="(dynamicDialogConfig.data?.obj?.name)!.en"
         />
       </div>
     </div>
@@ -39,7 +39,7 @@
           pInputText
           [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
           name="lng"
-          [(ngModel)]="dynamicDialogConfig.data?.obj?.coordinates.lon"
+          [(ngModel)]="(dynamicDialogConfig.data?.obj?.coordinates)!.lon"
         />
       </div>
       <div class="w-full flex flex-col gap-2">
@@ -52,7 +52,7 @@
           pInputText
           [dir]="currentLang() === 'ar' ? 'rtl' : 'ltr'"
           name="lat"
-          [(ngModel)]="dynamicDialogConfig.data?.obj?.coordinates.lat"
+          [(ngModel)]="(dynamicDialogConfig.data?.obj?.coordinates)!.lat"
         />
       </div>
     </div>

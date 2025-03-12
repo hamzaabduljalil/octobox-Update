@@ -1,4 +1,4 @@
-@if (data.length<=0) {
+@if (files.length<=0) {
 <div
   class="drop-area flex items-center justify-center flex-col gap-3"
   (drop)="onFileDropped($event)"
@@ -17,12 +17,12 @@
 </div>
 }@else { @if(onlyViewIcon){
 <div class="flex items-center flex-row gap-3">
-  <span>{{ file.name! | fileName }}</span>
+  <span>{{ files[0].name! | fileName }}</span>
   <p-button
     icon="pi pi-eye"
     [rounded]="true"
     [outlined]="true"
-    (onClick)="viewFile()"
+    (onClick)="viewFile(0)"
   />
 </div>
 }@else{
@@ -30,12 +30,12 @@
   <div
     class="w-full mb-3 rounded-lg relative flex items-center justify-center flex-col gap-3"
   >
-    <span>{{ file.name! | fileName }}</span>
+    <span>{{ files[0].name! | fileName }}</span>
     <p-button
       icon="pi pi-eye"
       [rounded]="true"
       [outlined]="true"
-      (onClick)="viewFile()"
+      (onClick)="viewFile(0)"
     />
   </div>
   @if(canDelete){
@@ -43,7 +43,7 @@
     class="absolute top-2 right-2"
     icon="pi pi-times"
     severity="danger"
-    (onClick)="removeFile()"
+    (onClick)="removeFile(0)"
   ></p-button>
   }
 </div>

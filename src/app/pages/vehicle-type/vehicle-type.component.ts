@@ -1,33 +1,33 @@
-import { CommonModule } from "@angular/common";
-import { HttpClient } from "@angular/common/http";
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
   inject,
   signal,
-} from "@angular/core";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { ConfirmationService, MessageService } from "primeng/api";
-import { ButtonModule } from "primeng/button";
-import { ButtonGroupModule } from "primeng/buttongroup";
-import { CheckboxModule } from "primeng/checkbox";
-import { DialogModule } from "primeng/dialog";
-import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
-import { InputTextModule } from "primeng/inputtext";
-import { OverlayPanelModule } from "primeng/overlaypanel";
-import { PaginatorModule, PaginatorState } from "primeng/paginator";
-import { SkeletonModule } from "primeng/skeleton";
-import { TableModule } from "primeng/table";
-import { BehaviorSubject, finalize, switchMap } from "rxjs";
-import { Vehicle, VehicleDefault } from "../../models/Interfaces/Vehicle";
-import { VehicleTypeService } from "../../services/dataServices/vehicle-type.service";
-import { ChangeLangService } from "../../services/other/change-lang.service";
-import { deepMergeAndOverwrite } from "../../services/other/staticFunctions";
-import { ToastService } from "../../services/other/toast.service";
-import { AddEditVehicleComponent } from "./dialogs/add-edit-vehicle/add-edit-vehicle.component";
+} from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { ButtonGroupModule } from 'primeng/buttongroup';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DialogModule } from 'primeng/dialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { SkeletonModule } from 'primeng/skeleton';
+import { TableModule } from 'primeng/table';
+import { BehaviorSubject, finalize, switchMap } from 'rxjs';
+import { Vehicle, VehicleDefault } from '../../models/Interfaces/Vehicle';
+import { VehicleTypeService } from '../../services/dataServices/vehicle-type.service';
+import { ChangeLangService } from '../../services/other/change-lang.service';
+import { deepMergeAndOverwrite } from '../../services/other/staticFunctions';
+import { ToastService } from '../../services/other/toast.service';
+import { AddEditVehicleComponent } from './dialogs/add-edit-vehicle/add-edit-vehicle.component';
 
 @Component({
-  selector: "app-vehicle-type",
+  selector: 'app-vehicle-type',
   standalone: true,
   imports: [
     CommonModule,
@@ -42,8 +42,8 @@ import { AddEditVehicleComponent } from "./dialogs/add-edit-vehicle/add-edit-veh
     InputTextModule,
     ButtonGroupModule,
   ],
-  templateUrl: "./vehicle-type.component.html",
-  styleUrl: "./vehicle-type.component.scss",
+  templateUrl: './vehicle-type.component.html',
+  styleUrl: './vehicle-type.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VehicleTypeComponent {
@@ -64,10 +64,10 @@ export class VehicleTypeComponent {
   objs = signal<Vehicle[]>([]);
 
   selectedObj: Vehicle | null = null;
-  searchValue = "";
+  searchValue = '';
   cols = [
-    { field: "name", header: "Name" },
-    { field: "processes", header: "Processes" },
+    { field: 'name', header: 'Name' },
+    { field: 'processes', header: 'Processes' },
   ];
   paginationState = new BehaviorSubject<PaginatorState>({
     page: 0,
@@ -91,7 +91,7 @@ export class VehicleTypeComponent {
             limit: event.rows!,
             withCount: true,
             searchValue: this.searchValue,
-            sortKey: "createdAt",
+            sortKey: 'createdAt',
             sortOrder: -1,
           };
 
@@ -125,9 +125,9 @@ export class VehicleTypeComponent {
     const cloneObject = JSON.parse(JSON.stringify(obj ? obj : VehicleDefault));
 
     const dialog = this.dialogService.open(AddEditVehicleComponent, {
-      header: this.tr.instant(obj ? "Edit" : "Add"),
-      footer: ".",
-      width: "600px",
+      header: this.tr.instant(obj ? 'Edit' : 'Add'),
+      footer: '.',
+      width: '600px',
       data: { obj: cloneObject },
       closeOnEscape: false,
       style: {
@@ -155,9 +155,9 @@ export class VehicleTypeComponent {
 
   delete(obj: Vehicle, index: number) {
     this.confirmationService.confirm({
-      header: this.tr.instant("Delete"),
-      message: this.tr.instant("Delete This Row"),
-      icon: "fa-solid fa-trash-can fa-2xl",
+      header: this.tr.instant('Delete'),
+      message: this.tr.instant('Delete This Row'),
+      icon: 'fa-solid fa-trash-can fa-2xl',
       // acceptButtonProps: {
       //   label: this.tr.instant("Delete"),
       //   severity: "danger",
@@ -169,18 +169,20 @@ export class VehicleTypeComponent {
       //   outlined: true,
       // },
       accept: () => {
-        this.dataService.delete(obj.id).subscribe({
-          next: () => {
-            this.count.set(this.count() - 1);
-            this.objs().splice(index, 1);
-            this.getData();
-            this.toastService.showToast(
-              "success",
-              "",
-              this.tr.instant("Deleted Successfully")
-            );
-          },
-        });
+        if (obj.id) {
+          this.dataService.delete(obj.id!).subscribe({
+            next: () => {
+              this.count.set(this.count() - 1);
+              this.objs().splice(index, 1);
+              this.getData();
+              this.toastService.showToast(
+                'success',
+                '',
+                this.tr.instant('Deleted Successfully')
+              );
+            },
+          });
+        }
       },
     });
   }

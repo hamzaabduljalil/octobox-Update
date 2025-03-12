@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
@@ -6,37 +11,35 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
-import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import {
+  DialogService,
+  DynamicDialogConfig,
+  DynamicDialogRef,
+} from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToastService } from '../../../../services/other/toast.service';
-import { ShippingCompanyService } from '../../../../services/dataServices/shipping-company.service';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CityService } from '../../../../services/dataServices/city.service';
 import { City, CityDefault } from '../../../../models/Interfaces/City';
-import { CoordinatesDefault } from '../../../../models/Interfaces/Coordinates';
-import { Coordinates } from '../../../../models/Interfaces/Coordinates';
 import { ChangeLangService } from '../../../../services/other/change-lang.service';
-
 
 @Component({
   selector: 'app-add-city-dialog',
   standalone: true,
-   imports: [
-      ButtonModule,
-      DialogModule,
-      TranslateModule,
-      FormsModule,
-      InputTextModule,
-      InputTextareaModule,
-      CheckboxModule,
-      DropdownModule,
-      DividerModule,
-      MultiSelectModule
-    ],
+  imports: [
+    ButtonModule,
+    DialogModule,
+    TranslateModule,
+    FormsModule,
+    InputTextModule,
+    CheckboxModule,
+    DropdownModule,
+    DividerModule,
+    MultiSelectModule,
+  ],
   templateUrl: './add-city-dialog.component.html',
   styleUrl: './add-city-dialog.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddCityDialogComponent {
   dynamicDialogRef = inject(DynamicDialogRef);
@@ -45,32 +48,30 @@ export class AddCityDialogComponent {
   dataService = inject(CityService);
   toastService = inject(ToastService);
   translate = inject(TranslateService);
-  currentLang = inject(ChangeLangService).currentLang
+  currentLang = inject(ChangeLangService).currentLang;
   companyData: any;
-  dynamicDialogConfig = inject(DynamicDialogConfig)as {
-      data?: {
-        obj?: City;
-      }
+  dynamicDialogConfig = inject(DynamicDialogConfig) as {
+    data?: {
+      obj?: City;
     };
-  newCity: City = CityDefault
+  };
+  newCity: City = CityDefault;
   saving = false;
-  
+
   ngOnInit(): void {
-    console.log(this.dynamicDialogConfig.data?.obj)
-       if (!this.dynamicDialogConfig.data?.obj) {
-         this.dynamicDialogConfig.data = {
-           obj: this.newCity, 
-         };
-         
-       }
+    console.log(this.dynamicDialogConfig.data?.obj);
+    if (!this.dynamicDialogConfig.data?.obj) {
+      this.dynamicDialogConfig.data = {
+        obj: this.newCity,
+      };
+    }
   }
-  
 
   save() {
     this.dataService
       .save(
-        this.dynamicDialogConfig.data?.obj,
-        this.dynamicDialogConfig.data?.obj.id
+        this.dynamicDialogConfig.data?.obj!,
+        this.dynamicDialogConfig.data?.obj!.id
       )
       .subscribe({
         next: (value) => {

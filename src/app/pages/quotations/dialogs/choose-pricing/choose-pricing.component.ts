@@ -4,25 +4,25 @@ import {
   Component,
   inject,
   signal,
-} from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { ButtonModule } from "primeng/button";
-import { MultiSelectModule } from "primeng/multiselect";
-import { PricingMethod } from "../../../../models/Interfaces/PricingMethod";
-import { PricingMethodService } from "../../../../services/dataServices/pricing-method.service";
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { PricingMethod } from '../../../../models/Interfaces/PricingMethod';
+import { PricingMethodService } from '../../../../services/dataServices/pricing-method.service';
 import {
   DialogService,
   DynamicDialogConfig,
   DynamicDialogRef,
-} from "primeng/dynamicdialog";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { AddRangeDialogComponent } from "../add-range-dialog/add-range-dialog.component";
-import { Range } from "../../../../models/Interfaces/Range";
-import { InputTextModule } from "primeng/inputtext";
-import { ChangeLangService } from "../../../../services/other/change-lang.service";
+} from 'primeng/dynamicdialog';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AddRangeDialogComponent } from '../add-range-dialog/add-range-dialog.component';
+import { Range } from '../../../../models/Interfaces/Range';
+import { InputTextModule } from 'primeng/inputtext';
+import { ChangeLangService } from '../../../../services/other/change-lang.service';
 
 @Component({
-  selector: "app-choose-pricing",
+  selector: 'app-choose-pricing',
   standalone: true,
   imports: [
     MultiSelectModule,
@@ -31,8 +31,8 @@ import { ChangeLangService } from "../../../../services/other/change-lang.servic
     TranslateModule,
     InputTextModule,
   ],
-  templateUrl: "./choose-pricing.component.html",
-  styleUrl: "./choose-pricing.component.scss",
+  templateUrl: './choose-pricing.component.html',
+  styleUrl: './choose-pricing.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChoosePricingComponent {
@@ -49,7 +49,7 @@ export class ChoosePricingComponent {
   pricesArray: { [key: string]: number } = {};
 
   ngOnInit(): void {
-    console.log(this.dynamicDialogConfig.data.obj , 'Pricing Object');
+    console.log(this.dynamicDialogConfig.data.obj, 'Pricing Object');
     this.getData();
   }
 
@@ -66,18 +66,16 @@ export class ChoosePricingComponent {
             this.pricingTypes.set(value.results);
           }
           if (this.dynamicDialogConfig.data?.obj) {
-            this.selectedPricing = 
-              this.pricingTypes().filter((price) => {
-                return this.dynamicDialogConfig.data?.obj.some(
-                  (p) => price.code === p.code
-                );
-              }
-            );
+            this.selectedPricing = this.pricingTypes().filter((price) => {
+              return this.dynamicDialogConfig.data?.obj.some(
+                (p: PricingMethod) => price.code === p.code
+              );
+            });
             this.isZones.set(this.selectedPricing.some((p) => p.code === 2));
           }
           // if(this.dynamicDialogConfig.data.obj){
           //   this.pricesArray = this.dynamicDialogConfig.data.obj
-          //   console.log(this.pricesArray , 'pricesArray');  
+          //   console.log(this.pricesArray , 'pricesArray');
           // }
           // if (this.dynamicDialogConfig?.data?.obj && Array.isArray(this.dynamicDialogConfig.data.obj)) {
           //   this.dynamicDialogConfig.data.obj.forEach((price) => {
@@ -88,7 +86,6 @@ export class ChoosePricingComponent {
           // } else {
           //   console.error("data.obj is undefined or not an array:", this.dynamicDialogConfig?.data?.obj);
           // }
-          
         },
         error: (e) => {
           console.log(e);
@@ -96,53 +93,53 @@ export class ChoosePricingComponent {
       });
   }
 
-  changePricingMethod(event) {
+  changePricingMethod(event: { value: PricingMethod[] }): void {
     this.pricesArray = {};
     console.log(event.value);
-    this.selectedPricing = ([...event.value]);
-    console.log(this.selectedPricing , 'selectedPricing');
-    this.isZones.set(this.selectedPricing.some((val) => val.code === 2));
+    this.selectedPricing = [...event.value];
+    console.log(this.selectedPricing, 'selectedPricing');
+    this.isZones.set(
+      this.selectedPricing.some((val: PricingMethod) => val.code === 2)
+    );
     if (!this.isZones) {
       this.rangesArray.set([]);
     }
   }
 
   openRangeDialog() {
-    const headerText = this.translate.instant("Add Range");
+    const headerText = this.translate.instant('Add Range');
     const dialog = this.dialogService.open(AddRangeDialogComponent, {
       header: headerText,
-      footer: ".",
-      width: "600px",
+      footer: '.',
+      width: '600px',
       rtl: true,
     });
     dialog.onClose.subscribe((result) => {
-      console.log("Dialog closed", result);
+      console.log('Dialog closed', result);
       const range = result;
       this.rangesArray().push(range);
-      console.log(this.rangesArray() , 'Array Of Ranges');
-      
+      console.log(this.rangesArray(), 'Array Of Ranges');
     });
   }
 
   save() {
     console.log(
-      "pricesarray" + JSON.stringify(this.pricesArray),
+      'pricesarray' + JSON.stringify(this.pricesArray),
       this.rangesArray
     );
 
     const result = [];
     const name = this.selectedPricing.map((p) => p);
-    console.log(name, "name");
+    console.log(name, 'name');
     for (const n of name) {
-      console.log(n, "n");
+      console.log(n, 'n');
       if (this.rangesArray().length > 0 && n.code === 2) {
         result.push({
           type: n.name,
           code: n.code,
           range: this.rangesArray(),
         });
-        console.log(result , 'rangeResult');
-        
+        console.log(result, 'rangeResult');
       } else {
         result.push({
           type: n.name,
@@ -151,7 +148,7 @@ export class ChoosePricingComponent {
         });
       }
     }
-    console.log(result, " result");
+    console.log(result, ' result');
     this.dynamicDialogRef.close(result);
   }
 }

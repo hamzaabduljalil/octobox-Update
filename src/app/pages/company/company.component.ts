@@ -1,32 +1,32 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   inject,
   signal,
-} from "@angular/core";
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { ButtonModule } from "primeng/button";
-import { ButtonGroupModule } from "primeng/buttongroup";
-import { CheckboxModule } from "primeng/checkbox";
-import { DialogModule } from "primeng/dialog";
-import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
-import { InputTextModule } from "primeng/inputtext";
-import { OverlayPanelModule } from "primeng/overlaypanel";
-import { PaginatorModule, PaginatorState } from "primeng/paginator";
-import { SkeletonModule } from "primeng/skeleton";
-import { TableModule } from "primeng/table";
-import { BehaviorSubject, finalize, switchMap } from "rxjs";
-import { AddCompneyDialogComponent } from "./dialogs/add-compney-dialog/add-compney-dialog.component";
+} from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
+import { ButtonGroupModule } from 'primeng/buttongroup';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DialogModule } from 'primeng/dialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { SkeletonModule } from 'primeng/skeleton';
+import { TableModule } from 'primeng/table';
+import { BehaviorSubject, finalize, switchMap } from 'rxjs';
+import { AddCompneyDialogComponent } from './dialogs/add-compney-dialog/add-compney-dialog.component';
 // import Company from '../../models/Company';
-import { HttpClient } from "@angular/common/http";
-import { ConfirmationService, MessageService } from "primeng/api";
-import { Company, CompanyDefault } from "../../models/Interfaces/Company";
-import { ShippingCompanyService } from "../../services/dataServices/shipping-company.service";
-import { ChangeLangService } from "../../services/other/change-lang.service";
-import { deepMergeAndOverwrite } from "../../services/other/staticFunctions";
-import { ToastService } from "../../services/other/toast.service";
+import { HttpClient } from '@angular/common/http';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { Company, CompanyDefault } from '../../models/Interfaces/Company';
+import { ShippingCompanyService } from '../../services/dataServices/shipping-company.service';
+import { ChangeLangService } from '../../services/other/change-lang.service';
+import { deepMergeAndOverwrite } from '../../services/other/staticFunctions';
+import { ToastService } from '../../services/other/toast.service';
 
 interface Products {
   id: string;
@@ -34,7 +34,7 @@ interface Products {
 }
 
 @Component({
-  selector: "app-company",
+  selector: 'app-company',
   standalone: true,
   imports: [
     CommonModule,
@@ -49,8 +49,8 @@ interface Products {
     InputTextModule,
     ButtonGroupModule,
   ],
-  templateUrl: "./company.component.html",
-  styleUrl: "./company.component.scss",
+  templateUrl: './company.component.html',
+  styleUrl: './company.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompanyComponent {
@@ -72,10 +72,10 @@ export class CompanyComponent {
 
   selectedObj: Company | null = null;
   dynamicDialogRef: DynamicDialogRef | undefined;
-  searchValue = "";
+  searchValue = '';
   cols = [
-    { field: "name", header: "Name" },
-    { field: "processes", header: "Processes" },
+    { field: 'name', header: 'Name' },
+    { field: 'processes', header: 'Processes' },
   ];
   paginationState = new BehaviorSubject<PaginatorState>({
     page: 0,
@@ -91,7 +91,7 @@ export class CompanyComponent {
       .pipe(
         switchMap((event: PaginatorState) => {
           this.objs.set([]);
-          this.count.set(0)
+          this.count.set(0);
           this.loading.set(true);
 
           const data = {
@@ -99,8 +99,8 @@ export class CompanyComponent {
             limit: event.rows!,
             withCount: true,
             searchValue: this.searchValue,
-            sortKey:'createdAt',
-            sortOrder:-1
+            sortKey: 'createdAt',
+            sortOrder: -1,
           };
 
           return this.dataService.get(data).pipe(
@@ -114,7 +114,7 @@ export class CompanyComponent {
         next: (res: { results: Company[]; count: number } | Company[]) => {
           if (!Array.isArray(res)) {
             this.objs.set(res.results);
-            this.count.set(res.count)
+            this.count.set(res.count);
           }
         },
       });
@@ -131,9 +131,9 @@ export class CompanyComponent {
   openDialog(obj?: Company) {
     const cloneObject = JSON.parse(JSON.stringify(obj ? obj : CompanyDefault));
     const dialog = this.dialogService.open(AddCompneyDialogComponent, {
-      header: this.tr.instant(obj ? "Edit" : "Add"),
-      footer: ".",
-      width: "600px",
+      header: this.tr.instant(obj ? 'Edit' : 'Add'),
+      footer: '.',
+      width: '600px',
       data: { obj: cloneObject },
       closeOnEscape: false,
       style: {
@@ -160,9 +160,9 @@ export class CompanyComponent {
 
   delete(obj: Company, index: number) {
     this.confirmationService.confirm({
-      header: this.tr.instant("Delete"),
-      message: this.tr.instant("Delete This Row"),
-      icon: "fa-solid fa-trash-can fa-2xl",
+      header: this.tr.instant('Delete'),
+      message: this.tr.instant('Delete This Row'),
+      icon: 'fa-solid fa-trash-can fa-2xl',
       // acceptButtonProps: {
       //   label: this.tr.instant("Delete"),
       //   severity: "danger",
@@ -174,20 +174,18 @@ export class CompanyComponent {
       //   outlined: true,
       // },
       accept: () => {
-        this.dataService
-          .delete(obj.id)
-          .subscribe({
-            next: () => {
-              this.count.set(this.count()-1)
-              this.objs().splice(index, 1);
-              this.toastService.showToast(
-                "success",
-                "",
-                this.tr.instant("Deleted Successfully")
-              );
-              this.getData()
-            },
-          });
+        this.dataService.delete(obj.id!).subscribe({
+          next: () => {
+            this.count.set(this.count() - 1);
+            this.objs().splice(index, 1);
+            this.toastService.showToast(
+              'success',
+              '',
+              this.tr.instant('Deleted Successfully')
+            );
+            this.getData();
+          },
+        });
       },
     });
   }

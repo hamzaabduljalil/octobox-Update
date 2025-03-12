@@ -1,10 +1,24 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideAnimations } from '@angular/platform-browser/animations';
+
+import {
+  provideRouter,
+  withHashLocation,
+  withViewTransitions,
+} from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
+import { routes } from './app.routes';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimationsAsync(),
+    // ɵprovideZonelessChangeDetection(),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideRouter(routes, withHashLocation(), withViewTransitions()),
+    provideAnimations(),
     providePrimeNG({
       theme: {
         preset: {

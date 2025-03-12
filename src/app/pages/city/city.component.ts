@@ -1,15 +1,21 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, signal } from '@angular/core';
-import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { ButtonModule } from "primeng/button";
-import { CheckboxModule } from "primeng/checkbox";
-import { DialogModule } from "primeng/dialog";
-import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
-import { InputTextModule } from "primeng/inputtext";
-import { OverlayPanelModule } from "primeng/overlaypanel";
-import { PaginatorModule, PaginatorState } from "primeng/paginator";
-import { SkeletonModule } from "primeng/skeleton";
-import { TableModule } from "primeng/table";
-import { ButtonGroupModule } from "primeng/buttongroup";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DialogModule } from 'primeng/dialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { SkeletonModule } from 'primeng/skeleton';
+import { TableModule } from 'primeng/table';
+import { ButtonGroupModule } from 'primeng/buttongroup';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject, finalize, switchMap } from 'rxjs';
 import { Company } from '../../models/Interfaces/Company';
@@ -39,7 +45,7 @@ import { ChangeLangService } from '../../services/other/change-lang.service';
   ],
   templateUrl: './city.component.html',
   styleUrl: './city.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CityComponent {
   confirmationService = inject(ConfirmationService);
@@ -55,16 +61,16 @@ export class CityComponent {
   currentLang = inject(ChangeLangService).currentLang;
 
   loading = signal(false);
-  count = signal(0)
+  count = signal(0);
 
   objs = signal<City[]>([]);
 
   selectedObj: City | null = null;
   dynamicDialogRef: DynamicDialogRef | undefined;
-  searchValue = "";
+  searchValue = '';
   cols = [
-    { field: "name", header: "Name" },
-    { field: "processes", header: "Processes" },
+    { field: 'name', header: 'Name' },
+    { field: 'processes', header: 'Processes' },
   ];
   paginationState = new BehaviorSubject<PaginatorState>({
     page: 0,
@@ -80,7 +86,7 @@ export class CityComponent {
       .pipe(
         switchMap((event: PaginatorState) => {
           this.objs.set([]);
-          this.count.set(0)
+          this.count.set(0);
           this.loading.set(true);
 
           const data = {
@@ -118,9 +124,9 @@ export class CityComponent {
   openDialog(obj?: Company) {
     const cloneObject = JSON.parse(JSON.stringify(obj ? obj : CityDefault));
     const dialog = this.dialogService.open(AddCityDialogComponent, {
-      header: this.tr.instant(obj ? "Edit" : "Add"),
-      footer: ".",
-      width: "600px",
+      header: this.tr.instant(obj ? 'Edit' : 'Add'),
+      footer: '.',
+      width: '600px',
       data: { obj: cloneObject },
       closeOnEscape: false,
       style: {
@@ -148,9 +154,9 @@ export class CityComponent {
 
   delete(obj: City, index: number) {
     this.confirmationService.confirm({
-      header: this.tr.instant("Delete"),
-      message: this.tr.instant("Delete This Row"),
-      icon: "fa-solid fa-trash-can fa-2xl",
+      header: this.tr.instant('Delete'),
+      message: this.tr.instant('Delete This Row'),
+      icon: 'fa-solid fa-trash-can fa-2xl',
       // acceptButtonProps: {
       //   label: this.tr.instant("Delete"),
       //   severity: "danger",
@@ -162,20 +168,18 @@ export class CityComponent {
       //   outlined: true,
       // },
       accept: () => {
-        this.dataService
-          .delete(obj.id)
-          .subscribe({
-            next: () => {
-              this.count.set(this.count()-1)
-              this.objs().splice(index, 1);
-              this.toastService.showToast(
-                "success",
-                "",
-                this.tr.instant("Deleted Successfully")
-              );
-              this.getData()
-            },
-          });
+        this.dataService.delete(obj.id!).subscribe({
+          next: () => {
+            this.count.set(this.count() - 1);
+            this.objs().splice(index, 1);
+            this.toastService.showToast(
+              'success',
+              '',
+              this.tr.instant('Deleted Successfully')
+            );
+            this.getData();
+          },
+        });
       },
     });
   }

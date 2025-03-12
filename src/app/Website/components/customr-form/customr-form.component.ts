@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Output, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { City } from '../../../models/Interfaces/City';
@@ -17,91 +23,87 @@ import { ToastService } from '../../../services/other/toast.service';
 import { Coordinates } from '../../../models/Interfaces/Coordinates';
 import { ShippingTypeService } from '../../../services/dataServices/shipping-type.service';
 import { ShippingType } from '../../../models/Interfaces/ShippingType';
-import { Service, ServiceDefault } from '../../../models/Interfaces/Service';
-// import { ToastService } from '.../';
+
 @Component({
   selector: 'app-customr-form',
   standalone: true,
   imports: [
-    ButtonModule ,
+    ButtonModule,
     MultiSelectModule,
     FormsModule,
     DropdownModule,
     TranslateModule,
-    InputTextModule
+    InputTextModule,
   ],
   templateUrl: './customr-form.component.html',
   styleUrl: './customr-form.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomrFormComponent {
   cityService = inject(CityService);
   toastService = inject(ToastService);
   areaService = inject(AreaService);
-  packageTypeService = inject(PackageTypeService); 
+  packageTypeService = inject(PackageTypeService);
   searchService = inject(SearchServiceService);
-  cls = inject(ChangeLangService)
-  cities = signal<City[]>([])
-  selectedDestCity: City;
-  selectedpickCity: City;
-  pickareas = signal<Area[]>([])
-  destareas = signal<Area[]>([])
-  selectedDestArea: Area | null;
-  selectedpickArea: Area | null;
-  packageTypes = signal<PackageType[]>([])
-  selectedPackage: PackageType;
-  weight;
-  length
-  height
-  width
-  dimension = 0
+  cls = inject(ChangeLangService);
+  cities = signal<City[]>([]);
+  selectedDestCity!: City;
+  selectedpickCity!: City;
+  pickareas = signal<Area[]>([]);
+  destareas = signal<Area[]>([]);
+  selectedDestArea!: Area | null;
+  selectedpickArea!: Area | null;
+  packageTypes = signal<PackageType[]>([]);
+  selectedPackage!: PackageType;
+  weight: any;
+  length: any;
+  height: any;
+  width: any;
+  dimension = 0;
   translate = inject(TranslateService);
   cd = inject(ChangeDetectorRef);
-  shippingService = inject(ShippingTypeService)
+  shippingService = inject(ShippingTypeService);
   shippingTypes = signal<ShippingType[]>([]);
-  lang : string = "en" ;
-  shippingTypeId = ''
+  lang: string = 'en';
+  shippingTypeId = '';
 
   ngOnInit(): void {
     this.getData();
     this.getShippingType();
   }
 
-  
-
-  getShippingType(){
-    this.shippingService.getShippingTypes()
-    .subscribe({
+  getShippingType() {
+    this.shippingService.getShippingTypes().subscribe({
       next: (value) => {
         this.shippingTypes.set(value);
       },
       error: (e) => {
         console.log(e);
-      }
-    })
+      },
+    });
   }
 
   getData() {
     this.cityService.get({}).subscribe({
       next: (value) => {
-        this.cities.set(value) ;
+        this.cities.set(value);
         if (this.searchService.result) {
           this.selectedDestCity = this.searchService.data.destCity;
           this.selectedpickCity = this.searchService.data.pickCity;
-          this.width = this.searchService.data.weight
-          this.length = this.searchService.data.length
-          this.height = this.searchService.data.height
+          this.width = this.searchService.data.weight;
+          this.length = this.searchService.data.length;
+          this.height = this.searchService.data.height;
           this.loadAreasForSelectedCities();
         }
       },
       error: (e) => {
         console.log(e);
-      }
+      },
     });
 
     this.packageTypeService.get({}).subscribe({
       next: (value) => {
-        this.packageTypes.set(value) ;
+        this.packageTypes.set(value);
         if (this.searchService.result) {
           this.selectedPackage = this.searchService.data.packageType;
           this.weight = this.searchService.data.weight;
@@ -110,31 +112,35 @@ export class CustomrFormComponent {
       },
       error: (e) => {
         console.log(e);
-      }
+      },
     });
   }
 
   private loadAreasForSelectedCities() {
     if (this.selectedpickCity) {
-      const pickupCityArray = [this.selectedpickCity.id];
-      console.log(pickupCityArray , 'pickupCityArray');
+      const pickupCityArray = [this.selectedpickCity.id].filter(
+        (id): id is string => id !== undefined
+      );
+      console.log(pickupCityArray, 'pickupCityArray');
       // return
       this.areaService.getAreasByCities(pickupCityArray).subscribe({
         next: (value) => {
           for (const area of value) {
-            this.pickareas.set(area.areas) ;
+            this.pickareas.set(area.areas);
           }
           if (this.searchService.data.pickArea) {
             this.selectedpickArea = this.searchService.data.pickArea;
           }
         },
-        error: (e) => console.log(e)
+        error: (e) => console.log(e),
       });
     }
 
     if (this.selectedDestCity) {
-      const destCityArray = [this.selectedDestCity.id];
-      console.log(destCityArray , 'destCityArray');
+      const destCityArray = [this.selectedDestCity.id].filter(
+        (id): id is string => id !== undefined
+      );
+      console.log(destCityArray, 'destCityArray');
       this.areaService.getAreasByCities(destCityArray).subscribe({
         next: (value) => {
           for (const area of value) {
@@ -144,51 +150,51 @@ export class CustomrFormComponent {
             this.selectedDestArea = this.searchService.data.destArea;
           }
         },
-        error: (e) => console.log(e)
+        error: (e) => console.log(e),
       });
     }
   }
 
-  onpickCityCahnge(e) {
-      const city = e.value;
+  onpickCityCahnge(e: any) {
+    const city = e.value;
     const cityArray = [city];
-    console.log(cityArray , 'cityArray');
-    const citiesIds = cityArray.map(city => city.id);
-    console.log(citiesIds , 'citiesIds');
+    console.log(cityArray, 'cityArray');
+    const citiesIds = cityArray.map((city) => city.id);
+    console.log(citiesIds, 'citiesIds');
     this.areaService.getAreasByCities(citiesIds).subscribe({
       next: (value) => {
         for (const area of value) {
           this.pickareas.set(area.areas);
         }
-        this.selectedpickArea = null; 
+        this.selectedpickArea = null;
       },
       error: (e) => {
         console.log(e);
-      }
+      },
     });
   }
 
-  ondestCityCahnge(e) {
+  ondestCityCahnge(e: any) {
     const city = e.value;
     const cityArray = [city];
-    const citiesIds = cityArray.map(city => city.id);
+    const citiesIds = cityArray.map((city) => city.id);
     this.areaService.getAreasByCities(citiesIds).subscribe({
       next: (value) => {
         for (const area of value) {
           this.destareas.set(area.areas);
         }
-        this.selectedDestArea = null; 
+        this.selectedDestArea = null;
       },
       error: (e) => {
         console.log(e);
-      }
+      },
     });
-  };
+  }
 
-  OnSubmitClick(){
-    this.dimension = this.width * this.height * this.length
-    console.log(this.dimension , 'dimension');
-    
+  OnSubmitClick() {
+    this.dimension = this.width * this.height * this.length;
+    console.log(this.dimension, 'dimension');
+
     const data = {
       destCity: this.selectedDestCity,
       pickCity: this.selectedpickCity,
@@ -200,8 +206,8 @@ export class CustomrFormComponent {
       weight: this.weight,
       width: this.width,
       height: this.height,
-      length: this.length
-    }
+      length: this.length,
+    };
     this.searchService.data = data;
     // console.log('dest area' + JSON.stringify(this.selectedDestArea),
     //   'pick city' + JSON.stringify(this.selectedpickCity),
@@ -213,60 +219,63 @@ export class CustomrFormComponent {
     // );
 
     // submit the form here.
-    if (!this.weight|| 
-       !this.dimension || 
-       !this.selectedDestArea || 
-       !this.selectedDestCity || 
-       !this.selectedpickCity || 
-       !this.selectedpickArea ||
-       !this.selectedPackage
-      ){
-      const text = this.translate.instant('Please Fill All Fields')
-        this.toastService.showToast_error(text);
-    }else{
+    if (
+      !this.weight ||
+      !this.dimension ||
+      !this.selectedDestArea ||
+      !this.selectedDestCity ||
+      !this.selectedpickCity ||
+      !this.selectedpickArea ||
+      !this.selectedPackage
+    ) {
+      const text = this.translate.instant('Please Fill All Fields');
+      this.toastService.showToast_error(text);
+    } else {
       const pickarea = this.selectedpickArea;
       const destarea = this.selectedDestArea;
       console.log(pickarea, destarea);
-      const location : Coordinates[] = [];
+      const location: Coordinates[] = [];
       location.push({
-        lon: pickarea?.coordinates?.lon,
-        lat: pickarea?.coordinates?.lat
+        lon: pickarea?.coordinates?.lon ?? 0,
+        lat: pickarea?.coordinates?.lat ?? 0,
       });
       location.push({
-        lon: destarea?.coordinates?.lon,
-        lat: destarea?.coordinates?.lat
+        lon: destarea?.coordinates?.lon ?? 0,
+        lat: destarea?.coordinates?.lat ?? 0,
       });
       console.log(location);
       if (this.selectedDestCity.id === this.selectedpickCity.id) {
-        this.shippingTypeId = this.shippingTypes().find(s => s.name.en === "internal").id;
-        console.log(this.shippingTypeId , 'shippingTypeId');
-        console.log("Internal");
+        this.shippingTypeId =
+          this.shippingTypes().find((s) => s.name.en === 'internal')?.id ?? '';
+        console.log(this.shippingTypeId, 'shippingTypeId');
+        console.log('Internal');
         this.searchService.getServices(
           this.shippingTypeId,
-          this.selectedDestCity.id,
-          this.selectedpickCity.id,
-          this.selectedDestArea.id,
-          this.selectedpickArea.id,
-          this.selectedPackage.id,
-          this.weight,
-          this.dimension,
+          this.selectedDestCity.id!,
+          this.selectedpickCity.id!,
+          this.selectedDestArea.id!,
+          this.selectedpickArea.id!,
+          this.selectedPackage.id!,
+          this.weight!,
+          this.dimension!,
           location
-        )
+        );
       } else {
-        console.log("External")
-        this.shippingTypeId = this.shippingTypes().find(s => s.name.en === "External").id;
-        console.log(this.shippingTypeId , 'shippingTypeId');
+        console.log('External');
+        this.shippingTypeId =
+          this.shippingTypes().find((s) => s.name.en === 'External')?.id ?? '';
+        console.log(this.shippingTypeId, 'shippingTypeId');
         this.searchService.getServices(
           this.shippingTypeId,
-          this.selectedDestCity.id,
-          this.selectedpickCity.id,
-          this.selectedDestArea.id,
-          this.selectedpickArea.id,
-          this.selectedPackage.id,
+          this.selectedDestCity.id!,
+          this.selectedpickCity.id!,
+          this.selectedDestArea.id!,
+          this.selectedpickArea.id!,
+          this.selectedPackage.id!,
           this.weight,
           this.dimension,
           location
-        )
+        );
       }
     }
   }
