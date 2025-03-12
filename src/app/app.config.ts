@@ -4,7 +4,7 @@ import {
   importProvidersFrom,
   provideZoneChangeDetection,
 } from '@angular/core';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 import {
   provideRouter,
@@ -21,14 +21,14 @@ import {
 } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-// import { ToastService } from './services/other/toast.service';
 import {
   DialogService,
   DynamicDialogConfig,
   DynamicDialogRef,
 } from 'primeng/dynamicdialog';
 import { ToastService } from './services/other/toast.service';
-import { MyPreset } from './MyPreset';
+import aura from '@primeng/themes/aura';
+import { definePreset } from '@primeng/themes';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -38,7 +38,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection(),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
     provideRouter(routes, withHashLocation(), withViewTransitions()),
-    provideAnimationsAsync(),
+    provideAnimations(),
     importProvidersFrom(
       TranslateModule.forRoot({
         defaultLanguage: 'en',
@@ -62,7 +62,33 @@ export const appConfig: ApplicationConfig = {
     DynamicDialogConfig,
     providePrimeNG({
       theme: {
-        preset: MyPreset,
+        preset: definePreset(aura, {
+          semantic: {
+            root: {},
+            colorScheme: {
+              light: {
+                root: {
+                  '-tooltip-background': '#f9f9fb',
+                  '-tooltip-color': '#001533',
+                  '-surface-e': '#ffffff',
+                  '-text-color': '#001533',
+                  '-multiselect-background': '',
+                  '-multiselect-border-color': '',
+                },
+              },
+              dark: {
+                root: {
+                  '-tooltip-background': '#363c43',
+                  '-tooltip-color': '#fff',
+                  '-surface-e': '#2a323d',
+                  '-text-color': '#fff',
+                  '-multiselect-background': '',
+                  '-multiselect-border-color': '',
+                },
+              },
+            },
+          },
+        }),
         options: {
           darkModeSelector: '.dark',
         },

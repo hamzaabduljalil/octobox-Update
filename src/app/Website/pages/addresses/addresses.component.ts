@@ -2,8 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Inject,
   Input,
   Output,
+  PLATFORM_ID,
 } from '@angular/core';
 // import { TranslateModule } from "@ngx-translate/core";
 import { ButtonModule } from 'primeng/button';
@@ -27,11 +29,14 @@ import { ShippingFormComponent } from '../../components/shipping-form/shipping-f
 // import { ToastService } from "../../../services/other/toast.service"; // Adjust the path as needed
 import { inject } from '@angular/core';
 import { ShippingMethodComponent } from '../../components/dialogs/shipping-method/shipping-method.component';
+import { ToastService } from '../../../services/other/toast.service';
+import { ToastModule } from 'primeng/toast';
 @Component({
   selector: 'app-addresses',
   standalone: true,
   imports: [
     // TranslateModule,
+    ToastModule,
     StepperModule,
     ButtonModule,
     ReactiveFormsModule,
@@ -40,8 +45,6 @@ import { ShippingMethodComponent } from '../../components/dialogs/shipping-metho
     RatesFormComponent,
     InfoFormComponent,
     ChoosePackageComponent,
-    SaveAddressesComponent,
-    SaveRadioComponent,
     ShippingFormComponent,
     ShippingMethodComponent,
   ],
@@ -51,8 +54,15 @@ import { ShippingMethodComponent } from '../../components/dialogs/shipping-metho
 })
 export class AddressesComponent {
   selectedCard: any = null;
-  // private toastService = inject(ToastService);
 
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private toastService: ToastService,
+
+    // ********* instad of window !== unde *********
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
+  // ngOnInit(): void {}
   currentStep = 1;
   steps = [
     'Addresses',
@@ -64,6 +74,13 @@ export class AddressesComponent {
   setStep(step: number) {
     this.currentStep = step;
     this.resetDialogs();
+  }
+  show() {
+    this.toastService.showToast(
+      'info',
+      'Info',
+      'This is an informational message'
+    );
   }
 
   // setStep(step: number) {
@@ -202,7 +219,6 @@ export class AddressesComponent {
     this.isDialogRadioVisibleFrom = false;
     this.isShippingDialogVisible = false;
   }
-  constructor(private cdr: ChangeDetectorRef) {}
   dropdownTo = [
     {
       label: 'Save',

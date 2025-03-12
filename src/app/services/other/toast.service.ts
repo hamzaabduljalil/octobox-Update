@@ -7,7 +7,7 @@ import { MessageService } from 'primeng/api';
 })
 export class ToastService {
   messageService = inject(MessageService);
-  translate = inject(TranslateService);
+  // translate = inject(TranslateService);
 
   showToast(
     severity: 'success' | 'info' | 'warn' | 'error',
@@ -20,18 +20,21 @@ export class ToastService {
   showToast_success(): void {
     this.showToast(
       'success',
-      this.translate.instant('Success'),
-      this.translate.instant('Save Successfully')
+      'done',
+      'Save Successfully'
+      // this.translate.instant('Success'),
+      // this.translate.instant('Save Successfully')
     );
-  }
-  login_success(): void {
+
     this.showToast(
       'success',
-      this.translate.instant('Success'),
-      this.translate.instant('Login Successfully!')
+      'Success',
+      'Login Successfully!'
+      // this.translate.instant('Success'),
+      // this.translate.instant('Login Successfully!')
     );
   }
   showToast_error(error: string): void {
-    this.showToast('error', this.translate.instant('Error'), error);
+    // this.showToast('error', this.translate.instant('Error'), error);
   }
 }

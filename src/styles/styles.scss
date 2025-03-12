@@ -1,7 +1,33 @@
-/* @import "tailwindcss"; */
 @use "tailwindcss";
 @use "primeicons/primeicons.css";
 
+:root {
+  --default-font-family: "Cairo", sans-serif !important;
+}
+@layer reset {
+  input,
+  p-multiselect {
+    border-color: #e5e5ea;
+  }
+}
+// @layer components {
+//   .typography {
+//     p {
+//       font-size: var(--text-base);
+//       color: var(--color-gray-700);
+//     }
+//     h1 {
+//       font-size: var(--text-2xl--line-height);
+//       font-weight: var(--font-weight-semibold);
+//       color: var(--color-gray-950);
+//     }
+//     h2 {
+//       font-size: var(--text-xl);
+//       font-weight: var(--font-weight-semibold);
+//       color: var(--color-gray-950);
+//     }
+//   }
+// }
 @font-face {
   font-family: "Cairo";
   src: url(/assets/Cairo/Cairo-Regular.woff2) format("woff2"),
@@ -11,13 +37,13 @@
   font-style: normal;
 }
 * {
-  font-family: "Cairo", sans-serif !important;
   line-height: 120% !important;
   letter-spacing: -0.5px !important;
 }
 html,
 body {
   margin: 0;
+  font-family: "Cairo", sans-serif;
   overflow-x: hidden;
   height: 100% !important;
   background-color: var(--p--tooltip-background);
@@ -67,7 +93,7 @@ textarea {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-blue-600);
+  background-color: var(--color-blue-600) !important;
   border-radius: 4px;
 }
 
