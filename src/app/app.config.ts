@@ -362,6 +362,7 @@ export const appConfig: ApplicationConfig = {
           },
           semantic: {
             transitionDuration: '0.2s',
+
             focusRing: {
               width: '1px',
               style: 'solid',
@@ -474,7 +475,7 @@ export const appConfig: ApplicationConfig = {
               light: {
                 surface: {
                   0: '#ffffff',
-                  50: '#f2f7ff',
+                  50: '#f9fafb',
                   100: '#c2dbff',
                   200: '#91beff',
                   300: '#61a1ff',
@@ -532,7 +533,7 @@ export const appConfig: ApplicationConfig = {
                   hoverMutedColor: '{surface.600}',
                 },
                 content: {
-                  background: '{surface.0}',
+                  background: '{surface.50}',
                   hoverBackground: '{surface.100}',
                   borderColor: '{surface.200}',
                   color: '{text.color}',
