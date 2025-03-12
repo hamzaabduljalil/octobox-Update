@@ -1,0 +1,40 @@
+::ng-deep .button .p-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 15px !important;
+  padding: 9px 24px;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  width: 100%;
+  max-width: 100% !important;
+  min-height: 50px;
+}
+
+::ng-deep .next-button .p-button {
+  background-color: #0067ff !important;
+  color: white !important;
+  border: 2px solid #0067ff;
+}
+
+::ng-deep .next-button .p-button:hover {
+  border: 2px solid #0067ff;
+
+  background-color: #0067ff;
+}
+
+::ng-deep .back-button .p-button {
+  background-color: transparent !important;
+  color: #0067ff !important;
+  border: 2px solid #0067ff;
+}
+::ng-deep .back-button .p-button:hover {
+  border: 2px solid #0067ff;
+}
+::ng-deep .custom-dialog .p-dialog-header {
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
