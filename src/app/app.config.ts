@@ -1,4 +1,4 @@
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+// import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
   ApplicationConfig,
   importProvidersFrom,
@@ -21,17 +21,17 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpInterceptorService } from './services/other/http-interceptor.service';
+// import { HttpInterceptorService } from './services/other/http-interceptor.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { ToastService } from './services/other/toast.service';
+// import { ToastService } from './services/other/toast.service';
 import {
   DialogService,
   DynamicDialogConfig,
   DynamicDialogRef,
 } from 'primeng/dynamicdialog';
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
+// export function HttpLoaderFactory(http: HttpClient) {
+//   return new TranslateHttpLoader(http);
+// }
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -42,20 +42,20 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       TranslateModule.forRoot({
         defaultLanguage: 'en',
-        loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient],
-        },
+        // loader: {
+        //   provide: TranslateLoader,
+        //   useFactory: HttpLoaderFactory,
+        //   deps: [HttpClient],
+        // },
       })
     ),
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptorService,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   // useClass: HttpInterceptorService,
+    //   multi: true,
+    // },
     MessageService,
-    ToastService,
+    // ToastService,
     DialogService,
     ConfirmationService,
     DynamicDialogRef,

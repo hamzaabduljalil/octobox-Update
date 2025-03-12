@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+/* @import "tailwindcss";
+
 @font-face {
   font-family: "Cairo";
   src: url(./assets/Cairo/Cairo-Regular.woff2) format("woff2"),

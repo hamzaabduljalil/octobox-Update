@@ -24,7 +24,7 @@ import { ChoosePackageComponent } from '../../components/choose-package/choose-p
 import { SaveAddressesComponent } from '../../components/dialogs/save-addresses/save-addresses.component';
 import { SaveRadioComponent } from '../../components/dialogs/save-radio/save-radio.component';
 import { ShippingFormComponent } from '../../components/shipping-form/shipping-form.component';
-import { ToastService } from '../../../services/other/toast.service'; // Adjust the path as needed
+// import { ToastService } from '../../../services/other/toast.service'; // Adjust the path as needed
 import { inject } from '@angular/core';
 import { ShippingMethodComponent } from '../../components/dialogs/shipping-method/shipping-method.component';
 @Component({
@@ -48,7 +48,7 @@ import { ShippingMethodComponent } from '../../components/dialogs/shipping-metho
 })
 export class AddressesComponent {
   selectedCard: any = null;
-  private toastService = inject(ToastService);
+  // private toastService = inject(ToastService);
 
   currentStep = 1;
   steps = [
@@ -95,9 +95,9 @@ export class AddressesComponent {
     if (formValid && this.currentStep < this.steps.length) {
       this.currentStep++;
     } else {
-      this.toastService.showToast_error(
-        'Please fill in all required fields before proceeding.'
-      );
+      // this.toastService.showToast_error(
+      //   'Please fill in all required fields before proceeding.'
+      // );
     }
   }
 
