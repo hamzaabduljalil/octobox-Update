@@ -1,18 +1,5 @@
 {
   "plugins": {
-    "@tailwindcss/postcss": {
-      "config": {
-        "content": ["./src/*/.{html,ts}"],
-        "darkMode": "class",
-        "theme": {
-          "extend": {
-            "fontFamily": {
-              "Cairo": ["Cairo", "sans-serif"]
-            }
-          }
-        },
-        "plugins": ["./plugin.js"]
-      }
-    }
+    "@tailwindcss/postcss": {}
   }
 }
