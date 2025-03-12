@@ -1,7 +1,7 @@
-<div
-  class="flex items-center w-full md:grid md:place-items-center justify-center p-[25px_20px] md:container mx-auto"
->
-  <div class="grid w-full max-w-[1120px] mx-auto place-items-center">
+<div class="flex items-center w-full p-[25px_20px] md:container mx-auto">
+  <!-- md:grid md:place-items-center justify-center  -->
+  <div class="grid w-full mx-auto place-items-center">
+    <!-- max-w-[1120px] -->
     <!-- Title Section -->
     <div class="md:text-[32px] text-xl text-start w-full">
       <div
@@ -52,7 +52,7 @@
       <div class="text-center w-[100%] md:w-[74.5%]">
         <div *ngIf="currentStep === 1">
           <div
-            class="bg-[var(--surface-e)] p-4 rounded-2xl flex flex-col md:flex-row justify-between gap-[8px]"
+            class="!bg-[var(--p--surface-e)] p-4 rounded-2xl flex flex-col md:flex-row justify-between gap-[8px]"
           >
             <div class="w-full md:w-[45%]">
               <app-shipping-form
@@ -80,6 +80,8 @@
               class="flex items-center justify-center gap-2 relative md:flex-col"
             >
               <div class="custom-dashed-line"></div>
+              <i class="pi pi-spin pi-cog" style="font-size: 2rem"></i>
+
               <p-button
                 icon="pi pi-arrow-right-arrow-left"
                 [text]="true"
@@ -192,7 +194,7 @@
       </div>
       <!-- Stepper Progress -->
       <div
-        class="bg-[var(--surface-e)] rounded-[20px] p-[20px] w-[23.5%] hidden md:block"
+        class="!bg-[var(--p--surface-e)] rounded-[20px] p-[20px] w-[23.5%] hidden md:block"
       >
         <div class="flex flex-col">
           <div
@@ -206,18 +208,15 @@
               <div
                 class="w-[32px] h-[32px] flex items-center justify-center rounded-full border-3 transition-all"
                 [ngClass]="{
-                  'border-blue-600 bg-[var(--surface-e)]':
+                  '!border-blue-600 !bg-[var(--p--surface-e)]':
                     currentStep === i + 1,
-                  'border-blue-500 bg-blue-500 text-[var(--surface-e)]':
+                  '!border-[#2b7fff] bg-[#2b7fff] text-[var(--p--surface-e)]':
                     currentStep !== i + 1 && i < currentStep,
-                  'border-gray-300 bg-[var(--surface-e)]': i >= currentStep
+                  'border-gray-300 !bg-[var(--p--surface-e)]': i >= currentStep
                 }"
               >
                 <ng-container *ngIf="i < currentStep - 1; else currentStepDot">
-                  <img
-                    src="../../../../assets/icon/check.png"
-                    class="w-[17px]"
-                  />
+                  <img src="/assets/icon/check.png" class="w-[17px]" />
                 </ng-container>
                 <ng-template #currentStepDot>
                   <div

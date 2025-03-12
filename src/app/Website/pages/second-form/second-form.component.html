@@ -1,7 +1,5 @@
-<div
-  class="flex items-center w-full md:grid md:place-items-center justify-center p-[25px_20px] md:container mx-auto"
->
-  <div class="grid w-full max-w-[1120px] mx-auto place-items-center">
+<div class="flex items-center w-full p-[25px_20px] md:container mx-auto">
+  <div class="grid w-full mx-auto place-items-center">
     <!-- Title Section -->
     <div class="md:text-[32px] text-xl text-start w-full">
       <div
@@ -235,9 +233,7 @@
         </div>
       </div>
       <!-- Stepper Progress -->
-      <div
-        class="bg-white rounded-2xl shadow-md p-[16px_15px] w-[23.5%] hidden md:block"
-      >
+      <div class="bg-white rounded-2xl p-[16px_15px] w-[23.5%] hidden md:block">
         <div class="flex flex-col">
           <ng-container *ngFor="let step of steps; let i = index">
             <ng-container *ngIf="i !== steps.length - 1">
@@ -251,8 +247,8 @@
                   <div
                     class="w-[32px] h-[32px] flex items-center justify-center rounded-full border-3 transition-all"
                     [ngClass]="{
-                      'border-blue-600 bg-white': currentStep === i + 1,
-                      'border-blue-500 bg-blue-500 text-white':
+                      '!border-blue-600 bg-white': currentStep === i + 1,
+                      '!border-[#2b7fff] bg-blue-500 text-white':
                         currentStep !== i + 1 && i < currentStep,
                       'border-gray-300 bg-white': i >= currentStep
                     }"
@@ -260,10 +256,7 @@
                     <ng-container
                       *ngIf="i < currentStep - 1; else currentStepDot"
                     >
-                      <img
-                        src="../../../../assets/icon/check.png"
-                        class="w-[17px]"
-                      />
+                      <img src="/assets/icon/check.png" class="w-[17px]" />
                     </ng-container>
                     <ng-template #currentStepDot>
                       <div
