@@ -1,5 +1,9 @@
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 import {
@@ -31,7 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    // ɵprovideZonelessChangeDetection(),
+    provideZoneChangeDetection(),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
     provideRouter(routes, withHashLocation(), withViewTransitions()),
     provideAnimations(),
