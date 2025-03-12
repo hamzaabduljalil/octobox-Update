@@ -20,8 +20,9 @@ export class ShippingMethodComponent {
   @Input() title: string = "";
   @Input() label: string = "";
   @Input() visible: boolean = false;
+  @Input() book: boolean = false;
   @Output() visibleChange = new EventEmitter<boolean>();
-
+  @Output() bookChanges = new EventEmitter<boolean>();
   showDialog() {
     this.visible = true;
     this.visibleChange.emit(this.visible);
@@ -30,5 +31,9 @@ export class ShippingMethodComponent {
   closeDialog() {
     this.visible = false;
     this.visibleChange.emit(this.visible);
+  }
+  handleBookClick() {
+    this.book = true;
+    this.bookChanges.emit(this.book);
   }
 }

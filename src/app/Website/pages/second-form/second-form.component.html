@@ -149,8 +149,14 @@
           <app-rates-form
             class="w-[100%]"
             (cardSelected)="onCardSelected($event)"
-            (cardSelected)="nextStep()"
+            (cardSelected)="openShippingDialog()"
           ></app-rates-form>
+          <app-save-addresses
+            title="Save to Addresses"
+            label="Address Name"
+            [visible]="isShippingDialogVisible"
+            (bookChanges)="nextStep()"
+          ></app-save-addresses>
         </div>
 
         <div *ngIf="currentStep === 4">
@@ -172,11 +178,14 @@
                 }"
                 [selectedType]="selectedType"
                 title="Shipping From"
-                [form]="shippingFrom"
-                [items]="dropdownFrom"
-                [isDialogVisible]="isDialogVisibleFrom"
-                [isDialogRadioVisible]="isDialogRadioVisibleFrom"
+                [form]="shippingFromFull"
+                [items]="dropdownFromFull"
               ></app-shipping-form>
+              <app-shipping-method
+                [visible]="isDialogVisibleTo"
+                (bookChanges)="nextStep()"
+              >
+              </app-shipping-method>
             </div>
             <div
               class="flex items-center justify-center gap-2 relative md:flex-col"
@@ -210,10 +219,8 @@
                 }"
                 [selectedType]="selectedType"
                 title="Shipping To"
-                [form]="shippingTo"
-                [items]="dropdownTo"
-                [isDialogVisible]="isDialogVisibleTo"
-                [isDialogRadioVisible]="isDialogRadioVisibleTo"
+                [form]="shippingToFull"
+                [items]="dropdownToFull"
               ></app-shipping-form>
             </div>
           </div>

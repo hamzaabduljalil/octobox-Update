@@ -83,10 +83,17 @@ export class WeightFormComponent {
         weight: [""],
         description: [""],
         quantity: [""],
+        isDropdownOpen: [false],
+        expanded: [false],
         items: this.fb.array([]),
       });
     }
-    this.addItem();
+
+    this.items.controls.forEach((item) => {
+      if (!item.value.hasOwnProperty("isDropdownOpen")) {
+        item.patchValue({ isDropdownOpen: false });
+      }
+    });
   }
 
   addItem() {
@@ -129,13 +136,22 @@ export class WeightFormComponent {
   }
 
   toggleDropdown(index: number, event: Event) {
-    event.stopPropagation();
+    event.stopPropagation(); // ✅ Prevent immediate closing
 
     this.items.controls.forEach((item, i) => {
+      if (!item.value.hasOwnProperty("isDropdownOpen")) {
+        item.patchValue({ isDropdownOpen: false });
+      }
+
       item.patchValue({
         isDropdownOpen: i === index ? !item.value.isDropdownOpen : false,
       });
     });
+
+    console.log(
+      "Current State After:",
+      this.items.controls.map((i) => i.value.isDropdownOpen)
+    );
   }
 
   toggleShow() {

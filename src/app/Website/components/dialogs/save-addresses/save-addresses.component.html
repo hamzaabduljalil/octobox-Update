@@ -27,7 +27,11 @@
   </div>
 
   <div class="flex justify-end gap-4 mt-5">
-    <p-button class="next-button button first w-full" label="Save"></p-button>
+    <p-button
+      class="next-button button first w-full"
+      label="Save"
+      (onClick)="handleBookClick()"
+    ></p-button>
     <p-button
       class="edit-button button first w-full !border-none"
       label="Cancel"
