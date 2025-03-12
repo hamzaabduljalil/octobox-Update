@@ -39,10 +39,8 @@ import { ShippingMethodComponent } from '../../components/dialogs/shipping-metho
     CommonModule,
     WeightFormComponent,
     RatesFormComponent,
-    InfoFormComponent,
     ChoosePackageComponent,
     SaveAddressesComponent,
-    SaveRadioComponent,
     ShippingFormComponent,
     MultiSelectModule,
     ShippingMethodComponent,
@@ -57,6 +55,10 @@ export class SecondFormComponent {
 
   currentStep = 1;
   steps = [
+    'Addresses',
+    'Dimension & Weight',
+    'Shipping Rates',
+    'Shipment Info',
     'Addresses',
     'Dimension & Weight',
     'Shipping Rates',
@@ -112,7 +114,6 @@ export class SecondFormComponent {
 
   nextStep() {
     let formValid = false;
-
     if (this.currentStep === 1) {
       formValid = this.shippingFrom.valid && this.shippingTo.valid;
     } else if (this.currentStep === 2) {
@@ -180,6 +181,7 @@ export class SecondFormComponent {
           weight: new FormControl('', Validators.required),
           quantity: new FormControl(''),
           description: new FormControl('', Validators.required),
+
           isDropdownOpen: new FormControl(false),
           expanded: new FormControl(false),
         }),

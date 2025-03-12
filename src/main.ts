@@ -4,11 +4,8 @@ import { provideAnimations } from '@angular/platform-browser/animations'; // ✅
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { MessageService } from 'primeng/api';
+import { appConfig } from './app/app.config';
 
-bootstrapApplication(AppComponent, {
-  providers: [
-    provideRouter(routes),
-    provideAnimations(), // ✅ Ensure animations are enabled
-    MessageService,
-  ],
-}).catch((err) => console.error(err));
+bootstrapApplication(AppComponent, appConfig).catch((err) =>
+  console.error(err)
+);

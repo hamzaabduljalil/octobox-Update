@@ -1,7 +1,10 @@
-<div class="flex items-center w-full p-[25px_20px] md:container mx-auto">
+<div class="flex items-center p-[25px_20px] max-w-[1120px] w-full mx-auto">
+  <!--  -->
   <!-- md:grid md:place-items-center justify-center  -->
-  <div class="grid w-full mx-auto place-items-center">
-    <!-- max-w-[1120px] -->
+  <p-toast />
+
+  <div class="w-full">
+    <!--grid w-full mx-auto place-items-center max-w-[1120px] -->
     <!-- Title Section -->
     <div class="md:text-[32px] text-xl text-start w-full">
       <div
@@ -80,7 +83,6 @@
               class="flex items-center justify-center gap-2 relative md:flex-col"
             >
               <div class="custom-dashed-line"></div>
-              <i class="pi pi-spin pi-cog" style="font-size: 2rem"></i>
 
               <p-button
                 icon="pi pi-arrow-right-arrow-left"
@@ -147,6 +149,7 @@
             <p-button
               class="next-button button first w-full md:!w-[27%]"
               label=" Get Rates"
+              severity="warn"
               (click)="nextStep()"
               [disabled]="currentStep === steps.length"
             ></p-button>

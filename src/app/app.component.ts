@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ToastModule } from 'primeng/toast';
 
 // import { SwitchThemeService } from './services/other/switch-theme.service';
 // import { StateService } from './services/other/state.service';
@@ -9,7 +9,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ToastModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
@@ -21,12 +21,8 @@ export class AppComponent implements OnInit {
   // cls = inject(ChangeLangService);
 
   ngOnInit(): void {
-    if (typeof document !== 'undefined') {
-      document.title = 'My Angular App';
-      document.documentElement.style.fontSize = '11px'; // Ensure document is available before accessing it
-      this.setTheme();
-      this.setLang();
-    }
+    this.setTheme();
+    this.setLang();
   }
 
   setTheme() {

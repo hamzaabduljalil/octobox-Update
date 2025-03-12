@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '', // Root route
-    title: 'Home',
+    title: 'OctoBox',
     loadComponent: () =>
       import('./Website/pages/addresses/addresses.component').then(
         (m) => m.AddressesComponent
