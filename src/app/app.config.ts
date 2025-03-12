@@ -14,6 +14,7 @@ import {
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import {
+  HTTP_INTERCEPTORS,
   HttpClient,
   provideHttpClient,
   withFetch,
@@ -51,7 +52,7 @@ export const appConfig: ApplicationConfig = {
     ),
     // {
     //   provide: HTTP_INTERCEPTORS,
-    //   // useClass: HttpInterceptorService,
+    //   useClass: HttpInterceptorService,
     //   multi: true,
     // },
     MessageService,
