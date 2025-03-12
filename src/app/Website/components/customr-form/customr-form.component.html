@@ -1,0 +1,183 @@
+<div class="w-full h-[100vh] flex justify-center items-center">
+  <div class="w-[60%] mx-auto">
+    <h1 class="text-center">
+      {{ "Hello Fill this Fields Please :" | translate }}
+    </h1>
+    <form action="" (ngSubmit)="OnSubmitClick()">
+      <div class="flex gap-5">
+        <div class="mb-5 flex-1">
+          <label
+            for="selectedpickCity"
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            >{{ "Select pickup City :*" | translate }}
+          </label>
+          <p-dropdown
+            class="w-full"
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            [options]="cities()"
+            [(ngModel)]="selectedpickCity"
+            name="selectedpickCity"
+            [optionLabel]="cls.currentLang() === 'en' ? 'name.en' : 'name.ar'"
+            (onChange)="onpickCityCahnge($event)"
+            [filter]="true"
+            [filterBy]="cls.currentLang() === 'en' ? 'name.en' : 'name.ar'"
+            styleClass="w-full font-bold  min-h-10"
+          >
+          </p-dropdown>
+        </div>
+        <div class="mb-5 flex-1">
+          <label
+            for="selectedpickArea"
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            >{{ "Select pickup Area :*" | translate }}
+          </label>
+          <p-dropdown
+            class="w-full"
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            [options]="pickareas()"
+            [(ngModel)]="selectedpickArea"
+            name="selectedpickArea"
+            [optionLabel]="cls.currentLang() === 'en' ? 'name.en' : 'name.ar'"
+            [filter]="true"
+            [filterBy]="cls.currentLang() === 'en' ? 'name.en' : 'name.ar'"
+            styleClass="w-full font-bold  min-h-10"
+          >
+          </p-dropdown>
+        </div>
+      </div>
+      <div class="flex gap-5">
+        <div class="mb-5 flex-1">
+          <label
+            for="selectedDestCity"
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            >{{ "Select destination City :*" | translate }}
+          </label>
+          <p-dropdown
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            class="w-full"
+            (onChange)="ondestCityCahnge($event)"
+            [options]="cities()"
+            [(ngModel)]="selectedDestCity"
+            name="selectedDestCity"
+            [optionLabel]="cls.currentLang() === 'en' ? 'name.en' : 'name.ar'"
+            [filter]="true"
+            [filterBy]="cls.currentLang() === 'en' ? 'name.en' : 'name.ar'"
+            styleClass="w-full font-bold  min-h-10"
+          >
+          </p-dropdown>
+        </div>
+        <div class="mb-5 flex-1">
+          <label
+            for="selectedDestArea"
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            >{{ "Select destination Area :*" | translate }}
+          </label>
+          <p-dropdown
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            class="w-full"
+            [options]="destareas()"
+            [(ngModel)]="selectedDestArea"
+            name="selectedDestArea"
+            [optionLabel]="cls.currentLang() === 'en' ? 'name.en' : 'name.ar'"
+            [filter]="true"
+            [filterBy]="cls.currentLang() === 'en' ? 'name.en' : 'name.ar'"
+            styleClass="w-full font-bold  min-h-10"
+          >
+          </p-dropdown>
+        </div>
+      </div>
+
+      <div class="mb-5 flex flex-col">
+        <label
+          for="selectedPackage"
+          [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+          >{{ "Select package Type :*" | translate }}</label
+        >
+        <p-dropdown
+          [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+          class="w-full"
+          [options]="packageTypes()"
+          [(ngModel)]="selectedPackage"
+          name="selectedPackage"
+          [optionLabel]="cls.currentLang() === 'en' ? 'name.en' : 'name.ar'"
+          [filter]="true"
+          [filterBy]="cls.currentLang() === 'en' ? 'name.en' : 'name.ar'"
+          styleClass="w-full font-bold  min-h-10"
+        >
+        </p-dropdown>
+      </div>
+      <div class="mb-5 flex gap-5">
+        <div class="flex-1">
+          <label for="weight" [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            >{{ "Package weight in kg :" | translate }}
+          </label>
+          <input
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            class="w-full font-bold px-2 border-0 rounded min-h-10"
+            [(ngModel)]="weight"
+            type="number"
+            pInputText
+            name="weight"
+            id="weight"
+          />
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center mb-5 gap-5">
+        <div class="flex flex-col w-1/3">
+          <label
+            for="width"
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            >{{ "package max width" | translate }}</label
+          >
+          <input
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            class="w-full font-bold px-2 border-0 rounded min-h-10"
+            [(ngModel)]="width"
+            type="number"
+            pInputText
+            name="width"
+            id="width"
+          />
+        </div>
+        <div class="flex flex-col w-1/3">
+          <label
+            for="height"
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            >{{ "package max height" | translate }}</label
+          >
+          <input
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            class="w-full font-bold px-2 border-0 rounded min-h-10"
+            [(ngModel)]="height"
+            type="number"
+            pInputText
+            name="height"
+            id="height"
+          />
+        </div>
+        <div class="flex flex-col w-1/3">
+          <label
+            for="length"
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            >{{ "package max length" | translate }}</label
+          >
+          <input
+            [dir]="cls.currentLang() === 'en' ? 'ltr' : 'rtl'"
+            class="w-full font-bold px-2 border-0 rounded min-h-10"
+            [(ngModel)]="length"
+            type="number"
+            pInputText
+            name="length"
+            id="length"
+          />
+        </div>
+      </div>
+      <div class="w-full text-center">
+        <p-button styleClass="text-xl font-bold px-10 py-3" type="submit">
+          {{ "Search Services" | translate }}
+        </p-button>
+      </div>
+    </form>
+  </div>
+</div>

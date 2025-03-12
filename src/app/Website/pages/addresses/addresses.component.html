@@ -157,8 +157,13 @@
           <app-rates-form
             class="w-[100%]"
             (cardSelected)="onCardSelected($event)"
-            (cardSelected)="nextStep()"
+            (cardSelected)="openShippingDialog()"
           ></app-rates-form>
+          <app-shipping-method
+            [visible]="isShippingDialogVisible"
+            (bookChanges)="nextStep()"
+          >
+          </app-shipping-method>
         </div>
 
         <div *ngIf="currentStep === 4">

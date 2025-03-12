@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+// import { TranslateModule } from "@ngx-translate/core";
 import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
 import {
@@ -24,14 +24,14 @@ import { ChoosePackageComponent } from '../../components/choose-package/choose-p
 import { SaveAddressesComponent } from '../../components/dialogs/save-addresses/save-addresses.component';
 import { SaveRadioComponent } from '../../components/dialogs/save-radio/save-radio.component';
 import { ShippingFormComponent } from '../../components/shipping-form/shipping-form.component';
-// import { ToastService } from '../../../services/other/toast.service'; // Adjust the path as needed
+// import { ToastService } from "../../../services/other/toast.service"; // Adjust the path as needed
 import { inject } from '@angular/core';
 import { ShippingMethodComponent } from '../../components/dialogs/shipping-method/shipping-method.component';
 @Component({
   selector: 'app-addresses',
   standalone: true,
   imports: [
-    TranslateModule,
+    // TranslateModule,
     StepperModule,
     ButtonModule,
     ReactiveFormsModule,
@@ -40,7 +40,10 @@ import { ShippingMethodComponent } from '../../components/dialogs/shipping-metho
     RatesFormComponent,
     InfoFormComponent,
     ChoosePackageComponent,
+    SaveAddressesComponent,
+    SaveRadioComponent,
     ShippingFormComponent,
+    ShippingMethodComponent,
   ],
   templateUrl: './addresses.component.html',
   styleUrls: ['./addresses.component.scss'],
@@ -60,7 +63,9 @@ export class AddressesComponent {
 
   setStep(step: number) {
     this.currentStep = step;
+    this.resetDialogs();
   }
+
   // setStep(step: number) {
   //   let formValid = false;
 
@@ -90,21 +95,25 @@ export class AddressesComponent {
       formValid = this.shippingFrom.valid && this.shippingTo.valid;
     } else if (this.currentStep === 2) {
       formValid = this.weightForm.valid;
+    } else if (this.currentStep == 3) {
+      formValid = this.selectedCard;
     }
 
     if (formValid && this.currentStep < this.steps.length) {
       this.currentStep++;
     } else {
       // this.toastService.showToast_error(
-      //   'Please fill in all required fields before proceeding.'
+      //   "Please fill in all required fields before proceeding."
       // );
     }
+    this.resetDialogs();
   }
 
   prevStep() {
     if (this.currentStep > 1) {
       this.currentStep--;
     }
+    this.resetDialogs();
   }
 
   mainForm = new FormGroup({
@@ -129,16 +138,26 @@ export class AddressesComponent {
       addressType: new FormControl('', Validators.required),
     }),
     weightForm: new FormGroup({
-      length: new FormControl('', Validators.required),
-      width: new FormControl('', Validators.required),
-      height: new FormControl('', Validators.required),
-      weight: new FormControl('', Validators.required),
-      quantity: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      items: new FormArray([]),
+      items: new FormArray([
+        new FormGroup({
+          length: new FormControl('', Validators.required),
+          width: new FormControl('', Validators.required),
+          height: new FormControl('', Validators.required),
+          weight: new FormControl('', Validators.required),
+          description: new FormControl('', Validators.required),
+          quantity: new FormControl(''),
+          isDropdownOpen: new FormControl(false),
+          expanded: new FormControl(false),
+        }),
+      ]),
     }),
   });
-
+  clearFormFrom() {
+    this.shippingFrom.reset();
+  }
+  clearFormTo() {
+    this.shippingTo.reset();
+  }
   get shippingFrom(): FormGroup {
     return this.mainForm.get('shippingFrom') as FormGroup;
   }
@@ -173,7 +192,16 @@ export class AddressesComponent {
   @Input() isDialogVisibleTo: boolean = false;
   @Input() isDialogRadioVisibleFrom: boolean = false;
   @Input() isDialogVisibleFrom: boolean = false;
+  @Input() isShippingDialogVisible: boolean = false;
+  // isShippingDialogVisible = false;
 
+  private resetDialogs() {
+    this.isDialogVisibleTo = false;
+    this.isDialogRadioVisibleTo = false;
+    this.isDialogVisibleFrom = false;
+    this.isDialogRadioVisibleFrom = false;
+    this.isShippingDialogVisible = false;
+  }
   constructor(private cdr: ChangeDetectorRef) {}
   dropdownTo = [
     {
@@ -194,7 +222,7 @@ export class AddressesComponent {
     },
     {
       label: 'Clear',
-      action: () => console.log('Clear clicked'),
+      action: () => this.clearFormTo(),
     },
   ];
   dropdownFrom = [
@@ -216,7 +244,11 @@ export class AddressesComponent {
     },
     {
       label: 'Clear',
-      action: () => console.log('Clear clicked'),
+      action: () => this.clearFormFrom(),
     },
   ];
+
+  openShippingDialog() {
+    this.isShippingDialogVisible = true;
+  }
 }

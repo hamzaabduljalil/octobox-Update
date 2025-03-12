@@ -21,7 +21,8 @@ export class SaveAddressesComponent {
   @Input() label: string = "";
   @Input() visible: boolean = false;
   @Output() visibleChange = new EventEmitter<boolean>();
-
+  @Input() book: boolean = false;
+  @Output() bookChanges = new EventEmitter<boolean>();
   showDialog() {
     this.visible = true;
     this.visibleChange.emit(this.visible);
@@ -30,5 +31,9 @@ export class SaveAddressesComponent {
   closeDialog() {
     this.visible = false;
     this.visibleChange.emit(this.visible);
+  }
+  handleBookClick() {
+    this.book = true;
+    this.bookChanges.emit(this.book);
   }
 }
