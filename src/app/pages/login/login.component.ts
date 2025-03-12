@@ -11,7 +11,7 @@ import { ChangeLangService } from '../../services/other/change-lang.service';
   selector: 'app-login',
   standalone: true,
   imports: [ButtonModule, FormsModule, InputTextModule, TranslateModule],
-  providers: [],
+  providers: [TranslateService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
