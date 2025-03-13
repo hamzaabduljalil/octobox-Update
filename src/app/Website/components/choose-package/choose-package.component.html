@@ -4,7 +4,7 @@
 >
   <button
     *ngFor="let type of types"
-    class="p-[7px] !bg-[var(--p-surface-0)] cursor-pointer rounded-2xl transition-all opacity-70 border border-transparent min-w-[140px] w-[140px] md:w-[var(--button-width)]"
+    class="p-[7px] !bg-[var(--p-surface-0)] cursor-pointer rounded-2xl transition-all opacity-70 border border-transparent min-w-[119px] w-[119px] md:w-[var(--button-width)]"
     [ngClass]="{
       'opacity-100 !border-[#2b7fff] ': selectedType === type
     }"
@@ -12,7 +12,7 @@
   >
     <div class="flex justify-start items-center">
       <img [src]="'/assets/icon/' + type + '.svg'" class="w-[56px]" />
-      <p class="ml-2 font-semibold text-lg">{{ type }}</p>
+      <p class="ml-2 font-semibold text-sm md:text-[18px]">{{ type }}</p>
     </div>
   </button>
 </div>

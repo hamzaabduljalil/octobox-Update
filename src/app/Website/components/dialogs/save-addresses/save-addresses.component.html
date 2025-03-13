@@ -6,13 +6,16 @@
   [closable]="false"
   [style]="{
     width: '502px',
-    minHeight: '264px',
+    minHeight: '260px',
     padding: '2px',
+
   }"
-  class="custom-dialog"
+  class="custom-dialog bg-[var(--p-surface-0)]"
 >
   <!-- Custom Header (Without Space) -->
-  <div class="text-2xl font-semibold p-[20px_5px] text-start">{{ title }}</div>
+  <div class="text-2xl font-semibold p-[20px_5px] text-start mb-2">
+    {{ title }}
+  </div>
 
   <!-- Form Content -->
   <div class="p-[0_5px]">
@@ -26,14 +29,14 @@
     />
   </div>
 
-  <div class="flex justify-end gap-4 mt-5">
+  <div class="flex justify-end gap-4 !mt-[33px]">
     <p-button
-      class="next-button button first w-full"
+      class="next-button button1 first w-full"
       label="Save"
       (onClick)="handleBookClick()"
     ></p-button>
     <p-button
-      class="edit-button button first w-full !border-none"
+      class="edit-button button1 first w-full !border-none"
       label="Cancel"
       (onClick)="closeDialog()"
     ></p-button>

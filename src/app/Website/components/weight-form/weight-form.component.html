@@ -1,5 +1,5 @@
 <form [formGroup]="form" class="font-normal">
-  <div class="mb-4 w-[27%] text-start flex flex-col gap-2">
+  <div class="mb-4 w-[33%] md:w-[27%] text-start flex flex-col gap-2">
     <label class="text-[16px]" for="Quantity"> Quantity </label>
     <p-multiSelect
       id="Quantity"
@@ -161,18 +161,20 @@
       <div
         *ngIf="item.value.expanded"
         class="rounded-lg transition-all duration-300 ease-in-out"
-        (click)="toggleExpand(i)"
       >
-        <p class="text-[14px] text-[#8E8E93] cursor-pointer text-start mt-0">
+        <p
+          class="text-[14px] flex justify-between text-[#8E8E93] cursor-pointer text-start mt-0"
+        >
           L: {{ item.value.length }} cm | W: {{ item.value.width }} cm | H:
-          {{ item.value.height }} cm | Weight: {{ item.value.weight }} kg
+          {{ item.value.height }} cm
+          <span> Weight: {{ item.value.weight }} kg </span>
         </p>
       </div>
 
       <button
         type="button"
         (click)="toggleExpand(i)"
-        class="mt-2 border-none flex justify-center items-center w-full transition-all duration-300"
+        class="mt-[20px] border-none flex justify-center items-center w-full transition-all duration-300"
       >
         <i
           *ngIf="item.value.expanded; else collapsedIcon"

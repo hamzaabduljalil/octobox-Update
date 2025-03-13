@@ -59,10 +59,6 @@ export class SecondFormComponent {
     'Dimension & Weight',
     'Shipping Rates',
     'Shipment Info',
-    'Addresses',
-    'Dimension & Weight',
-    'Shipping Rates',
-    'Shipment Info',
   ];
 
   setStep(step: number) {

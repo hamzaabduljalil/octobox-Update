@@ -485,7 +485,7 @@ export const appConfig: ApplicationConfig = {
                   700: '#0048b3',
                   800: '#00398c',
                   900: '#002966',
-                  950: '#001a40',
+                  950: '#001533',
                 },
                 primary: {
                   color: '{primary.500}',

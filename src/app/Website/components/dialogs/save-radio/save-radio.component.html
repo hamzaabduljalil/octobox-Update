@@ -6,13 +6,15 @@
   [closable]="false"
   [style]="{
     width: '502px',
-    minHeight: '264px',
+    minHeight: '449px',
     padding: '8px',
 
   }"
   class="custom-dialog"
 >
-  <div class="text-2xl text-start font-semibold p-[20px_5px]">{{ title }}</div>
+  <div class="text-2xl text-start font-semibold p-[20px_5px] mb-2">
+    {{ title }}
+  </div>
 
   <div class="space-y-4">
     <div
@@ -30,7 +32,7 @@
           type="radio"
           [checked]="selectedAddress === i"
           (change)="selectedAddress = i"
-          class="form-radio text-blue-50 outline-none ring-0 focus:ring-0 focus:outline-none"
+          class="form-radio w-[15px] h-[15px] text-blue-50 outline-none ring-0 focus:ring-0 focus:outline-none"
         />
         <div>
           <p class="font-semibold text-base">{{ address.title }}</p>
@@ -48,10 +50,10 @@
   </div>
   <!--  -->
 
-  <div class="flex justify-end gap-4 mt-5">
-    <p-button class="next-button button first w-full" label="Save"></p-button>
+  <div class="flex justify-end gap-4 mt-[33px]">
+    <p-button class="next-button button1 first w-full" label="Save"></p-button>
     <p-button
-      class="edit-button button first w-full !border-none"
+      class="edit-button button1 first w-full !border-none"
       label="Cancel"
       (onClick)="closeDialog()"
     ></p-button>

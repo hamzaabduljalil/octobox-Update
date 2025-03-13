@@ -1,5 +1,8 @@
-<div class="flex items-center w-full p-[25px_20px] md:container mx-auto">
-  <div class="grid w-full mx-auto place-items-center">
+<div class="flex items-center p-[25px_20px] max-w-[1120px] w-full mx-auto">
+  <!--  -->
+  <!-- <p-toast /> -->
+
+  <div class="w-full">
     <!-- Title Section -->
     <div class="md:text-[32px] text-xl text-start w-full">
       <div
@@ -14,18 +17,20 @@
             <div class="flex items-center gap-2">
               <button (click)="prevStep()">
                 <i
-                  class="pi pi-arrow-left w-[22px] h-[24px] blocck md:hidden"
+                  class="pi pi-arrow-left w-[22px] h-[24px] blocck md:!hidden"
                 ></i>
               </button>
 
-              <h1 class="text-xl md:text-4xl font-semibold md:font-normal">
+              <h1
+                class="text-[20px] md:text-[32px] font-semibold md:font-normal"
+              >
                 {{ step }}
               </h1>
             </div>
           </div>
           <div>
             <button>
-              <i class="pi pi-bars w-[24px] block md:hidden"></i>
+              <i class="pi pi-bars w-[24px] h-[24px] block md:!hidden"></i>
             </button>
           </div>
         </div>
@@ -225,13 +230,13 @@
 
           <div class="flex gap-4 mt-4 justify-self-auto justify-end">
             <p-button
-              class="back-button button first w-full md:!w-[27%]"
+              class="back-button font button first w-full md:!w-[27%]"
               label="Save to draft"
               (click)="nextStep()"
               [disabled]="currentStep === steps.length"
             ></p-button>
             <p-button
-              class="next-button button first w-full md:!w-[27%]"
+              class="next-button font button first w-full md:!w-[27%]"
               label="Back"
               (click)="prevStep()"
               [disabled]="currentStep === steps.length"
@@ -263,7 +268,7 @@
                     <ng-container
                       *ngIf="i < currentStep - 1; else currentStepDot"
                     >
-                      <img src="/assets/icon/check.png" class="w-[17px]" />
+                      <i class="pi pi-check w-[17px] text-white"></i>
                     </ng-container>
                     <ng-template #currentStepDot>
                       <div

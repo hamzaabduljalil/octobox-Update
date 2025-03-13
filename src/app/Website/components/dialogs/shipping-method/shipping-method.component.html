@@ -4,17 +4,19 @@
   [closable]="false"
   [style]="{
     width: '502px',
-    minHeight: '264px',
+    minHeight: '455px',
     padding: '2px',
   }"
   class="custom-dialog"
 >
-  <div class="p-[15px_5px]">
+  <div class="p-[25px_5px_0px]">
     <!-- Custom Header (Without Space) -->
-    <div class="text-2xl font-semibold">Shipping Method</div>
+    <div class="text-2xl font-semibold text-start mb-[30px]">
+      Shipping Method
+    </div>
 
     <!-- Form Content -->
-    <div class="flex flex-col gap-3 my-4">
+    <div class="flex flex-col gap-[12px] my-[30px]">
       <div class="flex gap-2 items-center">
         <input
           type="radio"
@@ -24,7 +26,7 @@
           class="w-[15px] h-[15px] accent-[#0067FF]"
           id="1"
         />
-        <label class="text-[14px]" for="1"> Resedintial Address </label>
+        <label class="text-[14px]" for="1"> ASAP pickup </label>
       </div>
       <div class="flex gap-2 items-center">
         <input
@@ -35,7 +37,7 @@
           class="w-[15px] h-[15px] accent-[#0067FF]"
           id="2"
         />
-        <label class="text-[14px]" for="2"> Resedintial Address </label>
+        <label class="text-[14px]" for="2"> Schedule pickup </label>
       </div>
       <div class="flex gap-2 items-center">
         <input
@@ -46,13 +48,13 @@
           class="w-[15px] h-[15px] accent-[#0067FF]"
           id="3"
         />
-        <label class="text-[14px]" for="3"> Resedintial Address </label>
+        <label class="text-[14px]" for="3"> I will drop off the package </label>
       </div>
     </div>
     <!--  -->
 
     <div class="flex gap-3 flex-col">
-      <div class="flex flex-col w-full gap-2 text-start">
+      <div class="flex flex-col w-full gap-2 text-start mb-[5px]">
         <label class="text-sm text-[#8E8E93]" for="address">
           Shipping Date
         </label>
@@ -67,7 +69,7 @@
           />
           <img
             src="/assets/icon/cleander.svg"
-            class="absolute right-4 text-blue-500 cursor-pointer text-[24px]"
+            class="absolute right-4 text-blue-500 cursor-pointer h-[24px] w-[24px]"
           />
         </div>
       </div>
@@ -75,7 +77,7 @@
       <div class="flex flex-row justify-center items-center gap-2 text-start">
         <div>
           <label class="text-sm text-[#8E8E93] mb-2 block" for="address">
-            Shipping Date
+            Ready Time
           </label>
           <div class="flex items-center relative">
             <input
@@ -87,7 +89,7 @@
               placeholder="Example"
             />
             <i
-              class="pi pi-clock absolute right-4 text-blue-500 cursor-pointer text-[24px]"
+              class="pi pi-clock absolute right-4 text-blue-500 cursor-pointer !text-[24px]"
             ></i>
           </div>
         </div>
@@ -97,7 +99,7 @@
             class="text-sm text-[#8E8E93] mb-2 block text-start"
             for="address"
           >
-            Shipping Date
+            Closing Time
           </label>
           <div class="flex items-center relative">
             <input
@@ -109,7 +111,7 @@
               placeholder="Example"
             />
             <i
-              class="pi pi-clock absolute right-4 text-blue-500 cursor-pointer text-[24px]"
+              class="pi pi-clock absolute right-4 text-blue-500 cursor-pointer !text-[24px]"
             ></i>
           </div>
         </div>
@@ -117,15 +119,15 @@
     </div>
 
     <!--  -->
-    <div class="flex justify-end gap-4 mt-5">
+    <div class="flex justify-end gap-4 mt-[33px]">
       <p-button
-        class="next-button button first w-full"
+        class="next-button button1 first w-full"
         label="Book"
         (onClick)="handleBookClick()"
       >
       </p-button>
       <p-button
-        class="edit-button button first w-full !border-none"
+        class="edit-button button1 first w-full !border-none"
         label="Save to draft"
         (onClick)="closeDialog()"
       ></p-button>

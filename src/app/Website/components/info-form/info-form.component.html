@@ -7,7 +7,9 @@
   <div
     class="flex justify-between items-start md:items-center flex-col md:flex-row w-full gap-2"
   >
-    <p class="text-primary text-[#0067FF] text-[20px] font-normal">
+    <p
+      class="text-primary text-[#0067FF] text-[16px] md:text-[20px] font-semibold md:font-normal"
+    >
       {{ selectedCard?.company }}
     </p>
 
@@ -49,7 +51,9 @@
             </p>
           </div>
         </div>
-        <i class="pi pi-chevron-right text-black w-[10px] h-[5px]"></i>
+        <i
+          class="pi pi-chevron-right text-black w-[10px] h-[5px] mr-6 md:mr-0"
+        ></i>
       </div>
       <div class="flex justify-between flex-row items-start">
         <div
@@ -64,7 +68,9 @@
             <p class="m-0">{{ shippingFrom.get("number")?.value }}</p>
           </div>
         </div>
-        <i class="pi pi-chevron-right text-black w-[10px] h-[5px]"></i>
+        <i
+          class="pi pi-chevron-right text-black w-[10px] h-[5px] mr-6 md:mr-0"
+        ></i>
       </div>
     </div>
 
@@ -113,16 +119,20 @@
           <div class="flex justify-center items-center">
             <img src="/assets/icon/Package1.svg" />
             <div class="ml-2">
-              <p class="text-primary text-[#0067FF] text-xl text-start mb-1">
+              <p
+                class="text-primary text-[#0067FF] text-xl text-start mb-1 font-semibold md:font-normal"
+              >
                 Package Name
               </p>
-              <p class="text-base text-[#001533] m-0">
+              <p class="text-[12px] md:text-base text-[#001533] mt-2 md:m-0">
                 L: {{ item.length }} cm | W: {{ item.width }} cm | H:
                 {{ item.height }} cm | Weight: {{ item.weight }} kg
               </p>
             </div>
           </div>
-          <p class="text-[#8E8E93] text-base text-start mt-1 mb-2">
+          <p
+            class="text-[#8E8E93] text-[14px] md:text-base text-start mt-1 mb-2"
+          >
             {{ item.description }}
           </p>
         </div>

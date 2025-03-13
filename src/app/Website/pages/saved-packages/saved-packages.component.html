@@ -1,6 +1,7 @@
 <div
-  class="flex items-center w-full md:grid md:place-items-center justify-center p-[25px_20px] md:container mx-auto"
+  class="flex items-center flex-col w-full md:grid md:place-items-center justify-center p-[25px_8px] md:container mx-auto"
 >
+  <!-- title  -->
   <div
     class="md:text-[32px] text-xl text-start w-full mb-4 flex justify-between items-center"
   >
@@ -11,41 +12,45 @@
       <i class="pi pi-bars w-[24px] block md:!hidden"></i>
     </button>
   </div>
+
   <div
     class="flex w-full max-w-[1120px] mx-auto place-items-start justify-between"
   >
-    <!-- title  -->
     <!--  -->
-    <div class="text-start w-[100%] md:!w-[49%] gap-3 bg-[var(--p-surface-0)]">
+    <div
+      class="text-start mb-4 p-[16px] w-[100%] md:!w-[49%] gap-[8px] bg-[var(--p-surface-0)] rounded-[15px]"
+    >
       <!-- *ngFor="let item of weightForm.get('items')?.value" -->
       <section>
-        <div class="mb-4 bg-[var(--surface-e)] p-[16px] rounded-2xl">
-          <div>
-            <div class="flex justify-between items-start">
-              <div class="flex items-start justify-start flex-col">
-                <div class="flex justify-center items-center">
-                  <img src="../../../../assets/icon/Package1.svg" />
-                  <div class="ml-2">
-                    <p
-                      class="text-primary text-[#0067FF] text-xl text-start pb-2"
-                    >
-                      Package Name
-                    </p>
-                    <div class="flex flex-wrap gap-5 text-base text-[#001533]">
-                      <span>L: 999 cm | W: 999 cm | H: 999 cm</span>
-                      <span>Weight: 999 kg</span>
-                    </div>
+        <div>
+          <div class="flex justify-between items-start">
+            <div class="flex items-start justify-start flex-col">
+              <div class="flex justify-center items-center">
+                <img src="../../../../assets/icon/Package1.svg" />
+                <div class="ml-2">
+                  <p
+                    class="text-primary text-[#0067FF] text-[16px] md:text-xl text-start pb-2"
+                  >
+                    Package Name
+                  </p>
+                  <div
+                    class="flex gap-5 text-[12px] md:text-base text-[#001533]"
+                  >
+                    <span>L: 999 cm | W: 999 cm | H: 999 cm</span>
+                    <span>Weight: 999 kg</span>
                   </div>
                 </div>
-                <p class="text-[#8E8E93] text-base text-start py-2">
-                  Description Description Description Description scription
-                  Descrip
-                </p>
               </div>
-              <button>
-                <i class="pi pi-ellipsis-v w-[20px]"></i>
-              </button>
+              <p
+                class="text-[#8E8E93] text-[14px] md:text-base text-start py-2"
+              >
+                Description Description Description Description scription
+                Descrip
+              </p>
             </div>
+            <button>
+              <i class="pi pi-ellipsis-v w-[20px]"></i>
+            </button>
           </div>
         </div>
       </section>
@@ -79,7 +84,7 @@
                 type="text"
                 id="Length"
                 placeholder="Example"
-                class="rounded-[10px] p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
+                class="rounded-[10px] p-[14px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
               />
               <span class="absolute right-7 top-3">c.m</span>
             </div>
@@ -95,7 +100,7 @@
                 type="text"
                 id="Width"
                 placeholder="Example"
-                class="rounded-[10px] p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
+                class="rounded-[10px] p-[14px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
               />
               <span class="absolute right-3 top-3">c.m</span>
             </div>
@@ -111,7 +116,7 @@
                 type="text"
                 id="Height"
                 placeholder="Example"
-                class="rounded-[10px] p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
+                class="rounded-[10px] p-[14px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
               />
               <span class="absolute right-3 top-3">c.m</span>
             </div>
@@ -127,7 +132,7 @@
                 type="text"
                 id="Weight"
                 placeholder="Example"
-                class="rounded-[10px] p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
+                class="rounded-[10px] p-[14px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
               />
               <span class="absolute right-3 top-3">k.g</span>
             </div>
@@ -145,7 +150,7 @@
                 type="text"
                 id="Description"
                 placeholder="Example"
-                class="rounded-[10px] w-full p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA]"
+                class="rounded-[10px] w-full p-[14px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA]"
               />
             </div>
           </div>
