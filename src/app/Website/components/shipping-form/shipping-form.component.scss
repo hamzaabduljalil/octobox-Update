@@ -6,8 +6,13 @@
 ::ng-deep .p-multiselect .p-multiselect-trigger-icon {
   color: #001533 !important;
 }
-::ng-deep .p-multiselect .p-multiselect-label.p-placeholder {
-  font-family: "Cairo", sans-serif !important;
+
+::ng-deep .p-multiselect {
+  border-radius: 10px !important;
+  width: 100% !important;
+  padding: 13px 4px 13px 16px !important;
+  background-color: var(--p-surface-0) !important;
+  border: 1px solid #e5e5ea !important;
 }
 input::placeholder {
   color: #aeaeb2;

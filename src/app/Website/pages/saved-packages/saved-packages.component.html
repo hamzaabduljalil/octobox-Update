@@ -1,27 +1,30 @@
-<div class="flex items-center w-full p-[25px_20px] md:container mx-auto">
-  <div class="">
-    <!-- grid w-fullmx-auto place-items-start justify-between -->
+<div
+  class="flex items-center w-full md:grid md:place-items-center justify-center p-[25px_20px] md:container mx-auto"
+>
+  <div
+    class="md:text-[32px] text-xl text-start w-full mb-4 flex justify-between items-center"
+  >
+    <h1 class="text-[20px] md:text-[32px] font-semibold md:font-normal">
+      My Saved Packages
+    </h1>
+    <button>
+      <i class="pi pi-bars w-[24px] block md:!hidden"></i>
+    </button>
+  </div>
+  <div
+    class="flex w-full max-w-[1120px] mx-auto place-items-start justify-between"
+  >
     <!-- title  -->
-    <div
-      class="md:text-[32px] text-xl text-start w-full mb-4 flex justify-between items-center"
-    >
-      <h1 class="text-[20px] md:text-[32px] font-semibold md:font-normal">
-        My Saved Packages
-      </h1>
-      <button>
-        <i class="pi pi-bars w-[24px] block md:hidden"></i>
-      </button>
-    </div>
     <!--  -->
-    <div class="text-start w-[100%] md:w-[49%] gap-3">
+    <div class="text-start w-[100%] md:!w-[49%] gap-3 bg-[var(--p-surface-0)]">
       <!-- *ngFor="let item of weightForm.get('items')?.value" -->
       <section>
-        <div class="mb-4 !bg-[var(--p--surface-e)] p-[16px] rounded-2xl">
+        <div class="mb-4 bg-[var(--surface-e)] p-[16px] rounded-2xl">
           <div>
             <div class="flex justify-between items-start">
               <div class="flex items-start justify-start flex-col">
                 <div class="flex justify-center items-center">
-                  <img src="/assets/icon/Package1.svg" />
+                  <img src="../../../../assets/icon/Package1.svg" />
                   <div class="ml-2">
                     <p
                       class="text-primary text-[#0067FF] text-xl text-start pb-2"
@@ -49,7 +52,7 @@
     </div>
 
     <div
-      class="!bg-[var(--p--surface-e)] rounded-[25px] hidden md:block w-[49%] p-[24px]"
+      class="bg-[var(--p-surface-0)] rounded-[25px] hidden md:block !w-[49%] p-[24px]"
     >
       <h2 class="text-[#0067FF] text-xl font-semibold">Add a new package</h2>
       <!--  -->
@@ -64,6 +67,7 @@
         ></app-choose-package>
       </div>
 
+      <!--  -->
       <div class="flex flex-wrap gap-1 my-4 transition-all">
         <div style="width: calc(97% / 2)" class="mb-3">
           <div class="flex flex-col gap-2 w-full">
@@ -75,7 +79,7 @@
                 type="text"
                 id="Length"
                 placeholder="Example"
-                class="rounded-[10px] p-[12px_16px] !bg-[var(--p--surface-e)] border-1 border-[#E5E5EA] w-full"
+                class="rounded-[10px] p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
               />
               <span class="absolute right-7 top-3">c.m</span>
             </div>
@@ -91,7 +95,7 @@
                 type="text"
                 id="Width"
                 placeholder="Example"
-                class="rounded-[10px] p-[12px_16px] !bg-[var(--p--surface-e)] border-1 border-[#E5E5EA] w-full"
+                class="rounded-[10px] p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
               />
               <span class="absolute right-3 top-3">c.m</span>
             </div>
@@ -107,7 +111,7 @@
                 type="text"
                 id="Height"
                 placeholder="Example"
-                class="rounded-[10px] p-[12px_16px] !bg-[var(--p--surface-e)] border-1 border-[#E5E5EA] w-full"
+                class="rounded-[10px] p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
               />
               <span class="absolute right-3 top-3">c.m</span>
             </div>
@@ -123,7 +127,7 @@
                 type="text"
                 id="Weight"
                 placeholder="Example"
-                class="rounded-[10px] p-[12px_16px] !bg-[var(--p--surface-e)] border-1 border-[#E5E5EA] w-full"
+                class="rounded-[10px] p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA] w-full"
               />
               <span class="absolute right-3 top-3">k.g</span>
             </div>
@@ -141,7 +145,7 @@
                 type="text"
                 id="Description"
                 placeholder="Example"
-                class="rounded-[10px] w-full p-[12px_16px] !bg-[var(--p--surface-e)] border-1 border-[#E5E5EA]"
+                class="rounded-[10px] w-full p-[12px_16px] bg-[var(--surface-e)] border-1 border-[#E5E5EA]"
               />
             </div>
           </div>

@@ -1,10 +1,8 @@
 <div class="flex items-center p-[25px_20px] max-w-[1120px] w-full mx-auto">
   <!--  -->
-  <!-- md:grid md:place-items-center justify-center  -->
-  <p-toast />
+  <!-- <p-toast /> -->
 
   <div class="w-full">
-    <!--grid w-full mx-auto place-items-center max-w-[1120px] -->
     <!-- Title Section -->
     <div class="md:text-[32px] text-xl text-start w-full">
       <div
@@ -19,18 +17,20 @@
             <div class="flex items-center gap-2">
               <button (click)="prevStep()">
                 <i
-                  class="pi pi-arrow-left w-[22px] h-[24px] blocck md:hidden"
+                  class="pi pi-arrow-left w-[22px] h-[24px] blocck md:!hidden"
                 ></i>
               </button>
 
-              <h1 class="text-xl md:text-4xl font-semibold md:font-normal">
+              <h1
+                class="text-[20px] md:text-[32px] font-semibold md:font-normal"
+              >
                 {{ step }}
               </h1>
             </div>
           </div>
           <div>
             <button>
-              <i class="pi pi-bars w-[24px] block md:hidden"></i>
+              <i class="pi pi-bars w-[24px] h-[24px] block md:!hidden"></i>
             </button>
           </div>
         </div>
@@ -55,7 +55,7 @@
       <div class="text-center w-[100%] md:w-[74.5%]">
         <div *ngIf="currentStep === 1">
           <div
-            class="!bg-[var(--p--surface-e)] p-4 rounded-2xl flex flex-col md:flex-row justify-between gap-[8px]"
+            class="!bg-[var(--p-surface-0)] p-[24px] rounded-[20px] flex flex-col md:flex-row justify-between gap-[8px]"
           >
             <div class="w-full md:w-[45%]">
               <app-shipping-form
@@ -68,7 +68,7 @@
                   name: true,
                   number: true,
                   addressType: true,
-                                    drop:true,
+                  drop:true,
 
 
                 }"
@@ -80,7 +80,7 @@
               ></app-shipping-form>
             </div>
             <div
-              class="flex items-center justify-center gap-2 relative md:flex-col"
+              class="flex items-center mt-2 justify-center gap-2 relative md:flex-col"
             >
               <div class="custom-dashed-line"></div>
 
@@ -91,7 +91,7 @@
                 (click)="swapForms()"
                 size="large"
                 [className]="
-                  'my-button p-[2px] lg:p-[8px] rotate-[90deg] md:rotate-[0deg] '
+                  'my-button p-[2px] lg:p-[8px] !text-[#000000] rotate-[90deg] md:rotate-[0deg] '
                 "
               />
               <div class="custom-dashed-line"></div>
@@ -121,7 +121,7 @@
           </div>
           <div class="flex gap-4 justify-self-auto justify-end pt-[32px]">
             <p-button
-              class="next-button button first w-full md:!w-[31%]"
+              class="next-button button first w-full md:!w-[29%]"
               label="Next"
               (click)="nextStep()"
               [disabled]="currentStep === steps.length"
@@ -140,18 +140,17 @@
             ></app-weight-form>
           </div>
 
-          <div class="flex justify-end gap-3 mt-[32px]">
+          <div class="flex justify-end gap-3 mt-[34px]">
             <p-button
-              class="back-button button first hidden md:block w-full md:!w-[27%]"
+              class="back-button button first hidden md:block md:!w-[29%]"
               label="Back"
               (click)="prevStep()"
             ></p-button>
             <p-button
-              class="next-button button first w-full md:!w-[27%]"
+              class="next-button button first w-full md:!w-[29%]"
               label=" Get Rates"
               severity="warn"
               (click)="nextStep()"
-              [disabled]="currentStep === steps.length"
             ></p-button>
           </div>
         </div>
@@ -182,17 +181,17 @@
 
           <div class="flex justify-end flex-row-reverse md:flex-row gap-4">
             <p-button
-              class="back-button button first w-full md:!w-[27%] hidden md:block"
+              class="back-button button first w-full md:!w-[29%] hidden md:block"
               label="Cancel"
               (click)="prevStep()"
             ></p-button>
             <p-button
-              class="edit-button button first w-full md:!w-[27%] block md:hidden !border-none"
+              class="edit-button button first w-full block md:hidden !border-none"
               label="Edit"
               (click)="prevStep()"
             ></p-button>
             <p-button
-              class="next-button button first w-full md:!w-[27%]"
+              class="next-button button first w-full md:!w-[29%]"
               label="Confirm"
               (click)="nextStep()"
               [disabled]="currentStep === steps.length"
@@ -202,7 +201,7 @@
       </div>
       <!-- Stepper Progress -->
       <div
-        class="!bg-[var(--p--surface-e)] rounded-[20px] p-[20px] w-[23.5%] hidden md:block"
+        class="!bg-[var(--p-surface-0)] rounded-[20px] p-[20px] w-[23.5%] hidden md:block"
       >
         <div class="flex flex-col">
           <div
@@ -224,7 +223,7 @@
                 }"
               >
                 <ng-container *ngIf="i < currentStep - 1; else currentStepDot">
-                  <img src="/assets/icon/check.png" class="w-[17px]" />
+                  <i class="pi pi-check w-[17px] text-white"></i>
                 </ng-container>
                 <ng-template #currentStepDot>
                   <div

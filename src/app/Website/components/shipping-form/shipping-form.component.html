@@ -46,7 +46,6 @@
         <p-multiSelect
           id="country"
           formControlName="country"
-          styleClass="rounded-[10px] w-full p-[12px_4px_12px_16px] !bg-[var(--p--surface-e)] border-1 border-[#E5E5EA]"
           placeholder="Choose"
           [options]="cities"
           optionLabel="label"
@@ -57,7 +56,6 @@
         <p-multiSelect
           id="city"
           formControlName="city"
-          styleClass="rounded-[10px] w-full p-[12px_4px_12px_16px] !bg-[var(--p--surface-e)] border-1 border-[#E5E5EA]"
           placeholder="Choose"
           [options]="cities"
         />
@@ -70,7 +68,6 @@
         <p-multiSelect
           id="area"
           formControlName="area"
-          styleClass="rounded-[10px] w-full p-[12px_4px_12px_16px] !bg-[var(--p--surface-e)] border-1 border-[#E5E5EA]"
           placeholder="Choose"
           [options]="cities"
         />
@@ -80,7 +77,6 @@
         <p-multiSelect
           id="floor"
           formControlName="floor"
-          styleClass="rounded-[10px] w-full p-[12px_4px_12px_16px] !bg-[var(--p--surface-e)] border-1 border-[#E5E5EA]"
           placeholder="Choose"
           [options]="cities"
         />
@@ -93,14 +89,14 @@
         <div class="flex items-center relative w-full">
           <input
             formControlName="address"
-            class="rounded-[10px] w-full p-[12px_16px] pr-10 !bg-[var(--p--surface-e)] border-1 border-[#E5E5EA] focus:outline-none"
+            class="rounded-[10px] w-full p-[13px_16px] pr-10 !bg-[var(--p--surface-0)] border-1 border-[#E5E5EA] focus:outline-none"
             pInputText
             type="text"
             id="address"
-            placeholder="Example"
+            placeholder="Choose"
           />
           <i
-            class="pi pi-map-marker absolute right-4 text-blue-500 cursor-pointer text-[24px]"
+            class="pi pi-map-marker absolute right-4 text-blue-500 cursor-pointer w-[24px] h-[24px] !text-[24px]"
           ></i>
         </div>
       </div>
@@ -111,12 +107,11 @@
         <label class="text-[16px] text-start" for="name"> Contact Name </label>
         <input
           formControlName="name"
-          class="rounded-[10px] p-3 !bg-[var(--p--surface-e)]"
           pInputText
           type="text"
           id="name"
           placeholder="Example"
-          class="rounded-[10px] p-[12px_16px] !bg-[var(--p--surface-e)] border-1 border-[#E5E5EA]"
+          class="rounded-[10px] p-[13px_16px] !bg-[var(--p--surface-0)] border-1 border-[#E5E5EA]"
         />
       </div>
     </div>
@@ -132,7 +127,7 @@
           type="text"
           id="number"
           placeholder="Example"
-          class="rounded-[10px] p-[12px_16px] !bg-[var(--p--surface-e)] border-1 border-[#E5E5EA]"
+          class="rounded-[10px] p-[13px_16px] !bg-[var(--p--surface-0)] border-1 border-[#E5E5EA]"
         />
       </div>
     </div>
@@ -150,7 +145,7 @@
             name="addressType"
             value="commercial"
             formControlName="addressType"
-            class="w-[19px] h-[19px] accent-[#0067FF]"
+            class="w-[15px] h-[15px] accent-[#0067FF]"
             id="commercial{{ form }}"
           />
           <label class="text-[14px]"> Commercial Address </label>
@@ -161,7 +156,7 @@
             name="addressType"
             value="residential"
             formControlName="addressType"
-            class="w-[19px] h-[19px] accent-[#0067FF]"
+            class="w-[15px] h-[15px] accent-[#0067FF]"
             id="residential{{ form }}"
           />
           <label class="text-[14px]"> Resedintial Address </label>

@@ -2,23 +2,23 @@
   class="flex items-center w-full md:grid md:place-items-center justify-center p-[25px_20px] md:container mx-auto"
 >
   <div
-    class="grid w-full max-w-[1120px] mx-auto place-items-start justify-between"
+    class="md:text-[32px] text-xl text-start w-full mb-4 flex justify-between items-center"
+  >
+    <h1 class="text-[20px] md:text-[32px] font-semibold md:font-normal">
+      My Saved Addresses
+    </h1>
+    <button>
+      <i class="pi pi-bars w-[24px] block md:hidden"></i>
+    </button>
+  </div>
+  <div
+    class="flex w-full max-w-[1120px] mx-auto place-items-start justify-between"
   >
     <!-- title  -->
-    <div
-      class="md:text-[32px] text-xl text-start w-full mb-4 flex justify-between items-center"
-    >
-      <h1 class="text-[20px] md:text-[32px] font-semibold md:font-normal">
-        My Saved Addresses
-      </h1>
-      <button>
-        <i class="pi pi-bars w-[24px] block md:hidden"></i>
-      </button>
-    </div>
     <!--  -->
     <div class="text-start w-[100%] md:w-[49%] gap-3">
       <section>
-        <div class="mb-4 !bg-[var(--p--surface-e)] p-[16px] rounded-2xl">
+        <div class="mb-4 !bg-[var(--p-surface-0)] p-[16px] rounded-2xl">
           <div>
             <div class="flex justify-between items-start">
               <div class="flex items-start justify-start flex-col">
@@ -46,7 +46,7 @@
     </div>
 
     <div
-      class="!bg-[var(--p--surface-e)] rounded-[25px] hidden md:block w-[49%] p-[24px]"
+      class="!bg-[var(--p-surface-0)] rounded-[25px] hidden md:block w-[49%] p-[24px]"
     >
       <div>
         <app-shipping-form

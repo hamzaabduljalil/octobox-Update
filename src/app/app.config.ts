@@ -66,12 +66,12 @@ export const appConfig: ApplicationConfig = {
         preset: definePreset(aura, {
           primitive: {
             borderRadius: {
-              none: '10px',
-              xs: '2px',
-              sm: '4px',
-              md: '6px',
-              lg: '18px',
-              xl: '112px',
+              none: '0px',
+              sm: '2px',
+              md: '4px',
+              lg: '8px',
+              xl: '10px',
+              '2xl': '12px',
             },
             emerald: {
               50: '#ecfdf5',
@@ -362,6 +362,7 @@ export const appConfig: ApplicationConfig = {
           },
           semantic: {
             transitionDuration: '0.2s',
+
             focusRing: {
               width: '1px',
               style: 'solid',
@@ -474,12 +475,12 @@ export const appConfig: ApplicationConfig = {
               light: {
                 surface: {
                   0: '#ffffff',
-                  50: '#f2f7ff',
+                  50: '#f9fafb',
                   100: '#c2dbff',
                   200: '#91beff',
-                  300: '#61a1ff',
-                  400: '#3084ff',
-                  500: '#0067ff',
+                  300: '#e5e5ea',
+                  400: '#001533',
+                  500: '#000000',
                   600: '#0058d9',
                   700: '#0048b3',
                   800: '#00398c',
@@ -532,7 +533,7 @@ export const appConfig: ApplicationConfig = {
                   hoverMutedColor: '{surface.600}',
                 },
                 content: {
-                  background: '{surface.0}',
+                  background: '{surface.50}',
                   hoverBackground: '{surface.100}',
                   borderColor: '{surface.200}',
                   color: '{text.color}',

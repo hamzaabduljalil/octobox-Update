@@ -46,8 +46,7 @@ body {
   font-family: "Cairo", sans-serif;
   overflow-x: hidden;
   height: 100% !important;
-  // background-color: var(--p--tooltip-background);
-  color: var(--p--tooltip-color);
+  background-color: var(--p-surface-50) !important;
 }
 .flipV {
   -moz-transform: scale(-1, -1);
