@@ -158,6 +158,7 @@
             title="Save to Addresses"
             label="Address Name"
             [visible]="isShippingDialogVisible"
+            (visibleChange)="isShippingDialogVisible = $event"
             (bookChanges)="nextStep()"
           ></app-save-addresses>
         </div>
@@ -186,6 +187,7 @@
               ></app-shipping-form>
               <app-shipping-method
                 [visible]="isDialogVisibleTo"
+                (visibleChange)="isDialogVisibleTo = $event"
                 (bookChanges)="nextStep()"
               >
               </app-shipping-method>

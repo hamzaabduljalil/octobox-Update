@@ -25,6 +25,11 @@ import { ShippingFormComponent } from '../../components/shipping-form/shipping-f
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { ToastService } from '../../../services/other/toast.service';
+import { ToastModule } from 'primeng/toast';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 // import { ToastService } from '../../../services/other/toast.service'; // Adjust the path as needed
 import { inject } from '@angular/core';
 import { ShippingMethodComponent } from '../../components/dialogs/shipping-method/shipping-method.component';
@@ -44,6 +49,7 @@ import { ShippingMethodComponent } from '../../components/dialogs/shipping-metho
     ShippingFormComponent,
     MultiSelectModule,
     ShippingMethodComponent,
+    ToastModule,
   ],
   templateUrl: './second-form.component.html',
   styleUrl: './second-form.component.scss',
@@ -51,7 +57,7 @@ import { ShippingMethodComponent } from '../../components/dialogs/shipping-metho
 })
 export class SecondFormComponent {
   selectedCard: any = null;
-  // private toastService = inject(ToastService);
+  private toastService = inject(ToastService);
 
   currentStep = 1;
   steps = [
@@ -121,9 +127,9 @@ export class SecondFormComponent {
     if (formValid && this.currentStep < this.steps.length) {
       this.currentStep++;
     } else {
-      // this.toastService.showToast_error(
-      //   'Please fill in all required fields before proceeding.'
-      // );
+      this.toastService.showToast_error(
+        'Please fill in all required fields before proceeding.'
+      );
     }
     this.resetDialogs();
   }
@@ -297,6 +303,8 @@ export class SecondFormComponent {
     },
   ];
   openShippingDialog() {
+    this.isShippingDialogVisible = false;
+    this.cdr.detectChanges();
     this.isShippingDialogVisible = true;
   }
 }

@@ -163,6 +163,7 @@
           ></app-rates-form>
           <app-shipping-method
             [visible]="isShippingDialogVisible"
+            (visibleChange)="isShippingDialogVisible = $event"
             (bookChanges)="nextStep()"
           >
           </app-shipping-method>

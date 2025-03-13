@@ -601,8 +601,8 @@ export const appConfig: ApplicationConfig = {
               },
               dark: {
                 surface: {
-                  0: '#ffffff',
-                  50: '#f4f5f6',
+                  0: '#2a323d',
+                  50: '#363c43',
                   100: '#cccfd5',
                   200: '#a3aab4',
                   300: '#7b8493',

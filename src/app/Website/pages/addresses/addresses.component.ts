@@ -31,6 +31,12 @@ import { inject } from '@angular/core';
 import { ShippingMethodComponent } from '../../components/dialogs/shipping-method/shipping-method.component';
 import { ToastService } from '../../../services/other/toast.service';
 import { ToastModule } from 'primeng/toast';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 @Component({
   selector: 'app-addresses',
   standalone: true,
@@ -119,9 +125,9 @@ export class AddressesComponent {
     if (formValid && this.currentStep < this.steps.length) {
       this.currentStep++;
     } else {
-      // this.toastService.showToast_error(
-      //   "Please fill in all required fields before proceeding."
-      // );
+      this.toastService.showToast_error(
+        'Please fill in all required fields before proceeding.'
+      );
     }
     this.resetDialogs();
   }
@@ -265,6 +271,10 @@ export class AddressesComponent {
   ];
 
   openShippingDialog() {
+    console.log('before', this.isShippingDialogVisible);
+    this.isShippingDialogVisible = false;
+    this.cdr.detectChanges();
+    console.log(this.isShippingDialogVisible);
     this.isShippingDialogVisible = true;
   }
 }

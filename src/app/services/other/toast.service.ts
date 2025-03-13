@@ -1,13 +1,13 @@
 import { inject, Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
   messageService = inject(MessageService);
-  // translate = inject(TranslateService);
+  translate = inject(TranslateService);
 
   showToast(
     severity: 'success' | 'info' | 'warn' | 'error',
@@ -35,6 +35,6 @@ export class ToastService {
     );
   }
   showToast_error(error: string): void {
-    // this.showToast('error', this.translate.instant('Error'), error);
+    this.showToast('error', this.translate.instant('Error'), error);
   }
 }
